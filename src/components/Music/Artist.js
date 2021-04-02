@@ -5,11 +5,10 @@ import "./artistStyle.css"
 export default function Artist({ data }) {
 
     return (
-        <div>
+        <div style={{marginBottom: "70px"}}>
             <h2 style={{textAlign: "center"}}>Artists</h2>
             <div style={{display: "flex", flexDirection: "row", justifyContent: "space-around", flexWrap: "wrap"}}>
                 {data.map((data, i) => {
-                    console.log(data)
                     return (
                             <div className="card" key={i} style={{position: "relative", margin: "10px", display: "flex", flexDirection: "column", boxShadow: "10px 10px", padding: "15px 15px 0px 15px", border: "solid 1px", width: "200px", height: "315px"}}>
                                 <div className="icon">

@@ -15,7 +15,7 @@ export default function Album({ data }) {
                                     <IoIosArrowDroprightCircle />
                                 </div>    
                                 <img style={{width: "200px"}} src={data.images[1].url} alt="album" />
-                                <h1 style={{margin: "5px", overflow: "hidden"}}>{data.name}</h1>
+                                <h1 className="albumName" style={{margin: "5px", overflow: "hidden"}}>{data.name}</h1>
                                 <h2 style={{margin: "0px 0px 30px 5px"}}>{data.artists[0].name}</h2>
                             </div>
                     )

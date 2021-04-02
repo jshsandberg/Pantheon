@@ -1,11 +1,13 @@
-import React, { useState } from "react";
-import SpotifyPlayer from 'react-spotify-player';
+import React from "react";
 import { AiFillCaretRight } from "react-icons/ai";
 import "./songStyle.css";
 
-export default function Song({ data }) {
+export default function Song({ data, getUri }) {
 
-    const [uri, setUri] = useState(null)
+
+    const sendUri = (uri) => {
+        getUri(uri);
+    }
 
     const millisToMinutesAndSeconds = (millis) => {
         var minutes = Math.floor(millis / 60000);
@@ -14,22 +16,13 @@ export default function Song({ data }) {
     }
 
     return (
-        <div style={{display: "flex", flexDirection: "column", width: "510px"}}>
+        <div style={{display: "flex", flexDirection: "column", width: "810px"}}>
             <div style={{display: "flex", flexDirection: "row", justifyContent: "space-around"}}>
                 <h1>Songs</h1>
-                {
-                uri ?
-                <SpotifyPlayer
-                uri={uri}
-                size="compact"
-                />
-                :
-                null
-                }
             </div>
             {data.map((data, i) => {
                 return (
-                    <div onClick={() => setUri(data.uri)} className="songs" key={i} style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: "10px"}}>
+                    <div onClick={() => sendUri(data.uri)} className="songs" key={i} style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: "10px"}}>
                     <div style={{display: "flex", flexDirection: "row"}}>
                         <div className="container">
                             <img className="artwork" style={{marginRight: "20px"}} src={data.album.images[2].url} alt="track" />
