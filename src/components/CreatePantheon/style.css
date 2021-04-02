@@ -1,0 +1,14 @@
+button {
+    background-color: #db3d44;
+    margin: 20px;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: #db3d44;
+    color: white;
+    transition-duration: 0.5s;
+}
+
+button:hover {
+    background-color: white;
+    color: #db3d44;
+}

@@ -1,0 +1,29 @@
+.songs:hover {
+    background-color: lightgray;
+}
+
+.songs:hover .artwork {
+    filter: brightness(75%)
+}
+
+.songs:hover .center {
+    visibility: visible;
+}
+
+.container {
+    position: relative
+}
+
+.artwork {
+    height: 100%;
+}
+
+.center {
+    position: absolute;
+    visibility: hidden;
+    top: 55%;
+    left: 45%;
+    transform: translate(-50%, -50%);
+    font-size: 30px;
+    color: white
+}

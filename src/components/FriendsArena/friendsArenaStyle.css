@@ -1,0 +1,16 @@
+.highlight:hover {
+    animation: fade 3s infinite;
+    cursor: pointer;
+}
+
+@keyframes fade {
+    0% {background: white;}
+    50% {background: lightgray;}
+    100% {background: white}
+}
+
+.parentDiv {
+    height: 500px;
+    overflow: auto
+}
+

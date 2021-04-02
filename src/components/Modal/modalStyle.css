@@ -1,0 +1,27 @@
+.modal {
+    width: 500px;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    padding: 30px;
+    box-shadow: 0 0 0 100vmax rgba(0, 0, 0, 0.6);
+    border: 1px solid #ccc;
+    transform: scale(1);
+    position: fixed;
+    z-index: 2000;
+    top: 35%;
+    left: calc(50% - 250px);
+    /* bottom: 40px; */
+    opacity: 1;
+    background-color: white;
+    animation: fadeIn .25s;
+}
+
+@keyframes fadeIn {
+    0%  {opacity: 0;}
+    100% {opacity: 1}
+}
+
+.modalButton {
+    margin: 0px
+}

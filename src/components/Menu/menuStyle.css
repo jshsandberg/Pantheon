@@ -1,0 +1,57 @@
+
+
+.fadeMenu {
+    width: 275px;
+    height: 50vmax;
+    background-color: dodgerblue;
+    position: fixed;
+    top: 0;
+    left: 0
+
+}
+
+
+
+
+
+.alert-enter {
+    background-color: green;
+    width: 0px;
+    transition: all 1s ease;
+  }
+  .alert-enter-active {
+    background-color: dodgerblue;
+    width: 275px
+  }
+  .alert-exit {
+    background-color: dodgerblue;
+    width: 275px;
+    transition: all 1s;
+  }
+  .alert-exit-active {
+    background-color: green;
+    width: 0px
+  }
+
+  .test {
+    position: fixed;
+    top: 100px;
+    left: 0
+
+}
+  .test-enter-active {
+    opacity: 1;
+
+  }
+  .test-exit {
+    opacity: 1;
+    transition: opacity 300ms;
+
+
+  }
+  .test-exit-active {
+    opacity: 0;
+
+  }
+
+

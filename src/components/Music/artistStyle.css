@@ -1,0 +1,30 @@
+.card:hover {
+    background: lightgray;
+    animation: fadeIn .5s;
+}
+
+@keyframes fadeIn {
+    0% {background-color: white}
+    100% {background-color: lightgray;}
+}
+
+.icon {
+    position: absolute;
+    z-index: 5px;
+    color: white;
+    bottom: 115px;
+    right: 30px;
+    font-size: 50px;
+    visibility: hidden;
+
+}
+
+.card:hover .icon {
+    animation: appear 1s;
+    visibility: visible;
+}
+
+@keyframes appear {
+    0% {opacity: 0}
+    100% {opacity: 1}
+}
