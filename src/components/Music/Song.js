@@ -23,8 +23,15 @@ export default function Song({ data, getUri }) {
                 <h1>Songs</h1>
             </div>
             {data.map((data, i) => {
+                const obj = {
+                    albumId: data.album.id,
+                    image: data.album.images[1].url,
+                    albumName: data.album.name,
+                    artist: data.artists[0].name,
+                    artistId: data.artists[0].id
+                }
                 return (
-                    <div onDoubleClick={() => history.push({pathname: "/album", state: data})} className="songs" key={i} style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: "10px"}}>
+                    <div onDoubleClick={() => history.push({pathname: "/album", state: obj})} className="songs" key={i} style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: "10px"}}>
                     <div style={{display: "flex", flexDirection: "row"}}>
                         <div className="container">
                             <img className="artwork" style={{marginRight: "20px"}} src={data.album.images[2].url} alt="track" />

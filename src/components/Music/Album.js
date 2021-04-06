@@ -1,16 +1,26 @@
 import React from "react";
 import { IoIosArrowDroprightCircle } from "react-icons/io";
+import { useHistory } from "react-router-dom";
 import "./albumStyle.css";
 
 export default function Album({ data }) {
+
+    const history = useHistory()
 
     return (
         <div>
             <h2 style={{textAlign: "center"}}>Albums</h2>
             <div style={{display: "flex", flexDirection: "row", justifyContent: "space-around", flexWrap: "wrap"}}>
                 {data.map((data, i) => {
+                    const obj = {
+                        albumId: data.id,
+                        image: data.images[1].url,
+                        albumName: data.name,
+                        artist: data.artists[0].name,
+                        artistId: data.artists[0].id
+                    }; 
                     return (
-                            <div className="card" key={i} style={{position: "relative", margin: "10px", display: "flex", flexDirection: "column", boxShadow: "10px 10px", padding: "15px 15px 0px 15px", border: "solid 1px", width: "200px", height: "315px"}}>
+                            <div onDoubleClick={() => history.push({pathname: "/album", state: obj})} className="card" key={i} style={{position: "relative", margin: "10px", display: "flex", flexDirection: "column", boxShadow: "10px 10px", padding: "15px 15px 0px 15px", border: "solid 1px", width: "200px", height: "315px"}}>
                                 <div className="icon">
                                     <IoIosArrowDroprightCircle />
                                 </div>    

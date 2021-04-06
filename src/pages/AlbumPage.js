@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import Header from "../components/Header/Header";
 import Menu from "../components/Menu/Menu";
 import AlbumSong from "../components/Music/AlbumSong";
@@ -7,6 +8,8 @@ import SpotifyPlayerComponent from "../components/Music/SpotifyPlayer";
 import Color from 'color-thief-react'
 
 export default function AlbumPage({ location }) {
+
+    const history = useHistory();
 
     const [dominantColor, setDominantColor] = useState("");
     const [info, setInfo] = useState(null);
@@ -19,7 +22,7 @@ export default function AlbumPage({ location }) {
             await setInfo(results);
             await setIsLoading(false)
         };
-        getAlbumFromState(location.state.album.id);
+        getAlbumFromState(location.state.albumId);
     }, [location]);
 
     const getUri = (data) => {
@@ -34,27 +37,22 @@ export default function AlbumPage({ location }) {
         position: "absolute",
         width: "100%",
         zIndex: "-10"
-
-    }
-
-
-  
-    
+    };
 
     return (
         <div style={{position: "relative"}}>
-            <Color src={location.state.album.images[1].url} crossOrigin="anonymous" format="rgbArray">
+            <Color src={location.state.image} crossOrigin="anonymous" format="rgbArray">
                 {({ data, loading }) => {if (!loading) setDominantColor(data)}}
             </Color>
             <Header />
             <Menu />
             <div style={style}></div>
             <div style={{display: "flex", flexDirection: "row", width: "100%"}}>
-                <img style={{margin: "30px"}} src={location.state.album.images[1].url} alt="album" />
+                <img style={{margin: "30px"}} src={location.state.image} alt="album" />
                 <div style={{alignSelf: "flex-end"}}>
-                    <h1 style={{fontSize: "85px", marginBottom: "10px", color: "black"}}>{location.state.album.name}</h1>
+                    <h1 style={{fontSize: "85px", marginBottom: "10px", color: "black"}}>{location.state.albumName}</h1>
                     <div style={{marginBottom: "30px"}}>
-                        <h2 style={{color: "black"}}>{location.state.artists[0].name}</h2>
+                        <h2 onClick={() => history.push({pathname: "/artist", state: location.state.artistId })} style={{color: "black", cursor: "pointer"}}>{location.state.artist}</h2>
                     </div>
                 </div>
             </div>
