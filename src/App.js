@@ -4,6 +4,7 @@ import HomePage from "./pages/HomePages"
 import LoginPage from "./pages/LoginPage";
 import MediaPage from "./pages/MediaPage";
 import SignUpPage from "./pages/SignUpPage";
+import AlbumPage from "./pages/AlbumPage";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route exact path="/signup" component={SignUpPage} />
         <Route exact path="/media" component={MediaPage} />
         <Route exact path="/artist" component={ArtistPage} />
+        <Route exact path="/album" component={AlbumPage} />
       </Router>
     </div>
 

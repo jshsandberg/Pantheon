@@ -27,3 +27,7 @@
     font-size: 30px;
     color: white
 }
+
+.center:hover {
+    cursor: pointer;
+}

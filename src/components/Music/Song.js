@@ -1,9 +1,11 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import { AiFillCaretRight } from "react-icons/ai";
 import "./songStyle.css";
 
 export default function Song({ data, getUri }) {
 
+    const history = useHistory()
 
     const sendUri = (uri) => {
         getUri(uri);
@@ -22,11 +24,11 @@ export default function Song({ data, getUri }) {
             </div>
             {data.map((data, i) => {
                 return (
-                    <div onClick={() => sendUri(data.uri)} className="songs" key={i} style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: "10px"}}>
+                    <div onDoubleClick={() => history.push({pathname: "/album", state: data})} className="songs" key={i} style={{display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: "10px"}}>
                     <div style={{display: "flex", flexDirection: "row"}}>
                         <div className="container">
                             <img className="artwork" style={{marginRight: "20px"}} src={data.album.images[2].url} alt="track" />
-                            <div className="center">
+                            <div onClick={() => sendUri(data.uri)}  className="center">
                                 <AiFillCaretRight />
                             </div>
                          </div>
