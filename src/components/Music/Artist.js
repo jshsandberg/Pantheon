@@ -1,8 +1,15 @@
 import React from "react";
 import { IoIosArrowDroprightCircle } from "react-icons/io";
+import { useHistory } from "react-router-dom";
 import "./artistStyle.css"
 
-export default function Artist({ data }) {
+export default function Artist({ data, getUri }) {
+
+    const history = useHistory();
+
+    const sendUri = (uri) => {
+        getUri(uri);
+    }
 
     return (
         <div style={{marginBottom: "70px"}}>
@@ -10,7 +17,7 @@ export default function Artist({ data }) {
             <div style={{display: "flex", flexDirection: "row", justifyContent: "space-around", flexWrap: "wrap"}}>
                 {data.map((data, i) => {
                     return (
-                            <div className="card" key={i} style={{position: "relative", margin: "10px", display: "flex", flexDirection: "column", boxShadow: "10px 10px", padding: "15px 15px 0px 15px", border: "solid 1px", width: "200px", height: "315px"}}>
+                            <div onClick={() => sendUri(data.uri)} onDoubleClick={() => history.push({pathname: "/artist", state: data.id})} className="card" key={i} style={{position: "relative", margin: "10px", display: "flex", flexDirection: "column", boxShadow: "10px 10px", padding: "15px 15px 0px 15px", border: "solid 1px", width: "200px", height: "315px"}}>
                                 <div className="icon">
                                     <IoIosArrowDroprightCircle />
                                 </div>    

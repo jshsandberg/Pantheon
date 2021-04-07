@@ -11,6 +11,8 @@ export default function AlbumPage({ location }) {
 
     const history = useHistory();
 
+    console.log(location.state)
+
     const [dominantColor, setDominantColor] = useState("");
     const [info, setInfo] = useState(null);
     const [isLoading, setIsLoading] = useState(true);

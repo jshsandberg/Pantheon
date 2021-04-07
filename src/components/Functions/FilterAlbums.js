@@ -6,15 +6,17 @@ export const filterAlbums = (data) => {
         const obj = {
             name: data[i].name,
             images: data[i].images[1].url,
-            id: data[i].id,
-            uri: data[i].uri
+            albumId: data[i].id,
+            uri: data[i].uri,
+            artist: data[i].artists[0].name,
+            artistId: data[i].artists[0].id
         }
         element.push(obj);
     };
 
-    const filtered = element.filter(function(element, index, array) {
-        return (index % 2 === 0);
-    });
+    // const filtered = element.filter(function(element, index, array) {
+    //     return (index % 2 === 0);
+    // });
 
-    return filtered
+    return element
 }

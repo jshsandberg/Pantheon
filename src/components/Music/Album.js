@@ -3,9 +3,13 @@ import { IoIosArrowDroprightCircle } from "react-icons/io";
 import { useHistory } from "react-router-dom";
 import "./albumStyle.css";
 
-export default function Album({ data }) {
+export default function Album({ data, getUri }) {
 
-    const history = useHistory()
+    const history = useHistory();
+
+    const sendUri = (uri) => {
+        getUri(uri);
+    }
 
     return (
         <div>
@@ -17,10 +21,11 @@ export default function Album({ data }) {
                         image: data.images[1].url,
                         albumName: data.name,
                         artist: data.artists[0].name,
-                        artistId: data.artists[0].id
+                        artistId: data.artists[0].id,
+                        uri: data.uri
                     }; 
                     return (
-                            <div onDoubleClick={() => history.push({pathname: "/album", state: obj})} className="card" key={i} style={{position: "relative", margin: "10px", display: "flex", flexDirection: "column", boxShadow: "10px 10px", padding: "15px 15px 0px 15px", border: "solid 1px", width: "200px", height: "315px"}}>
+                            <div onClick={() => sendUri(data.uri)} onDoubleClick={() => history.push({pathname: "/album", state: obj})} className="card" key={i} style={{position: "relative", margin: "10px", display: "flex", flexDirection: "column", boxShadow: "10px 10px", padding: "15px 15px 0px 15px", border: "solid 1px", width: "200px", height: "315px"}}>
                                 <div className="icon">
                                     <IoIosArrowDroprightCircle />
                                 </div>    

@@ -23,10 +23,10 @@ export default function MediaPage({ location }) {
                     <Song data={location.state.track} getUri={getUri} />
                 </div>
                 <div>
-                    <Album data={location.state.albums}/>
+                    <Album data={location.state.albums} getUri={getUri}/>
                 </div>
                 <div>
-                    <Artist data={location.state.artist} />
+                    <Artist data={location.state.artist} getUri={getUri} />
                 </div>
             </div>
             <div style={{position: "fixed", bottom: "0", width: "100%"}}>

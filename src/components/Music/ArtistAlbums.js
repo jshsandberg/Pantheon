@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
+import { IoIosArrowDroprightCircle } from "react-icons/io";
 import { filterAlbums } from "../Functions/FilterAlbums";
+import "./artistAlbumsStyle.css";
 
 export default function ArtistAlbums({ data }) {
+    
+    const history = useHistory();
 
-    const [album, setAlbums] = useState(null)
+    const [album, setAlbums] = useState(null);
 
     useEffect(() => {
 
@@ -15,15 +20,26 @@ export default function ArtistAlbums({ data }) {
     }, [data])
 
     return (
-        <div>
-            {album.map((item, i) => {
-                console.log(item)
-                return (
-                    <div>
-                        <img src={item.images} alt="album" />
-                    </div>    
-                )
-            })}
+        <div style={{display: "flex", flexDirection: "row", justifyContent: "space-around", flexWrap: "wrap"}}>
+             {album && album.map((data, i) => {
+                   const obj = {
+                    albumId: data.albumId,
+                    image: data.images,
+                    albumName: data.name,
+                    artist: data.artist,
+                    artistId: data.artistId
+                }; 
+                    return (
+                            <div onClick={() => history.push({pathname: "/album", state: obj})} className="card" key={i} style={{position: "relative", margin: "10px", display: "flex", flexDirection: "column", boxShadow: "10px 10px", padding: "15px 15px 0px 15px", border: "solid 1px", width: "200px", height: "315px"}}>
+                                <div className="icon">
+                                    <IoIosArrowDroprightCircle />
+                                </div>    
+                                <img style={{width: "200px"}} src={data.images} alt="album" />
+                                <h1 className="albumName" style={{margin: "5px", overflow: "hidden"}}>{data.name}</h1>
+                                <h2 style={{margin: "0px 0px 30px 5px"}}>{data.artist}</h2>
+                            </div>
+                    )
+                })}
         </div>
     )
 }
