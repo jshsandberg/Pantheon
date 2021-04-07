@@ -1,6 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
+import { API } from "../../utils/API";
 
 export default function SignUp() {
+    
+    const [input, setInput] = useState({});
+
+    const handleInputChange = ({ target: { value, name }}) => {
+        setInput({ ...input, [name]: value })
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        if (input.username && input.email && input.password && input.confirmed){
+            const newUser = await API.saveNewUser(input);
+            await console.log(newUser)
+        }
+    }
+
 
     return (
         <div style={{display: "flex", justifyContent: "center"}}>
@@ -10,16 +26,16 @@ export default function SignUp() {
             </div>
             <div style={{margin: "20px"}}>
                 <form>
-                    <label for="fname">Username</label><br />
-                    <input type="text" id="fname" name="fname" /><br />
-                    <label for="fname">Email</label><br />
-                    <input type="text" id="fname" name="fname" /><br />
-                    <label for="lname">Password</label><br />
-                    <input type="password" id="lname" name="lname" />
-                    <label for="lname">Confirm Password</label><br />
-                    <input type="password" id="lname" name="lname" />
-                    <button type="submit" name="submit">Submit</button>
+                    <label htmlFor="username">Username</label><br />
+                    <input onChange={handleInputChange} type="text" name="username" /><br />
+                    <label htmlFor="email">Email</label><br />
+                    <input onChange={handleInputChange} type="text" name="email" /><br />
+                    <label htmlFor="password">Password</label><br />
+                    <input onChange={handleInputChange} type="password" name="password" />
+                    <label htmlFor="confirmedPassword">Confirm Password</label><br />
+                    <input onChange={handleInputChange} type="password" name="confirmed" />
                 </form>
+                <button onClick={handleSubmit} name="submit">Submit</button>
             </div>
         </div>
     </div>
