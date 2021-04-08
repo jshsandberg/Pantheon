@@ -7,7 +7,9 @@ export default function SignUpPage() {
     return (
         <div>
             <Header />
-            <SignUp />
+            <div style={{display: "flex", justifyContent: "center"}}>
+                <SignUp />
+            </div>
         </div>
     )
 }
