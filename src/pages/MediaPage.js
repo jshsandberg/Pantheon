@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { UserContext } from "../context/userContext";
 import Header from "../components/Header/Header";
 import Menu from "../components/Menu/Menu";
 import Album from "../components/Music/Album";
@@ -8,7 +9,9 @@ import SpotifyPlayerComponent from "../components/Music/SpotifyPlayer";
 
 export default function MediaPage({ location }) {
 
-    const [uri, setUri] = useState(null)
+    const {user} = useContext(UserContext);
+
+    const [uri, setUri] = useState(null);
 
     const getUri = (data) => {
         setUri(data);
@@ -16,7 +19,7 @@ export default function MediaPage({ location }) {
 
     return (
         <div>
-            <Header />
+            <Header user={user} />
             <Menu />
             <div style={{display: "flex", flexDirection: "row", justifyContent: "space-around", margin: "5px", flexWrap: "wrap"}}>
                 <div>

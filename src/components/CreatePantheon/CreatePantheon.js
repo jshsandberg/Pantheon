@@ -66,7 +66,7 @@ export default function CreatePantheon() {
                         <h2 style={{marginTop: "20px", textAlign: "center", flex: "33%"}}>Tournament</h2>
                         <div style={{flex: "33%", justifyContent: "center", display: "flex"}}>
                             <form style={{marginTop: "10px"}}>
-                                <label for="pantheonTitle">Pantheon Title:</label>
+                                <label htmlFor="pantheonTitle">Pantheon Title:</label>
                                 <br />
                                 <input onChange={(e) => handlePantheonTitleChange(e)} type="text" id="fname" name="fname" value={pantheonTitleInput} />
                             </form>

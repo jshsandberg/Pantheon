@@ -1,7 +1,7 @@
 const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
-// const routes = require("./routes");
+const routes = require("./routes");
 const cors = require("cors");
 const PORT = process.env.PORT || 5000;
 require("dotenv").config();
@@ -34,7 +34,7 @@ mongoose
 	.catch((error) => console.log("MongoDB did not connect: ", error));
 
 // Add routes, both API and view
-// app.use(routes);
+app.use(routes);
 
 // Start the API server
 app.listen(PORT, function () {

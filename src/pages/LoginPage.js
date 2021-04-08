@@ -7,7 +7,9 @@ export default function LoginPage() {
     return (
         <div>
             <Header />
-            <Login />
+            <div style={{display: "flex", justifyContent: "center"}}>
+                <Login />
+            </div>
         </div>
     )
 }

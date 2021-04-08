@@ -1,8 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { UserContext } from "../../context/userContext";
+import { useHistory } from "react-router-dom";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import { API } from "../../utils/API";
 
 export default function SignUp() {
+
+    const history = useHistory();
+
+    const {setUser} = useContext(UserContext);
     
     const [input, setInput] = useState({});
     const [status, setStatus] = useState("")
@@ -13,12 +19,18 @@ export default function SignUp() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (input.username && input.email && input.password && input.confirmed){
+        try {
             const newUser = await API.saveNewUser(input);
-            await console.log(newUser)
-        } else {
-            setStatus("Need to fill out all of the forms!")
-        }
+            if (newUser.data.msg === undefined) {
+                await localStorage.setItem("auth-token", newUser.data.token)
+                await setUser(newUser.data.user)
+                history.push({pathname: "/home"})
+            } else {
+                setStatus(newUser.data.msg)
+            }
+        } catch (err) {
+            console.log(err)
+        }         
     }
 
 
