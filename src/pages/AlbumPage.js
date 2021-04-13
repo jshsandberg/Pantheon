@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { UserContext } from "../context/userContext";
 import { useHistory } from "react-router-dom";
 import Header from "../components/Header/Header";
 import Menu from "../components/Menu/Menu";
@@ -11,7 +12,7 @@ export default function AlbumPage({ location }) {
 
     const history = useHistory();
 
-    console.log(location.state)
+    const {user} = useContext(UserContext);
 
     const [dominantColor, setDominantColor] = useState("");
     const [info, setInfo] = useState(null);
@@ -46,8 +47,8 @@ export default function AlbumPage({ location }) {
             <Color src={location.state.image} crossOrigin="anonymous" format="rgbArray">
                 {({ data, loading }) => {if (!loading) setDominantColor(data)}}
             </Color>
-            <Header />
-            <Menu />
+            <Header user={user}/>
+            <Menu user={user} />
             <div style={style}></div>
             <div style={{display: "flex", flexDirection: "row", width: "100%"}}>
                 <img style={{margin: "30px"}} src={location.state.image} alt="album" />

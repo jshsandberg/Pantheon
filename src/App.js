@@ -9,6 +9,7 @@ import MediaPage from "./pages/MediaPage";
 import SignUpPage from "./pages/SignUpPage";
 import AlbumPage from "./pages/AlbumPage";
 import WelcomePage from "./pages/WelcomePage";
+import FriendsPage from "./pages/FriendsPage";
 
 function App() {
 
@@ -20,10 +21,15 @@ function App() {
     
     const checkIfLoggedIn = async () => {
       let token = await localStorage.getItem("auth-token");
+      console.log(token)
       if (token !== undefined) {
-        const decoded = await jwt.verify(token, "secret");      
-        const newUser = await API.getUserbyId(decoded.id);
-        await setUser(newUser.data);
+        try {
+          const decoded = await jwt.verify(token, "secret");      
+          const newUser = await API.getUserbyId(decoded.id);
+          await setUser(newUser.data);
+        } catch (err) {
+          setUser(null)
+        }
       } else {
         setUser(null)
       }
@@ -43,6 +49,8 @@ function App() {
           <Route exact path="/media" component={MediaPage} />
           <Route exact path="/artist" component={ArtistPage} />
           <Route exact path="/album" component={AlbumPage} />
+          <Route exact path="/friends" component={FriendsPage} />
+          <button onClick={() => console.log(user)}>Click ME</button>
         </UserContext.Provider>
       </Router>
     </div>

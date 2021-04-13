@@ -162,41 +162,84 @@ module.exports = {
 			res.status(500)
 		}
 	},
-	addFriend: async (req, res, err) => {
-		
+	addFriend: async (req, res) => {
 		try {
-			const value = (Object.keys(req.body));
-			const params = req.params.username;
-
-			const checkUserHasFriend = await db.User.findOne({ username: params });
-
-			if (checkUserHasFriend.friend.includes(value)) {
-				return res.send("User is already friends with this user")
-			} else {
-				const foundUser = await db.User.find({
-					username: value
-				})
-	
-	
-				if (foundUser.length === 0) {
-					return res.send("No username was found with the given username")
+			if (req.body.selector === "username") {
+				const foundUser = await db.User.findOne({ username: req.params.username });
+				if (foundUser.friend.includes(req.body.input)) {
+						return res.send("User is already friends with this user")
+				} else { 
+					const foundFriend = await db.User.findOne({
+						username: req.body.input
+					});
+					if (foundFriend === null) {
+						return res.send("User does not exist");
+					} else {
+						await User.findOneAndUpdate({
+								username: req.params.username
+							}, {
+								$push: {
+									friend: req.body.input
+								}
+							});
+							return res.send("Friend Added")
+					}
+				}
+			} else if (req.body.selector === "email") {
+				const foundUser = await db.User.findOne({ username: req.params.username });
+				const foundEmail = await db.User.findOne({ email: req.body.input });
+				if (foundEmail === null) {
+					return res.send("User does not exist")
+			} else if (foundUser.friend.includes(foundEmail.username)) {
+					return res.send("User has already been added");
 				} else {
 					await User.findOneAndUpdate({
-						username: params
-					}, {
-						$push: {
-							friend: value
-						}
-					});
-					return res.send("Friend Added")
+							username: req.params.username
+						}, {
+							$push: {
+								friend: foundEmail.username
+							}
+						});
+						return res.send("Friend Added")
 				}
-
 			}
-
 		} catch (err) {
-			console.log("we messed up")
+			console.log(err)
 		}
-	},
+		
+	// 	try {
+	// 		const value = (Object.keys(req.body));
+	// 		const params = req.params.username;
+
+	// 		const checkUserHasFriend = await db.User.findOne({ username: params });
+
+	// 		if (checkUserHasFriend.friend.includes(value)) {
+	// 			return res.send("User is already friends with this user")
+	// 		} else {
+	// 			const foundUser = await db.User.find({
+	// 				username: value
+	// 			})
+	
+	
+	// 			if (foundUser.length === 0) {
+	// 				return res.send("No username was found with the given username")
+	// 			} else {
+	// 				await User.findOneAndUpdate({
+	// 					username: params
+	// 				}, {
+	// 					$push: {
+	// 						friend: value
+	// 					}
+	// 				});
+	// 				return res.send("Friend Added")
+	// 			}
+
+	// 		}
+
+	// 	} catch (err) {
+	// 		console.log("we messed up")
+	// 	}
+	 },
 	
 	getFriends: async (req, res) => {
 		try {

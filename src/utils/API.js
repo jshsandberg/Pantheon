@@ -20,9 +20,13 @@ export const API = {
     // getMaxRatings: function() {
     //   return axios.post("api/maxRatings");
     // },
-    // addFriend: function(username, friendUsername) {
-    //   return axios.post("api/user/addFriend/" + username, friendUsername);
-    // },
+    addFriend: function(username, selector, input) {
+      const obj = {
+        selector: selector,
+        input: input
+      };
+      return axios.post("api/user/addFriend/" + username, obj);
+    },
     // getFriends: function(userId) {
     //   return axios.post("api/user/getFriends/" + userId);
     // },

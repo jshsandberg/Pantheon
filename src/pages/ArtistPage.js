@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { UserContext } from "../context/userContext";
 import Header from "../components/Header/Header";
 import Menu from "../components/Menu/Menu";
 import { getArtist } from "../components/Functions/GetArtist";
@@ -8,6 +9,8 @@ import Color from 'color-thief-react'
 import ArtistAlbums from "../components/Music/ArtistAlbums";
 
 export default function ArtistPage({ location }) {
+
+    const {user} = useContext(UserContext);
 
     const [data, setData] = useState(null);
     const [dominantColor, setDominantColor] = useState("");
@@ -38,8 +41,8 @@ export default function ArtistPage({ location }) {
 
     return (
         <div style={{position: "relative"}}>
-        <Header />
-        <Menu />
+        <Header user={user} />
+        <Menu user={user} />
         {
             isLoading ?
             <h2>Loading</h2>

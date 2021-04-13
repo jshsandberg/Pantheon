@@ -20,7 +20,7 @@ export default function MediaPage({ location }) {
     return (
         <div>
             <Header user={user} />
-            <Menu />
+            <Menu user={user} />
             <div style={{display: "flex", flexDirection: "row", justifyContent: "space-around", margin: "5px", flexWrap: "wrap"}}>
                 <div>
                     <Song data={location.state.track} getUri={getUri} />

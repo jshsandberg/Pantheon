@@ -2,20 +2,17 @@ import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { UserContext } from "../context/userContext";
 import Header from "../components/Header/Header";
-import FriendsArena from "../components/FriendsArena/FriendsArena";
-import CreatePantheon from "../components/CreatePantheon/CreatePantheon";
-import Footer from "../components/Footer/Footer";
 import Menu from "../components/Menu/Menu";
+import AddFriend from "../components/Friends/AddFriend";
 
-
-
-export default function HomePage() {
-
-    const {user} = useContext(UserContext);
+export default function FriendsPage() {
 
     const history = useHistory();
 
     const [loading, setLoading] = useState(true);
+
+    const {user} = useContext(UserContext);
+
 
     useEffect(() => {
         if (user === null) {
@@ -25,6 +22,7 @@ export default function HomePage() {
         }
     }, [user, history])
 
+
     return (
         <div>
             {
@@ -32,17 +30,21 @@ export default function HomePage() {
                 <div>
                     <Header user={user} />
                     <Menu user={user} />
-                    <div style={{display: "block"}}>
-                        <FriendsArena />
-                        <CreatePantheon />
-                    </div>
-                    <div>
-                        <Footer />
+                    <div style={{display: "flex", flexDirection: "row"}}>
+                        <div>
+                        </div>
+                        <div style={{display: "flex", flexDirection: "column"}}>
+                            <div>
+                                <AddFriend /> 
+                            </div>
+                            <div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 :
                 null
-            }         
+            }
         </div>
     )
 }
