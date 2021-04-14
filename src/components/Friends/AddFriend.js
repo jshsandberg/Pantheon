@@ -15,6 +15,7 @@ export default function AddFriend() {
 
     const addFriend = async () => {
         const addedFriend = await AddedFriend(user.username, selector, input);
+        console.log(addedFriend);
     };
 
     return (
@@ -22,7 +23,7 @@ export default function AddFriend() {
             <h2>Add Friend</h2>
             <div>
                 <form style={{display: "flex", flexDirection: "row"}}>
-                    <label for="user"><h2 style={{marginLeft: "5px"}}>using:</h2></label>
+                    <label htmlFor="user"><h2 style={{marginLeft: "5px"}}>using:</h2></label>
                     <select onClick={(e) => setSelector(e.target.value)} style={{padding: "0px", height: "30px", marginTop: "25px", marginLeft: "10px"}} name="selector">
                     <option value="username">Username</option>
                     <option  value="email">Email</option>

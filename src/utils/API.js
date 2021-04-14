@@ -11,6 +11,9 @@ export const API = {
     getUserbyId: function(id) {
       return axios.post("/api/user/" + id);
     },
+    checkFriendRequest: function(username) {
+      return axios.post("/api/user/friendRequest/" + username)
+    },
     // saveReview: function(user, review) {
     //   return axios.post("/api/user/review/" + user, review);
     // },

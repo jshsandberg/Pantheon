@@ -22,6 +22,8 @@ const userSchema = new Schema({
 
   friend: [],
 
+  friendRequest: [],
+
   pantheon: [{ type: Schema.Types.ObjectId, ref: 'Pantheon' }],
 
 

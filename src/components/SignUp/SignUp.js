@@ -22,8 +22,9 @@ export default function SignUp() {
         try {
             const newUser = await API.saveNewUser(input);
             if (newUser.data.msg === undefined) {
-                await localStorage.setItem("auth-token", newUser.data.token)
-                await setUser(newUser.data.user)
+                await localStorage.setItem("auth-token", newUser.data.token);
+                console.log(newUser.data)
+                await setUser(newUser.data.savedUser)
                 history.push({pathname: "/home"})
             } else {
                 setStatus(newUser.data.msg)

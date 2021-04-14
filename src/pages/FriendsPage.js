@@ -4,6 +4,7 @@ import { UserContext } from "../context/userContext";
 import Header from "../components/Header/Header";
 import Menu from "../components/Menu/Menu";
 import AddFriend from "../components/Friends/AddFriend";
+import FriendRequest from "../components/Friends/FriendRequest";
 
 export default function FriendsPage() {
 
@@ -38,6 +39,7 @@ export default function FriendsPage() {
                                 <AddFriend /> 
                             </div>
                             <div>
+                                <FriendRequest />
                             </div>
                         </div>
                     </div>
