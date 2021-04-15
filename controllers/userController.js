@@ -246,12 +246,44 @@ module.exports = {
 		try {
 			const foundUser = await db.User.findOne({ username: req.params.username });
 			
-			return res.send(foundUser.friendRequest)
+			return res.json(foundUser.friendRequest)
 
 		} catch (err) {
 			console.log(err)
 		}
 	 },
+
+	 acceptFriendRequest: async (req, res) => {
+		 try {
+			const foundUser = await db.User.findOne({ username: req.params.username });
+
+			const updateUserFriend = await db.User.findOneAndUpdate({
+				username: foundUser.username
+			}, {
+				$push: {
+					friend: [req.body.friendUsername]
+				}
+			});
+
+			const friendRequestArr = await foundUser.friendRequest;
+			const index = await friendRequestArr.indexOf(req.body.friendUsername);
+			const updatedFriendRequestArr = await friendRequestArr.splice(index, 1);
+
+			const deleteFriendRequest = await db.User.findOneAndUpdate({
+				username: foundUser.username
+			}, {
+				$set: {
+					friendRequest: friendRequestArr
+				}
+			});
+
+			return res.send("Friend Request accepted")
+
+
+		 } catch (err) {
+			 console.log(err)
+		 }
+	 }
 	
 	// getFriends: async (req, res) => {
 	// 	try {

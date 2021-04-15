@@ -50,7 +50,7 @@ function App() {
           <Route exact path="/artist" component={ArtistPage} />
           <Route exact path="/album" component={AlbumPage} />
           <Route exact path="/friends" component={FriendsPage} />
-          <button onClick={() => console.log(user)}>Click ME</button>
+          {/* <button onClick={() => console.log(user)}>Click ME</button> */}
         </UserContext.Provider>
       </Router>
     </div>
