@@ -1,34 +1,33 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { AcceptFriendRequest } from "../Functions/AcceptFriendRequest";
-import Modal from "../Modal/Modal";
 import { DeclineFriendRequest } from "../Functions/DeclineFriendRequest"
-import { friendRequests } from "../Functions/CheckFriendRequest";
 
-export default function FriendRequest({ user }) {
-
+export default function FriendRequest({ user, rerenderPage, requests }) {
+    
+    // eslint-disable-next-line
     const [rerender, setRerender] = useState(0);
-    const [requests, setRequests] = useState(null);
+    // const [requests, setRequests] = useState(null);
     const [message, setMessage] = useState("");
 
-    console.log(message)
-
-    useEffect(() => {
-        const checkForFriendRequests = async () => {
-            const checkedRequest = await friendRequests(user.username);
-            await setRequests(checkedRequest);
-        };
-        checkForFriendRequests();
-    }, [user, rerender]);
+    // useEffect(() => {
+    //     const checkForFriendRequests = async () => {
+    //         const checkedRequest = await friendRequests(user.username);
+    //         await setRequests(checkedRequest);
+    //     };
+    //     checkForFriendRequests();
+    // }, [user, rerender]);
 
     const acceptingFriendRequest = async (username, friendUsername) => {
         const acceptedFriendRequest = await AcceptFriendRequest(username, friendUsername);
         await setMessage(acceptedFriendRequest);
+        await rerenderPage()
         await setRerender(rerender => rerender + 1)
     };
 
     const decliningFriendRequest = async (username, friendUsername) => {
         const declinedFriendRequest = await DeclineFriendRequest(username, friendUsername);
         await setMessage(declinedFriendRequest);
+        await rerenderPage()
         await setRerender(rerender => rerender + 1)
     };
 

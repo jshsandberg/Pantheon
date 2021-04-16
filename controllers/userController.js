@@ -329,12 +329,14 @@ module.exports = {
 					friend: foundFriend.friend,
 					pantheon: foundFriend.pantheon
 				};
-				friends.push(obj)
+				await friends.push(obj)
 			};
 		
 			return res.json(friends);
 			
 		} catch (err) {
+			console.log(req.params)
+			console.log(err);
 			res.status(500)
 		}
 	},

@@ -4,7 +4,8 @@ import FriendRequest from "../Friends/FriendRequest";
 import "./modalStyle.css"
 
 
-export default function FriendRequestModal({ show, hide, user }) {
+export default function FriendRequestModal({ show, hide, user, rerenderPage, requests }) {
+
 
     const onClose = () => {
         hide()
@@ -21,7 +22,7 @@ export default function FriendRequestModal({ show, hide, user }) {
                     <AddFriend user={user} />
                 </div>
                 <div>
-                    <FriendRequest user={user} />
+                    <FriendRequest user={user} rerenderPage={rerenderPage} requests={requests} />
                 </div>
             </div>
         )

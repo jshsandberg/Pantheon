@@ -3,7 +3,6 @@ import "./modalStyle.css"
 
 export default function Modal({ show, message, hide, confirmed }) {
 
-    console.log(show, confirmed)
 
     const onClose = () => {
         hide()
@@ -14,19 +13,12 @@ export default function Modal({ show, message, hide, confirmed }) {
         await hide();
     };
 
-  if (show && confirmed === true) {
+  if (show) {
       return (
         <div className="modal">
             {message}
             <button className="modalButton" onClick={() => confirm()}>Yes</button>
             <button className="modalButton" onClick={() => onClose()}>No</button>
-        </div>
-      )
-  } else if (show === true && confirmed !== true) {
-      return (
-        <div className="modal">
-            {message}
-            <button className="modalButton" onClick={() => onClose()}>Close</button>
         </div>
       )
   } else {

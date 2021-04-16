@@ -1,24 +1,21 @@
-import React, { useEffect, useState } from "react";
-import { GetFriends } from "../Functions/GetFriends.js";
+import React from "react";
 
-export default function Friends({ user }) {
+export default function Friends({ friends }) {
 
-    const [friends, setFriends] = useState(null);
-
-    useEffect(() => {
-        const gettingFriends = async () => {
-            const gotFriends = await GetFriends(user.username);
-            setFriends(gotFriends)
-        };
-        gettingFriends();
-    }, [user])
+    // useEffect(() => {
+    //     const gettingFriends = async () => {
+    //         const gotFriends = await GetFriends(user.username);
+    //         setFriends(gotFriends)
+    //     };
+    //     gettingFriends();
+    // }, [user])
 
     return (
         <div style={{display: "flex", flexDirection: "column", padding: "10px"}}>
             <div>
                 <h2 style={{textAlign: "center"}}>Friends</h2>
             </div>
-            <div style={{border: "solid 1px",}}>
+            <div style={{border: "solid 1px", overflow: "auto", maxHeight: "500px"}}>
                 {
                     friends && friends.map((item, i) => {
                         return (

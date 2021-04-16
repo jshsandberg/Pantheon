@@ -4,7 +4,7 @@ import { UserContext } from "../context/userContext";
 import Header from "../components/Header/Header";
 import FriendsArena from "../components/FriendsArena/FriendsArena";
 import CreatePantheon from "../components/CreatePantheon/CreatePantheon";
-import Footer from "../components/Footer/Footer";
+// import Footer from "../components/Footer/Footer";
 import Menu from "../components/Menu/Menu";
 
 
@@ -34,7 +34,7 @@ export default function HomePage() {
                     <Menu user={user} />
                     <div style={{display: "block"}}>
                         <FriendsArena />
-                        <CreatePantheon />
+                        <CreatePantheon user={user}/>
                     </div>
                     <div>
                         {/* <Footer /> */}
