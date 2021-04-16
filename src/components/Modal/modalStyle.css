@@ -25,3 +25,29 @@
 .modalButton {
     margin: 0px
 }
+
+.friendRequestModal {
+    width: 800px;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    padding: 30px;
+    box-shadow: 0 0 0 100vmax rgba(0, 0, 0, 0.6);
+    border: 1px solid #ccc;
+    transform: scale(1);
+    position: fixed;
+    z-index: 2000;
+    top: 5%;
+    left: calc(50% - 400px);
+    /* bottom: 40px; */
+    opacity: 1;
+    background-color: white;
+    animation: fadeIn .25s;
+}
+
+.modalFriendRequestButton {
+    margin: 0px
+
+}
+
+

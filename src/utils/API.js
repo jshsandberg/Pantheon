@@ -17,6 +17,9 @@ export const API = {
     acceptFriendRequest: function(username, friendUsername) {
       return axios.post("/api/user/acceptFriendRequest/" + username, {friendUsername: friendUsername})
     },
+    declineFriendRequest: function(username, friendUsername) {
+      return axios.post("/api/user/declineFriendRequest/" + username, {friendUsername: friendUsername})
+    },
     // saveReview: function(user, review) {
     //   return axios.post("/api/user/review/" + user, review);
     // },
@@ -33,9 +36,9 @@ export const API = {
       };
       return axios.post("api/user/addFriend/" + username, obj);
     },
-    // getFriends: function(userId) {
-    //   return axios.post("api/user/getFriends/" + userId);
-    // },
+    getFriends: function(username) {
+      return axios.post("api/user/getFriends/" + username);
+    },
     // savePantheon: function(data) {
     //   return axios.post("api/pantheon", data);
     // },

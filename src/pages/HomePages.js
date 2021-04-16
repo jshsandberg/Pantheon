@@ -37,7 +37,7 @@ export default function HomePage() {
                         <CreatePantheon />
                     </div>
                     <div>
-                        <Footer />
+                        {/* <Footer /> */}
                     </div>
                 </div>
                 :

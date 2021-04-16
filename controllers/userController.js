@@ -265,9 +265,17 @@ module.exports = {
 				}
 			});
 
+			const updateFriendUser = await db.User.findOneAndUpdate({
+				username: req.body.friendUsername
+			}, {
+				$push: {
+					friend: [foundUser.username]
+				}
+			})
+
 			const friendRequestArr = await foundUser.friendRequest;
 			const index = await friendRequestArr.indexOf(req.body.friendUsername);
-			const updatedFriendRequestArr = await friendRequestArr.splice(index, 1);
+			await friendRequestArr.splice(index, 1);
 
 			const deleteFriendRequest = await db.User.findOneAndUpdate({
 				username: foundUser.username
@@ -277,24 +285,59 @@ module.exports = {
 				}
 			});
 
-			return res.send("Friend Request accepted")
+			return res.json("Friend Request accepted")
 
 
 		 } catch (err) {
 			 console.log(err)
 		 }
-	 }
+	 },
+
+	 declineFriendRequest: async (req, res) => {
+		 try {
+			const foundUser = await db.User.findOne({ username: req.params.username });
+
+			const friendRequestArr = await foundUser.friendRequest;
+			const index = await friendRequestArr.indexOf(req.body.friendUsername);
+			await friendRequestArr.splice(index, 1);
+
+			const deleteFriendRequest = await db.User.findOneAndUpdate({
+				username: foundUser.username
+			}, {
+				$set: {
+					friendRequest: friendRequestArr
+				}
+			});
+
+			return res.json("Friend Request declined")
+
+
+		 } catch (err) {
+			 console.log(err)
+		 }
+	 },
 	
-	// getFriends: async (req, res) => {
-	// 	try {
-	// 		const foundUser = await db.User.findById(req.params.userId)
+	getFriends: async (req, res) => {
+		try {
+			const foundUser = await db.User.findOne({ username: req.params.username });
+			const friends = [];
+
+			for (let i = 0; i < foundUser.friend.length; i++) {
+				const foundFriend = await db.User.findOne({ username: foundUser.friend[i] });
+				const obj = {
+					username: foundFriend.username,
+					friend: foundFriend.friend,
+					pantheon: foundFriend.pantheon
+				};
+				friends.push(obj)
+			};
 		
-	// 		return res.json(foundUser.friend);
+			return res.json(friends);
 			
-	// 	} catch (err) {
-	// 		res.status(500)
-	// 	}
-	// },
+		} catch (err) {
+			res.status(500)
+		}
+	},
 
 	// acceptPantheon: async (req, res) => {
 	// 	try {

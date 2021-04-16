@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { UserContext } from "../context/userContext";
+import Friends from "../components/Friends/Friends";
 import Header from "../components/Header/Header";
 import Menu from "../components/Menu/Menu";
 import AddFriend from "../components/Friends/AddFriend";
@@ -33,13 +34,14 @@ export default function FriendsPage() {
                     <Menu user={user} />
                     <div style={{display: "flex", flexDirection: "row"}}>
                         <div>
+                            <Friends user={user}/>
                         </div>
                         <div style={{display: "flex", flexDirection: "column"}}>
                             <div>
-                                <AddFriend /> 
+                                <AddFriend user={user} /> 
                             </div>
                             <div>
-                                <FriendRequest />
+                                <FriendRequest user={user} />
                             </div>
                         </div>
                     </div>

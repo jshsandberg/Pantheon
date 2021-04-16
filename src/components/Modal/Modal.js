@@ -12,7 +12,7 @@ export default function Modal({ show, message, hide, confirmed }) {
         await hide();
     };
 
-  if (show === true) {
+  if (show && confirmed === true) {
       return (
         <div className="modal">
             {message}
@@ -20,7 +20,16 @@ export default function Modal({ show, message, hide, confirmed }) {
             <button className="modalButton" onClick={() => onClose()}>No</button>
         </div>
       )
+  } else if (show === true && confirmed !== true) {
+      return (
+        <div className="modal">
+            {message}
+            <button className="modalButton" onClick={() => onClose()}>Close</button>
+        </div>
+      )
   } else {
-      return null
+      return (
+          null
+      )
   }
 }

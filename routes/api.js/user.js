@@ -6,10 +6,11 @@ router.route("/login").post(userController.login);
 router.route("/:id").post(userController.findById);
 router.route("/friendRequest/:username").post(userController.findFriendRequest);
 router.route("/acceptFriendRequest/:username").post(userController.acceptFriendRequest);
+router.route("/declineFriendRequest/:username").post(userController.declineFriendRequest);
+router.route("/getFriends/:username").post(userController.getFriends);
+router.route("/addFriend/:username").post(userController.addFriend);
 // router.route("/review/:userId").post(userController.saveReview);
 // router.route("/mediaReview/:spotifyId").post(userController.getReview);
-// router.route("/addFriend/:username").post(userController.addFriend);
-// router.route("/getFriends/:userId").post(userController.getFriends);
 // router.route("/pantheon/:id").post(userController.acceptPantheon);
 
 
