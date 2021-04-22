@@ -60,8 +60,9 @@ export default function CreatePantheon({ user }) {
 
     const savePantheon = async () => {
         // MAKE THIS ASYNC
-        SavePantheon(pantheonObj);
-        onClose()
+        const pantheon = await SavePantheon(pantheonObj);
+        console.log(pantheon)
+        await onClose()
     }
 
     return (

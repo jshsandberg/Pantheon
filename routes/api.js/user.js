@@ -9,9 +9,13 @@ router.route("/acceptFriendRequest/:username").post(userController.acceptFriendR
 router.route("/declineFriendRequest/:username").post(userController.declineFriendRequest);
 router.route("/getFriends/:username").post(userController.getFriends);
 router.route("/addFriend/:username").post(userController.addFriend);
+router.route("/pantheonInteractions/:username").post(userController.pantheonInteractions);
+router.route("/pantheon/:id").post(userController.acceptPantheon);
+router.route("/pantheonDeclined/:id").post(userController.declinePantheon);
+
+
 // router.route("/review/:userId").post(userController.saveReview);
 // router.route("/mediaReview/:spotifyId").post(userController.getReview);
-// router.route("/pantheon/:id").post(userController.acceptPantheon);
 
 
 

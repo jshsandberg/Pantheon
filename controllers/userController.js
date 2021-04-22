@@ -341,68 +341,155 @@ module.exports = {
 		}
 	},
 
-	// acceptPantheon: async (req, res) => {
-	// 	try {
-	// 		const username = (Object.keys(req.body));
-	// 		const pantheonId = req.params;
+	pantheonInteractions: async (req, res) => {
+		try {
 
-	// 		const testIfPantheon = await db.User.find({ username: username});
+			let count = 0;
+
+			// FIND PANTHEON THAT USER HAS NOT ACCEPTED/DECLINED PANTHEON INVITE
+			const foundPantheon = await db.Pantheon.find({ players: req.params.username });
+
+			for (let i = 0; i < foundPantheon.length; i++) {
+				if (foundPantheon[i].acceptedPlayers.includes(req.params.username)) {
+				} else {
+					count += 1
+				}	
+			};
+
+			res.json(count)
+
+		} catch (err) {
+			console.log(err)
+		}
+	},
+
+	acceptPantheon: async (req, res) => {
+		try {
+
+			const foundUser = await db.User.findOne({ username: req.body.username });
+			const foundPantheon = await db.Pantheon.findOne({ _id: req.params.id });
 
 
-	// 		if (testIfPantheon[0].pantheon.length === 0) {
+			if (foundUser.pantheon.includes(req.params.id)) {
+				return res.send("User has already accepted this invite.")
+			} else {
+				const updataPantheon = await db.Pantheon.findOneAndUpdate({
+					_id: req.params.id
+				}, {
+					$push : {
+						acceptedPlayers: foundUser.username
+					}
+				});
+				const updatedUser = await db.User.findOneAndUpdate({ 
+					username: foundUser.username
+				}, {
+					$push: {
+						pantheon: [req.params.id]
+					}
+				});
+				if (foundPantheon.acceptedPlayers.length === foundPantheon.players.length - 1) {
+					const updatedStatusPantheon = await db.Pantheon.findOneAndUpdate({
+						_id: foundPantheon._id
+					}, {
+						$set: { accepted: true }
+					});
+					res.send("Everyone has accepted the Pantheon Invite! Choose your song!")
+				} else {
+					res.send("Challenge has been accepted")
+				}
+			}
+		} catch (err) {
+			console.log("there is an error")
+			console.log(err)
+		}
+	},
+	declinePantheon: async (req, res) => {
+		try {
+
+			console.log(req.body.username, req.params.id);
+
+			const foundUser = await db.User.findOne({ username: req.body.username });
+			console.log("HAVE NO IDEA IF I WANT A DECLINE")
+
+			// if (foundUser.pantheon.includes(req.params.id)) {
+			// 	return res.send("User has already accepted this invite.")
+			// } else {
+			// 	const updataPantheon = await db.Pantheon.findOneAndUpdate({
+			// 		_id: req.params.id
+			// 	}, {
+			// 		$push : {
+			// 			acceptedPlayers: foundUser.username
+			// 		}
+			// 	});
+			// 	const updatedUser = await db.User.findOneAndUpdate({ 
+			// 		username: foundUser.username
+			// 	}, {
+			// 		$push: {
+			// 			pantheon: [req.params.id]
+			// 		}
+			// 	});
+			// 	return res.send("Challenge has been accepted")
+			// }
+			// const username = (Object.keys(req.body));
+			// const pantheonId = req.params;
+
+			// const testIfPantheon = await db.User.find({ username: username});
+
+
+			// if (testIfPantheon[0].pantheon.length === 0) {
 				
-	// 			const findUser = await db.User.findOneAndUpdate({ 
-	// 				username: username
-	// 			}, {
-	// 				$push: {
-	// 					pantheon: [pantheonId.id]
-	// 				}
-	// 			});
-	// 			const updatePantheon = await db.Pantheon.findOneAndUpdate({
-	// 				_id: pantheonId.id
-	// 			}, {
-	// 				$push: {
-	// 					acceptedPlayers: username[0]
-	// 				}
-	// 			});
+			// 	const findUser = await db.User.findOneAndUpdate({ 
+			// 		username: username
+			// 	}, {
+			// 		$push: {
+			// 			pantheon: [pantheonId.id]
+			// 		}
+			// 	});
+			// 	const updatePantheon = await db.Pantheon.findOneAndUpdate({
+			// 		_id: pantheonId.id
+			// 	}, {
+			// 		$push: {
+			// 			acceptedPlayers: username[0]
+			// 		}
+			// 	});
 
-	// 			return res.send("Challenge has been accepted. This is the users first Pantheon Challenge!")
+			// 	return res.send("Challenge has been accepted. This is the users first Pantheon Challenge!")
 
-	// 		} else { for (let i = 0; i < testIfPantheon[0].pantheon.length; i++) {
-	// 			if (testIfPantheon[0].pantheon[i] == pantheonId.id) {
+			// } else { for (let i = 0; i < testIfPantheon[0].pantheon.length; i++) {
+			// 	if (testIfPantheon[0].pantheon[i] == pantheonId.id) {
 
-	// 			   return res.send("Challenge has already been accepted")
-	// 		   } else {
+			// 	   return res.send("Challenge has already been accepted")
+			//    } else {
 
-	// 			   const findUser = await db.User.findOneAndUpdate({ 
-	// 				   username: username
-	// 			   }, {
-	// 				   $push: {
-	// 					   pantheon: [pantheonId.id]
-	// 				   }
-	// 			   });
-	// 			   const updatePantheon = await db.Pantheon.findOneAndUpdate({
-	// 				   _id: pantheonId.id
-	// 			   }, {
-	// 				   $push: {
-	// 					   acceptedPlayers: username[0]
-	// 				   }
-	// 			   });
+			// 	   const findUser = await db.User.findOneAndUpdate({ 
+			// 		   username: username
+			// 	   }, {
+			// 		   $push: {
+			// 			   pantheon: [pantheonId.id]
+			// 		   }
+			// 	   });
+			// 	   const updatePantheon = await db.Pantheon.findOneAndUpdate({
+			// 		   _id: pantheonId.id
+			// 	   }, {
+			// 		   $push: {
+			// 			   acceptedPlayers: username[0]
+			// 		   }
+			// 	   });
 
-	// 			   return res.send("Challenge has been accepted")
+			// 	   return res.send("Challenge has been accepted")
 
 
-	// 		   	}
+			//    	}
 
 			
-	// 			}
-	// 		}
+			// 	}
+			// }
 			
 			
-	// 	} catch (err) {
-	// 		console.log("there is an error")
-	// 		console.log(err)
-	// 	}
-	// }
+		} catch (err) {
+			console.log("there is an error")
+			console.log(err)
+		}
+	}
 
 }

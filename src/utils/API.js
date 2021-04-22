@@ -42,12 +42,24 @@ export const API = {
     savePantheon: function(data) {
       return axios.post("api/pantheon", data);
     },
-    // getPantheon: function(username) {
-    //   return axios.post("api/pantheon/" + username);
-    // },
-    // acceptPantheon: function(id, username) {
-    //   return axios.post("api/user/pantheon/" + id, username)
-    // },
+    getNonAcceptedPantheons: function(username) {
+      return axios.post("api/pantheon/" + username);
+    },
+    getUserPantheonInteractions: function(username) {
+      return axios.post("api/user/pantheonInteractions/" + username)
+    },
+    acceptPantheon: function(id, username) {
+      const obj = {
+        username: username
+      };
+      return axios.post("api/user/pantheon/" + id, obj)
+    },
+    declinePantheon: function(id, username) {
+      const obj = {
+        username: username
+      };
+      return axios.post("api/user/pantheonDeclined/" + id, obj)
+    },
     // getActivePantheon: function(id) {
     //   return axios.post("api/pantheon/creator/" + id);
     // },

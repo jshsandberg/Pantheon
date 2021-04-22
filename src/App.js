@@ -10,18 +10,16 @@ import SignUpPage from "./pages/SignUpPage";
 import AlbumPage from "./pages/AlbumPage";
 import WelcomePage from "./pages/WelcomePage";
 import FriendsPage from "./pages/FriendsPage";
+import PantheonPage from "./pages/PantheonPage";
 
 function App() {
 
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-
     const jwt = require("jsonwebtoken");
-    
     const checkIfLoggedIn = async () => {
       let token = await localStorage.getItem("auth-token");
-      console.log(token)
       if (token !== undefined) {
         try {
           const decoded = await jwt.verify(token, "secret");      
@@ -35,8 +33,9 @@ function App() {
       }
     };
     checkIfLoggedIn()
+  }, []);
 
-  }, [])
+
 
   return (
     <div>
@@ -50,6 +49,7 @@ function App() {
           <Route exact path="/artist" component={ArtistPage} />
           <Route exact path="/album" component={AlbumPage} />
           <Route exact path="/friends" component={FriendsPage} />
+          <Route exact path="/pantheon" component={PantheonPage} />
           {/* <button onClick={() => console.log(user)}>Click ME</button> */}
         </UserContext.Provider>
       </Router>

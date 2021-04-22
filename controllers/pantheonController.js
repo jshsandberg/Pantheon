@@ -7,90 +7,91 @@ module.exports = {
     register: async (req, res) => {
         try {
 
-            console.log(req.body)
-            // const playerArr = req.body.players;
+            const playerArr = [req.body.fighter1, req.body.fighter2, req.body.fighter3, req.body.fighter4];
 
             // await playerArr.push(req.body.creator);
 
-            // if (playerArr.length === 4) {
+            if (playerArr.length === 4) {
 
-            //     const getShuffledArr = arr => {
-            //         const newArr = arr.slice()
-            //         for (let i = newArr.length - 1; i > 0; i--) {
-            //             const rand = Math.floor(Math.random() * (i + 1));
-            //             [newArr[i], newArr[rand]] = [newArr[rand], newArr[i]];
-            //         }
-            //         return newArr
-            //     };
+                const getShuffledArr = arr => {
+                    const newArr = arr.slice()
+                    for (let i = newArr.length - 1; i > 0; i--) {
+                        const rand = Math.floor(Math.random() * (i + 1));
+                        [newArr[i], newArr[rand]] = [newArr[rand], newArr[i]];
+                    }
+                    return newArr
+                };
 
-            //     const shuffledArr = getShuffledArr(playerArr);
+                const shuffledArr = getShuffledArr(playerArr);
+
+                console.log(shuffledArr)
            
-            //     const newPantheon = new Pantheon ({
-            //         category: req.body.data.category,
-            //         players: playerArr,
-            //         creator: req.body.creator,
-            //         acceptedPlayers: [req.body.creator],
-            //         numOfPlayers: 4,
-            //         battle: {
-            //             battleOne: {
-            //                 fighterOne: {
-            //                     username: shuffledArr[0],
-            //                     music: null
-            //                 },
-            //                 fighterTwo: {
-            //                     username: shuffledArr[1],
-            //                     music: null
-            //                 },
-            //                 votesForFighterOne: [],
-            //                 votesForFighterTwo: [],
-            //                 playersWhoVoted: [],
-            //                 winner: null
-            //             },
-            //             battleTwo: {
-            //                 fighterOne: {
-            //                     username: shuffledArr[2],
-            //                     music: null
-            //                 },
-            //                 fighterTwo: {
-            //                     username: shuffledArr[3],
-            //                     music: null
-            //                 },
-            //                 votesForFighterOne: [],
-            //                 votesForFighterTwo: [],
-            //                 playersWhoVoted: [],
-            //                 winner: null
-            //             }
-            //         },
-            //         finalBattle: {                    
-            //             fighterOne: {
-            //                 username: null,
-            //                 music: null
-            //             },
-            //             fighterTwo: {
-            //                 username: null,
-            //                 music: null
-            //             },
-            //             votesForFighterOne: [],
-            //             votesForFighterTwo: [],
-            //             playersWhoVoted: [],
-            //             winner: null
-            //         },
-            //         accepted: false,
-            //         music: false,
-            //         vote: false,
-            //         final: false,
-            //         finalMusic: false,
-            //         finalVote: false,
-            //         completed: false
-            //     });
+                const newPantheon = new Pantheon ({
+                    category: req.body.pantheon,
+                    players: playerArr,
+                    creator: req.body.fighter1,
+                    acceptedPlayers: [req.body.fighter1],
+                    numOfPlayers: 4,
+                    battle: {
+                        battleOne: {
+                            fighterOne: {
+                                username: shuffledArr[0],
+                                music: null
+                            },
+                            fighterTwo: {
+                                username: shuffledArr[1],
+                                music: null
+                            },
+                            votesForFighterOne: [],
+                            votesForFighterTwo: [],
+                            playersWhoVoted: [],
+                            winner: null
+                        },
+                        battleTwo: {
+                            fighterOne: {
+                                username: shuffledArr[2],
+                                music: null
+                            },
+                            fighterTwo: {
+                                username: shuffledArr[3],
+                                music: null
+                            },
+                            votesForFighterOne: [],
+                            votesForFighterTwo: [],
+                            playersWhoVoted: [],
+                            winner: null
+                        }
+                    },
+                    finalBattle: {                    
+                        fighterOne: {
+                            username: null,
+                            music: null
+                        },
+                        fighterTwo: {
+                            username: null,
+                            music: null
+                        },
+                        votesForFighterOne: [],
+                        votesForFighterTwo: [],
+                        playersWhoVoted: [],
+                        winner: null
+                    },
+                    accepted: false,
+                    music: false,
+                    vote: false,
+                    final: false,
+                    finalMusic: false,
+                    finalVote: false,
+                    completed: false
+                });
     
-            //     const savedPantheon = await newPantheon.save();
+                await newPantheon.save();
     
-            //     res.send("Pantheon created");
+                res.send("Pantheon created");
 
-            // } else {
-            //     res.send("You need to invite 3 of your friends to create a Pantheon")
-            // }
+            } else {
+                res.send("You need to invite 3 of your friends to create a Pantheon")
+            }
 
    
 
