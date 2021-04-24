@@ -60,6 +60,9 @@ export const API = {
       };
       return axios.post("api/user/pantheonDeclined/" + id, obj)
     },
+    getPantheonBattle: function(username) {
+      return axios.post("api/pantheon/selectMusic/" + username)
+    }
     // getActivePantheon: function(id) {
     //   return axios.post("api/pantheon/creator/" + id);
     // },

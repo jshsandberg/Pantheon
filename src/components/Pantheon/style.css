@@ -1,0 +1,70 @@
+.battle:hover {
+    /* background-color: #f0b1b4;
+    transition-duration: 0.5s; */
+    animation: change 3s;
+    animation-fill-mode: forwards; 
+    cursor: pointer;
+}
+
+@keyframes change {
+    0% {background-color: white;}
+    20% {background-color: white;}
+    40% {background-color: white;}
+    100% {background-color: #f0b1b4;}
+}
+
+.leftSword {
+    width: 100px;
+    height: auto;
+    position: absolute;
+    transform: rotate(225deg);
+    left: -30px;
+    opacity: 0
+}
+
+.battle:hover .leftSword{   
+    animation: fade 3s, shiftLeft 2.5s, clashLeft 3s;
+    animation-fill-mode: forwards;
+}
+
+.battle:hover .rightSword{   
+    animation: fade 3s, shiftRight 2.5s, clashRight 3s;
+    animation-fill-mode: forwards;
+}
+
+.rightSword {
+    width: 100px;
+    height: auto;
+    position: absolute;
+    transform: rotate(225deg);
+    right: -30px;
+    opacity: 0
+}
+
+@keyframes fade {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
+
+@keyframes shiftLeft {
+    0% {left: -30px}
+    100% {left: 240px}
+}
+
+@keyframes shiftRight {
+    0% {right: -30px}
+    100% {right: 240px}
+}
+@keyframes clashLeft {
+    0% {transform: rotate(225deg)}
+    /* 50% {transform: rotate(225deg)}
+    80% {transform: rotate(260deg)} */
+    100% {transform: rotate(270deg)}
+}
+
+@keyframes clashRight {
+    0% {transform: rotate(225deg)}
+    /* 50% {transform: rotate(225deg)}
+    80% {transform: rotate(260deg)} */
+    100% {transform: rotate(180deg)}
+}

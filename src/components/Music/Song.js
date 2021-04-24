@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { AiFillCaretRight } from "react-icons/ai";
 import "./songStyle.css";
 
-export default function Song({ data, getUri }) {
+export default function Song({ data, getUri, pantheon }) {
 
     const history = useHistory()
 
@@ -19,9 +19,14 @@ export default function Song({ data, getUri }) {
 
     return (
         <div style={{display: "flex", flexDirection: "column", width: "810px"}}>
-            <div style={{display: "flex", flexDirection: "row", justifyContent: "space-around"}}>
-                <h1>Songs</h1>
-            </div>
+            {
+                !pantheon ?
+                    <div style={{display: "flex", flexDirection: "row", justifyContent: "space-around"}}>
+                        <h1>Songs</h1>
+                    </div>
+                :
+                    null
+            }
             {data.map((data, i) => {
                 const obj = {
                     albumId: data.album.id,

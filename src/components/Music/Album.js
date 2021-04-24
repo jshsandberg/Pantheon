@@ -3,7 +3,7 @@ import { IoIosArrowDroprightCircle } from "react-icons/io";
 import { useHistory } from "react-router-dom";
 import "./albumStyle.css";
 
-export default function Album({ data, getUri }) {
+export default function Album({ data, getUri, pantheon }) {
 
     const history = useHistory();
 
@@ -13,7 +13,12 @@ export default function Album({ data, getUri }) {
 
     return (
         <div>
-            <h2 style={{textAlign: "center"}}>Albums</h2>
+            {
+                !pantheon ?
+                    <h2 style={{textAlign: "center"}}>Albums</h2>
+                :
+                null
+            }
             <div style={{display: "flex", flexDirection: "row", justifyContent: "space-around", flexWrap: "wrap"}}>
                 {data.map((data, i) => {
                     const obj = {
@@ -36,7 +41,6 @@ export default function Album({ data, getUri }) {
                     )
                 })}
             </div>
-
         </div>
     )
 };

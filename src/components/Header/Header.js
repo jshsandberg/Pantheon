@@ -4,7 +4,7 @@ import { Link, useHistory } from "react-router-dom";
 import { getSpotifyAccess } from "../Functions/GetSpotifyToken";
 import "./style.css"
 
-export default function Header({ user }) {
+export default function Header({ user, pantheon }) {
 
     const history = useHistory();
 
@@ -23,6 +23,12 @@ export default function Header({ user }) {
         setUser(null);
         history.push({pathname: "/"})
     };
+
+    const tournameData = (e) => {
+        e.preventDefault();
+        pantheon(e, value)
+    }
+
     
     return (
         <div className="headerStyle">
@@ -40,10 +46,19 @@ export default function Header({ user }) {
             }
           
             <Link style={{textDecoration: "none"}} to="/home"><h1 style={{marginLeft: "30px", color: "white"}}>Pantheon</h1></Link>
-            <form style={{position: "absolute", top: "11px", left: "345px"}}>
-                <input onChange={(e) => setValue(e.target.value)} type="text" />
-                <button onClick={(e) => getSpotifyData(e)} style={{padding: "10px"}}>Search</button>
-            </form>
+            {
+                pantheon ?
+                <form style={{position: "absolute", top: "11px", left: "345px"}}>
+                    <input onChange={(e) => setValue(e.target.value)} type="text" />
+                    <button onClick={(e) => tournameData(e)} style={{padding: "10px"}}>Search</button>
+                </form>                
+                :
+                <form style={{position: "absolute", top: "11px", left: "345px"}}>
+                    <input onChange={(e) => setValue(e.target.value)} type="text" />
+                    <button onClick={(e) => getSpotifyData(e)} style={{padding: "10px"}}>Search</button>
+                </form>
+            }
+          
         </div>
     )
 };

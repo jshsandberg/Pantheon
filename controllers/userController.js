@@ -356,6 +356,35 @@ module.exports = {
 				}	
 			};
 
+
+			for (let i = 0; i < foundPantheon.length; i++) {
+				if (foundPantheon[i].accepted === true && foundPantheon[i].music === false) {
+					const battle = foundPantheon[i].battle;
+					switch (req.params.username) {
+						case battle.battleOne.fighterOne.username:
+							if (battle.battleOne.fighterOne.music === null) {
+								count += 1
+							};
+							break;
+						case battle.battleOne.fighterTwo.username:
+							if (battle.battleOne.fighterTwo.music === null) {
+								count += 1
+							};
+							break;
+						case battle.battleTwo.fighterOne.username:
+							if (battle.battleTwo.fighterOne.music === null) {
+								count += 1
+							};
+							break;
+						case battle.battleTwo.fighterTwo.username:
+							if (battle.battleTwo.fighterTwo.music === null) {
+								count += 1
+							};
+							break;
+					}
+				}
+			}
+
 			res.json(count)
 
 		} catch (err) {

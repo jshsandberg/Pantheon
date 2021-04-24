@@ -3,9 +3,11 @@ import { IoIosArrowDroprightCircle } from "react-icons/io";
 import { useHistory } from "react-router-dom";
 import "./artistStyle.css"
 
-export default function Artist({ data, getUri }) {
+export default function Artist({ data, getUri , pantheon}) {
 
     const history = useHistory();
+
+    console.log(data)
 
     const sendUri = (uri) => {
         getUri(uri);
@@ -13,7 +15,12 @@ export default function Artist({ data, getUri }) {
 
     return (
         <div style={{marginBottom: "70px"}}>
-            <h2 style={{textAlign: "center"}}>Artists</h2>
+            {
+                !pantheon ?
+                    <h2 style={{textAlign: "center"}}>Artists</h2>
+                :
+                null
+            }
             <div style={{display: "flex", flexDirection: "row", justifyContent: "space-around", flexWrap: "wrap"}}>
                 {data.map((data, i) => {
                     return (
@@ -26,7 +33,7 @@ export default function Artist({ data, getUri }) {
                                 <h2 style={{margin: "0px 0px 30px 5px"}}>Artist</h2>
                             </div>
                     )
-                })}
+                })}       
             </div>
         </div>
     )
