@@ -13,8 +13,6 @@ export default function MediaPage({ location }) {
 
     const [uri, setUri] = useState(null);
 
-    console.log(location)
-
 
     const getUri = (data) => {
         setUri(data);

@@ -6,8 +6,6 @@ import "./style.css"
 
 export default function Header({ user, pantheon }) {
 
-    console.log(pantheon)
-
     const history = useHistory();
 
     const {setUser} = useContext(UserContext);
