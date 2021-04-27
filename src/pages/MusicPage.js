@@ -14,6 +14,7 @@ export default function MusicPage({ location: { state } }) {
     const {user} = useContext(UserContext);
 
     const [rerender, setRerender] = useState(0);
+    const [value, setValue] = useState("");
     const [tracks, setTracks] = useState(null);    
     const [albums, setAlbums] = useState(null);
     const [artists, setArtists] = useState(null);
@@ -23,22 +24,35 @@ export default function MusicPage({ location: { state } }) {
 
 
 
-    const rerenderPage = () => {
-        setRerender(rerender => rerender + 1);
+    // const rerenderPage = () => {
+    //     setRerender(rerender => rerender + 1);
+    // };
+
+
+    // const getMusicForPantheon = async (e, value) => {
+    //     e.preventDefault()
+    //     const data = await getSpotifyAccess(value);
+    //     setTracks(data.track);
+    //     setAlbums(data.albums);
+    //     setArtists(data.artist);
+    //     setSelection("songs");
+    // };
+
+    const getUri = (data) => {
+        setUri(data);
     };
 
-    const getMusicForPantheon = async (e, value) => {
-        e.preventDefault()
+    
+    const getSpotifyData = async (e) => {
+        e.preventDefault();
         const data = await getSpotifyAccess(value);
         setTracks(data.track);
         setAlbums(data.albums);
         setArtists(data.artist);
         setSelection("songs");
-    };
 
-    const getUri = (data) => {
-        setUri(data);
-    }
+        // history.push({pathname: "/media", state: data})   
+    };
 
 
 
@@ -49,7 +63,7 @@ export default function MusicPage({ location: { state } }) {
             !loading ? */}
             <div>
                 <div>
-                    <Header user={user} pantheon={getMusicForPantheon} />
+                    <Header user={user} pantheon={true} />
                     <Menu user={user} reset={rerender}/>
                 </div>
                 <div style={{display: "flex", flexDirection: "row", justifyContent: "space-around"}}>
@@ -80,7 +94,11 @@ export default function MusicPage({ location: { state } }) {
 
                                     }
                                 </div>
-                        : null
+                        : 
+                        <form>
+                            <input onChange={(e) => setValue(e.target.value)} type="text" />
+                            <button onClick={(e) => getSpotifyData(e)} style={{padding: "10px"}}>Search</button>
+                        </form>  
                         }
                     </div>
                 </div>

@@ -6,6 +6,8 @@ import "./style.css"
 
 export default function Header({ user, pantheon }) {
 
+    console.log(pantheon)
+
     const history = useHistory();
 
     const {setUser} = useContext(UserContext);
@@ -24,11 +26,6 @@ export default function Header({ user, pantheon }) {
         history.push({pathname: "/"})
     };
 
-    const tournameData = (e) => {
-        e.preventDefault();
-        pantheon(e, value)
-    }
-
     
     return (
         <div className="headerStyle">
@@ -44,19 +41,15 @@ export default function Header({ user, pantheon }) {
                     <Link to="/signup"><button className="signUpButton">Sign Up</button></Link>
                 </div>
             }
-          
             <Link style={{textDecoration: "none"}} to="/home"><h1 style={{marginLeft: "30px", color: "white"}}>Pantheon</h1></Link>
             {
-                pantheon ?
-                <form style={{position: "absolute", top: "11px", left: "345px"}}>
-                    <input onChange={(e) => setValue(e.target.value)} type="text" />
-                    <button onClick={(e) => tournameData(e)} style={{padding: "10px"}}>Search</button>
-                </form>                
-                :
+                !pantheon ?    
                 <form style={{position: "absolute", top: "11px", left: "345px"}}>
                     <input onChange={(e) => setValue(e.target.value)} type="text" />
                     <button onClick={(e) => getSpotifyData(e)} style={{padding: "10px"}}>Search</button>
                 </form>
+                :
+                null
             }
           
         </div>
