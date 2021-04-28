@@ -9,6 +9,7 @@ import SpotifyPlayerComponent from "../components/Music/SpotifyPlayer";
 import Album from "../components/Music/Album";
 import Artist from "../components/Music/Artist";
 import { getAlbum } from "../components/Functions/GetAlbum";
+import { getTrack } from "../components/Functions/GetTrack";
 import AlbumSong from "../components/Music/AlbumSong";
 import { getArtist } from "../components/Functions/GetArtist";
 import TopSong from "../components/Music/TopSong";
@@ -26,6 +27,7 @@ export default function MusicPage({ location: { state } }) {
     const [uri, setUri] = useState(null);
     const [childData, setChildData] = useState(null);
     const [albumName, setAlbumName] = useState(null);
+    const [userSelection, setUserSelection] = useState(null);
 
     const getUri = (data) => {
         setUri(data);
@@ -47,7 +49,6 @@ export default function MusicPage({ location: { state } }) {
         } else {
             await getArtistInfo(value.id)
         }
-       
     };
 
     const getAlbumData = async (id) => {
@@ -60,6 +61,13 @@ export default function MusicPage({ location: { state } }) {
         await setChildData(results);
     };
 
+    const transferUserSelection = async (data) => {
+        const results = await getTrack(data);
+        // setUserSelection(results)
+        console.log(results)
+
+    };
+
     return (
         <div>
             <div>
@@ -68,15 +76,15 @@ export default function MusicPage({ location: { state } }) {
                     <Menu user={user} reset={rerender}/>
                 </div>
                 <div style={{display: "flex", flexDirection: "row", justifyContent: "space-around"}}>
-                    <div style={{padding: "50px", marginTop: "50px"}}>
-                        <Tournament user={user} data={state} />
+                    <div style={{padding: "10px", marginTop: "10px", width: "800px"}}>
+                        <Tournament user={user} data={state} userSelection={userSelection} />
                     </div>
                     <div style={{display: "flex", flexDirection: "column", width: "1000px"}}>
                         <form style={{display: "flex", justifyContent: "center", marginRight: "50px"}}>
                             <input style={{height: "20px", marginTop: "26px"}} onChange={(e) => setValue(e.target.value)} type="text" />
                             {   
                                 childData ?
-                                <button style={{padding: "10px"}} onClick={async (e) => { await e.preventDefault(); await setSelection(null); await setChildData(null)}}>Go Back</button>
+                                <button style={{padding: "10px"}} onClick={async (e) => { await e.preventDefault(); await setSelection(null); await setChildData(null); await setUri(null)}}>Go Back</button>
                                 :
                                 <button onClick={(e) => getSpotifyData(e)} style={{padding: "10px"}}>Search</button>
                             }
@@ -92,7 +100,7 @@ export default function MusicPage({ location: { state } }) {
                                     {
                                         selection === "songs" ?
                                         <div style={{width: "1000px", display: "flex", justifyContent: "center"}}>
-                                            <Song data={tracks} pantheon={true} getUri={getUri} /> 
+                                            <Song data={tracks} pantheon={true} getUri={getUri} transferUserSelection={transferUserSelection} /> 
                                         </div>
                                         : 
                                         selection === "albums" ?
@@ -113,11 +121,11 @@ export default function MusicPage({ location: { state } }) {
 
                                     selection === "albums" ?
                                     <div style={{width: "1000px"}}>
-                                        <AlbumSong data={childData} getUri={getUri} pantheon={true} albumName={albumName} />
+                                        <AlbumSong data={childData} getUri={getUri} pantheon={true} albumName={albumName} transferUserSelection={transferUserSelection}  />
                                     </div>
                                     :    
                                     <div style={{width: "1000px"}}>
-                                        <TopSong data={childData.topTracks} getUri={getUri}/>
+                                        <TopSong data={childData.topTracks} pantheon={true} getUri={getUri} transferUserSelection={transferUserSelection} />
                                     </div>
                                 }
                             </div>

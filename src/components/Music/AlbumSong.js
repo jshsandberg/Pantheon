@@ -2,7 +2,7 @@ import React from "react";
 import { AiFillCaretRight } from "react-icons/ai";
 import "./albumSongStyle.css"
 
-export default function AlbumSong({ data, getUri, pantheon, albumName }) {
+export default function AlbumSong({ data, getUri, pantheon, albumName, transferUserSelection }) {
 
     const millisToMinutesAndSeconds = (millis) => {
         var minutes = Math.floor(millis / 60000);
@@ -25,7 +25,7 @@ export default function AlbumSong({ data, getUri, pantheon, albumName }) {
             </div>
             {data.map((element, i) => {
                 return (
-                <div onClick={() => sendUri(element.uri)} className="songContainer" key={i} style={{display: "flex", flexDirection: "row", padding: "0px 20px 0px 20px", justifyContent: "space-between"}}>
+                <div onDoubleClick={() => transferUserSelection(element.id)} onClick={() => sendUri(element.uri)} className="songContainer" key={i} style={{display: "flex", flexDirection: "row", padding: "0px 20px 0px 20px", justifyContent: "space-between"}}>
                     <div style={{display: "flex", flexDirection: "row"}}>
                         <div style={{position: "relative"}}>
                             <h2 className="number">{i}</h2>
