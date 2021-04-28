@@ -14,6 +14,8 @@ import AlbumSong from "../components/Music/AlbumSong";
 import { getArtist } from "../components/Functions/GetArtist";
 import TopSong from "../components/Music/TopSong";
 
+// MUST TEST TO SEE IF IT WORKS ON MOST SCREENS
+
 export default function MusicPage({ location: { state } }) {
 
     const {user} = useContext(UserContext);
@@ -74,10 +76,10 @@ export default function MusicPage({ location: { state } }) {
                     <Menu user={user} reset={rerender}/>
                 </div>
                 <div style={{display: "flex", flexDirection: "row", justifyContent: "space-around"}}>
-                    <div style={{padding: "10px", marginTop: "10px", width: "800px"}}>
+                    <div style={{padding: "10px", marginTop: "10px", maxWidth: "800px"}}>
                         <Tournament user={user} data={state} userSelection={userSelection} />
                     </div>
-                    <div style={{display: "flex", flexDirection: "column", width: "1000px"}}>
+                    <div style={{display: "flex", flexDirection: "column",  maxWidth: "800px"}}>
                         <form style={{display: "flex", justifyContent: "center", marginRight: "50px"}}>
                             <input style={{height: "20px", marginTop: "26px"}} onChange={(e) => setValue(e.target.value)} type="text" />
                             {   
@@ -97,16 +99,16 @@ export default function MusicPage({ location: { state } }) {
                                     </div>
                                     {
                                         selection === "songs" ?
-                                        <div style={{width: "1000px", display: "flex", justifyContent: "center"}}>
+                                        <div style={{maxWidth: "1000px", display: "flex", justifyContent: "center"}}>
                                             <Song data={tracks} pantheon={true} getUri={getUri} transferUserSelection={transferUserSelection} /> 
                                         </div>
                                         : 
                                         selection === "albums" ?
-                                        <div style={{width: "1000px"}}>
+                                        <div style={{maxWidth: "1000px"}}>
                                             <Album data={albums} pantheon={true} getUri={getUri} getChildData={getChildData} /> 
                                         </div>
                                         :    
-                                        <div style={{width: "1000px"}}>
+                                        <div style={{maxWidth: "1000px"}}>
                                             <Artist data={artists} pantheon={true} getUri={getUri} getChildData={getChildData} /> 
                                         </div>
 

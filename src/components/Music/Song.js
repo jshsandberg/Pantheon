@@ -18,7 +18,7 @@ export default function Song({ data, getUri, pantheon, transferUserSelection }) 
     };
 
     return (
-        <div style={{display: "flex", flexDirection: "column", width: "810px"}}>
+        <div style={{display: "flex", flexDirection: "column", maxWidth: "800px"}}>
             {
                 !pantheon ?
                     <div style={{display: "flex", flexDirection: "row", justifyContent: "space-around"}}>

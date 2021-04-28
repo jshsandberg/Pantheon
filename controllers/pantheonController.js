@@ -157,6 +157,38 @@ module.exports = {
             } catch (err) {
                 console.log(err)
             }
+        },
+        submitSong: async (req, res) => {
+            try {
+
+                console.log(req.params, req.body);
+
+                const foundPantheon = await db.Pantheon.findOne({ _id: req.body.pantheonId });
+                                        
+                
+                const battle = foundPantheon.battle;
+                  switch (req.params.username) {
+                            case battle.battleOne.fighterOne.username:
+                             console.log(" 1 1")
+                                break;
+                            case battle.battleOne.fighterTwo.username:
+                                console.log(" 1 2")
+
+                                break;
+                            case battle.battleTwo.fighterOne.username:
+                                console.log(" 2 1")
+
+                                break;
+                            case battle.battleTwo.fighterTwo.username:
+                                console.log(" 2 2")
+
+                                break;
+                        }
+
+
+            } catch (err) {
+                console.log(err)
+            }
         }
 //     findCreator: async (req, res) => {
 //         try {

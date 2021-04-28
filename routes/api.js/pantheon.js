@@ -5,6 +5,7 @@ const pantheonController = require("../../controllers/pantheonController");
 router.route("/").post(pantheonController.register);
 router.route("/:username").post(pantheonController.find);
 router.route("/selectMusic/:username").post(pantheonController.chooseMusic);
+router.route("/song/:username").post(pantheonController.submitSong);
 // router.route("/creator/:username").post(pantheonController.findCreator)
 // router.route("/music/:id").post(pantheonController.startMusic);
 // router.route("/find/:username").post(pantheonController.getMusic);

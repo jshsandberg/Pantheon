@@ -62,6 +62,14 @@ export const API = {
     },
     getPantheonBattle: function(username) {
       return axios.post("api/pantheon/selectMusic/" + username)
+    },
+    saveSong: function(username, song, pantheonId) {
+      const obj = {
+        song: song,
+        pantheonId: pantheonId
+      };
+      console.log(obj)
+      return axios.post("api/pantheon/song/" + username, obj)
     }
     // getActivePantheon: function(id) {
     //   return axios.post("api/pantheon/creator/" + id);

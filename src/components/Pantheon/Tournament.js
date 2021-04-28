@@ -1,13 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import Bracket from "../../utils/4-Team-Single-Elimination.jpg";
+import { SaveSong } from "../Functions/SaveSong";
+import Modal from "../Modal/Modal";
 
 export default function Tournament({ data, user, userSelection }) {
     
     const playerArr = [data.battle.battleOne.fighterOne, data.battle.battleOne.fighterTwo, data.battle.battleTwo.fighterOne, data.battle.battleTwo.fighterTwo];
 
-    const submitSong = async (song) => {
-        console.log(song)
+    const [show, setShow] = useState(false);
+
+    const submitSong = async () => {
+        const saveSongForUser = await SaveSong(user.username, userSelection, data._id);
+        // console.log(saveSongForUser)
     };
+
+    const close = () => {
+        setShow(false)
+    }
 
     return (
         <div>
@@ -22,15 +31,18 @@ export default function Tournament({ data, user, userSelection }) {
             <div style={{display: "flex", flexDirection: "row", justifyContent: "space-around"}}>
                 {playerArr.map((item, i) => {
                     return (
-                        <div style={{border: "solid 1px", padding: "15px", margin: "15px"}}>
+                        <div key={i} style={{border: "solid 1px", padding: "15px", margin: "15px"}}>
                            <h2>{item.username}</h2>
-                            {user.username === item.username && userSelection !== null ? <img style={{width: "135px"}} src={userSelection.album.images[1].url}/> : item.music === null ? <h2>No music submitted yet</h2> : null}
+                            {user.username === item.username && userSelection !== null ? <img style={{width: "135px"}} src={userSelection.album.images[1].url} alt="music" /> : item.music === null ? <h2>No music submitted yet</h2> : null}
                         </div>
                     )
                 })}
             </div>
             <div>
-                <button onClick={() => submitSong(userSelection)} style={{width: "100px", height: "40px"}}>Submit Song</button>
+                { userSelection ? <button onClick={() => setShow(true)} style={{width: "100px", height: "40px"}}>Submit Song</button> : null }
+            </div>
+            <div>
+                <Modal show={show} message={"Are you sure you want to submit this song. You can only submit one song"} hide={close} confirmed={true} method={submitSong}  />
             </div>
         </div>
     )

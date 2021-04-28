@@ -1,16 +1,15 @@
 import React from "react";
 import "./modalStyle.css"
 
-export default function Modal({ show, message, hide, confirmed }) {
+export default function Modal({ show, message, hide, confirmed, method }) {
 
-    console.log(show, confirmed)
 
     const onClose = () => {
         hide()
     };
 
     const confirm = async () => {
-        await confirmed();
+        await method();
         await hide();
     };
 
