@@ -2,10 +2,12 @@ import React from "react";
 import Bracket from "../../utils/4-Team-Single-Elimination.jpg";
 
 export default function Tournament({ data, user, userSelection }) {
-
-    console.log(userSelection)
     
-    const playerArr = [data.battle.battleOne.fighterOne, data.battle.battleOne.fighterTwo, data.battle.battleTwo.fighterOne, data.battle.battleTwo.fighterTwo]
+    const playerArr = [data.battle.battleOne.fighterOne, data.battle.battleOne.fighterTwo, data.battle.battleTwo.fighterOne, data.battle.battleTwo.fighterTwo];
+
+    const submitSong = async (song) => {
+        console.log(song)
+    };
 
     return (
         <div>
@@ -21,11 +23,14 @@ export default function Tournament({ data, user, userSelection }) {
                 {playerArr.map((item, i) => {
                     return (
                         <div style={{border: "solid 1px", padding: "15px", margin: "15px"}}>
-                            <h2>{item.username}</h2>
-                            {item.music === null ? <h2>No music submitted yet</h2> : null}
+                           <h2>{item.username}</h2>
+                            {user.username === item.username && userSelection !== null ? <img style={{width: "135px"}} src={userSelection.album.images[1].url}/> : item.music === null ? <h2>No music submitted yet</h2> : null}
                         </div>
                     )
                 })}
+            </div>
+            <div>
+                <button onClick={() => submitSong(userSelection)} style={{width: "100px", height: "40px"}}>Submit Song</button>
             </div>
         </div>
     )

@@ -63,9 +63,7 @@ export default function MusicPage({ location: { state } }) {
 
     const transferUserSelection = async (data) => {
         const results = await getTrack(data);
-        // setUserSelection(results)
-        console.log(results)
-
+        setUserSelection(results)
     };
 
     return (
