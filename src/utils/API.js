@@ -68,7 +68,6 @@ export const API = {
         song: song,
         pantheonId: pantheonId
       };
-      console.log(obj)
       return axios.post("api/pantheon/song/" + username, obj)
     }
     // getActivePantheon: function(id) {

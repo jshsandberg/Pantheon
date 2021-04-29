@@ -166,7 +166,19 @@ module.exports = {
                 const battle = foundPantheon.battle;
                   switch (req.params.username) {
                             case battle.battleOne.fighterOne.username:
-                             console.log(" 1 1")
+                                await db.Pantheon.findOneAndUpdate({ 
+                                    _id: foundPantheon._id
+                                }, {
+                                    $set: { "battle.battleOne.fighterOne.music" : req.body.song }
+                                });
+                                if (foundPantheon.battle.battleOne.fighterTwo.music !== null && foundPantheon.battle.battleTwo.fighterOne.music !== null && foundPantheon.battle.battleTwo.fighterTwo.music !== null) {
+                                    await db.Pantheon.findOneAndUpdate({ 
+                                        _id: foundPantheon._id
+                                    }, {
+                                        $set: { "music" : true }
+                                    });
+                                }
+                                res.json("Fighter One updated.");
                                 break;
                             case battle.battleOne.fighterTwo.username:
                                 await db.Pantheon.findOneAndUpdate({ 
@@ -174,15 +186,44 @@ module.exports = {
                                 }, {
                                     $set: { "battle.battleOne.fighterTwo.music" : req.body.song }
                                 });
+                                if (foundPantheon.battle.battleOne.fighterOne.music !== null && foundPantheon.battle.battleTwo.fighterOne.music !== null && foundPantheon.battle.battleTwo.fighterTwo.music !== null) {
+                                    await db.Pantheon.findOneAndUpdate({ 
+                                        _id: foundPantheon._id
+                                    }, {
+                                        $set: { "music" : true }
+                                    });
+                                };
                                 res.json("Fighter Two updated.")
                                 break;
                             case battle.battleTwo.fighterOne.username:
-                                console.log(" 2 1")
-
+                                await db.Pantheon.findOneAndUpdate({ 
+                                    _id: foundPantheon._id
+                                }, {
+                                    $set: { "battle.battleTwo.fighterOne.music" : req.body.song }
+                                });
+                                if (foundPantheon.battle.battleOne.fighterOne.music !== null && foundPantheon.battle.battleOne.fighterTwo.music !== null && foundPantheon.battle.battleTwo.fighterTwo.music !== null) {
+                                    await db.Pantheon.findOneAndUpdate({ 
+                                        _id: foundPantheon._id
+                                    }, {
+                                        $set: { "music" : true }
+                                    });
+                                };
+                                res.json("Fighter One updated.")
                                 break;
                             case battle.battleTwo.fighterTwo.username:
-                                console.log(" 2 2")
-
+                                await db.Pantheon.findOneAndUpdate({ 
+                                    _id: foundPantheon._id
+                                }, {
+                                    $set: { "battle.battleTwo.fighterTwo.music" : req.body.song }
+                                });
+                                if (foundPantheon.battle.battleOne.fighterOne.music !== null && foundPantheon.battle.battleOne.fighterTwo.music !== null && foundPantheon.battle.battleTwo.fighterOne.music !== null) {
+                                    await db.Pantheon.findOneAndUpdate({ 
+                                        _id: foundPantheon._id
+                                    }, {
+                                        $set: { "music" : true }
+                                    });
+                                };
+                                res.json("Fighter Two updated.")
                                 break;
                         }
 

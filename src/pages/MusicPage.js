@@ -79,7 +79,7 @@ export default function MusicPage({ location: { state } }) {
                     <div style={{padding: "10px", marginTop: "10px", maxWidth: "800px"}}>
                         <Tournament user={user} data={state} userSelection={userSelection} />
                     </div>
-                    <div style={{display: "flex", flexDirection: "column",  maxWidth: "800px"}}>
+                    <div style={{display: "flex", flexDirection: "column", width: "600px",  maxWidth: "800px"}}>
                         <form style={{display: "flex", justifyContent: "center", marginRight: "50px"}}>
                             <input style={{height: "20px", marginTop: "26px"}} onChange={(e) => setValue(e.target.value)} type="text" />
                             {   

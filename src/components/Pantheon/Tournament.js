@@ -13,7 +13,7 @@ export default function Tournament({ data, user, userSelection }) {
     const [show, setShow] = useState(false);
 
     const submitSong = async () => {
-        await SaveSong(user.username, userSelection, data._id);
+        const savedSong = await SaveSong(user.username, userSelection, data._id);
         history.push({ pathname: "/pantheon"})
     };
 
@@ -36,7 +36,7 @@ export default function Tournament({ data, user, userSelection }) {
                     return (
                         <div key={i} style={{border: "solid 1px", padding: "15px", margin: "15px"}}>
                            <h2>{item.username}</h2>
-                            {user.username === item.username && userSelection !== null ? <img style={{width: "135px"}} src={userSelection.album.images[1].url} alt="music" /> : item.music === null ? <h2>No music submitted yet</h2> : null}
+                            {user.username === item.username && userSelection !== null ? <img style={{width: "135px"}} src={userSelection.album.images[1].url} alt="music" /> : item.music === null ? <h2>No music submitted yet</h2> : <img style={{width: "135px"}} src={item.music.image} alt="music" />}
                         </div>
                     )
                 })}
