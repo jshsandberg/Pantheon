@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import Bracket from "../../utils/4-Team-Single-Elimination.jpg";
 import { SaveSong } from "../Functions/SaveSong";
 import Modal from "../Modal/Modal";
@@ -7,11 +8,13 @@ export default function Tournament({ data, user, userSelection }) {
     
     const playerArr = [data.battle.battleOne.fighterOne, data.battle.battleOne.fighterTwo, data.battle.battleTwo.fighterOne, data.battle.battleTwo.fighterTwo];
 
+    const history = useHistory();
+
     const [show, setShow] = useState(false);
 
     const submitSong = async () => {
-        const saveSongForUser = await SaveSong(user.username, userSelection, data._id);
-        // console.log(saveSongForUser)
+        await SaveSong(user.username, userSelection, data._id);
+        history.push({ pathname: "/pantheon"})
     };
 
     const close = () => {

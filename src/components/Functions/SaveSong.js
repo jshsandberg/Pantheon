@@ -1,6 +1,7 @@
 import { API } from "../../utils/API";
 
 export const SaveSong = async (user, song, pantheonId) => {
+    const data= {};
     const obj = {
         name: song.name,
         artist: song.artists[0].name,
@@ -9,5 +10,6 @@ export const SaveSong = async (user, song, pantheonId) => {
         id: song.id,
         uri: song.uri
     }
-    await API.saveSong(user, obj, pantheonId).then(res => console.log(res));
+    await API.saveSong(user, obj, pantheonId).then(res => data["res"] = res.data);
+    return data.res;
 }

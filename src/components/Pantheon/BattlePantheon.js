@@ -22,7 +22,7 @@ export default function BattlePantheon({user, data, rerenderPage}) {
                             <div onClick={() => history.push({pathname: "/music", state: item})}className="battle" key={i} style={{display: "flex", flexDirection: "row", border: "solid 2px #db3d44", marginBottom: "10px"}}>
                                 <div style={{display: "flex", flexDirection: "column"}}>
                                     {item.battle.battleOne.fighterOne.music === null ? <img style={{width: "75px", height: "auto", marginTop: "10px"}} src={RedQuestions} alt="black"/> : <img style={{width: "75px", height: "auto"}} src={Black} alt="black"/>}
-                                    {item.battle.battleOne.fighterTwo.music === null ? <img style={{width: "75px", height: "auto", marginTop: "30px"}} src={RedQuestions} alt="black"/> : <img style={{width: "75px", height: "auto"}} src={Black} alt="black"/>}
+                                    {item.battle.battleOne.fighterTwo.music === null ? <img style={{width: "75px", height: "auto", marginTop: "30px"}} src={RedQuestions} alt="black"/> : <img style={{width: "75px", height: "auto"}} src={item.battle.battleOne.fighterTwo.music.image} alt="black"/>}
                                 </div>
                                 <div style={{padding: "20px", width: "200px", position: "relative"}}>
                                     <img className="leftSword" src={Sword} alt="sword" />

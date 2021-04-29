@@ -161,10 +161,7 @@ module.exports = {
         submitSong: async (req, res) => {
             try {
 
-                console.log(req.params, req.body);
-
-                const foundPantheon = await db.Pantheon.findOne({ _id: req.body.pantheonId });
-                                        
+                const foundPantheon = await db.Pantheon.findOne({ _id: req.body.pantheonId });                                        
                 
                 const battle = foundPantheon.battle;
                   switch (req.params.username) {
@@ -172,8 +169,12 @@ module.exports = {
                              console.log(" 1 1")
                                 break;
                             case battle.battleOne.fighterTwo.username:
-                                console.log(" 1 2")
-
+                                await db.Pantheon.findOneAndUpdate({ 
+                                    _id: foundPantheon._id
+                                }, {
+                                    $set: { "battle.battleOne.fighterTwo.music" : req.body.song }
+                                });
+                                res.json("Fighter Two updated.")
                                 break;
                             case battle.battleTwo.fighterOne.username:
                                 console.log(" 2 1")
