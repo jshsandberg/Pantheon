@@ -13,7 +13,7 @@ export default function Tournament({ data, user, userSelection }) {
     const [show, setShow] = useState(false);
 
     const submitSong = async () => {
-        const savedSong = await SaveSong(user.username, userSelection, data._id);
+        await SaveSong(user.username, userSelection, data._id);
         history.push({ pathname: "/pantheon"})
     };
 

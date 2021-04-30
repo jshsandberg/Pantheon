@@ -341,6 +341,48 @@ module.exports = {
 		}
 	},
 
+	getFriendsPantheon: async (req, res) => {
+		try {
+
+			const friends = [];
+			const friendAccounts = [];
+			const pantheonId = [];
+			const stringfy = [];
+			const pantheonList = [];
+			
+			for (let i = 0; i < req.body.friend.length; i++) {
+				friends.push(req.body.friend[i])
+			}
+
+			for (let i = 0; i < friends.length; i++) {
+				const friendAccount = await db.User.findOne({ username: friends[i] });
+				friendAccounts.push(friendAccount.pantheon)
+			};
+
+			for (let i = 0; i < friendAccounts.length; i++) {
+				pantheonId.push(...friendAccounts[i])
+			};
+
+			for (let i = 0; i < pantheonId.length; i++) {
+				stringfy.push(pantheonId[i].toString())
+			};
+
+			const unique = [...new Set(stringfy)];
+
+			for (let i = 0; i < unique.length; i++) {
+				const getPantheon = await db.Pantheon.findOne({ _id: unique[i] });
+				if (getPantheon.music === true && getPantheon.vote === false) {
+					pantheonList.push(getPantheon)
+				}
+			};
+
+			return res.json(pantheonList)
+
+		} catch (err) {
+			console.log(err)
+		}
+	},
+
 	pantheonInteractions: async (req, res) => {
 		try {
 

@@ -39,6 +39,9 @@ export const API = {
     getFriends: function(username) {
       return axios.post("api/user/getFriends/" + username);
     },
+    getFriendsPantheon: function (user) {
+      return axios.post("api/user/getFriendsPantheon/" + user.username, user)
+    },
     savePantheon: function(data) {
       return axios.post("api/pantheon", data);
     },

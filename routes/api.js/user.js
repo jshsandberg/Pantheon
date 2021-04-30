@@ -8,6 +8,7 @@ router.route("/friendRequest/:username").post(userController.findFriendRequest);
 router.route("/acceptFriendRequest/:username").post(userController.acceptFriendRequest);
 router.route("/declineFriendRequest/:username").post(userController.declineFriendRequest);
 router.route("/getFriends/:username").post(userController.getFriends);
+router.route("/getFriendsPantheon/:username").post(userController.getFriendsPantheon);
 router.route("/addFriend/:username").post(userController.addFriend);
 router.route("/pantheonInteractions/:username").post(userController.pantheonInteractions);
 router.route("/pantheon/:id").post(userController.acceptPantheon);

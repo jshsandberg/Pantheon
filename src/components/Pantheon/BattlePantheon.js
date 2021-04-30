@@ -1,7 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import Sword from "../../utils/sword.png";
-import Black from "../../utils/testBlack.jpg";
 import RedQuestions from "../../utils/redQuestion.jpg";
 import "./style.css"
 

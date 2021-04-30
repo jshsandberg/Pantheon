@@ -9,7 +9,7 @@ module.exports = {
 
             const playerArr = [req.body.fighter1, req.body.fighter2, req.body.fighter3, req.body.fighter4];
 
-            // await playerArr.push(req.body.creator);
+       
 
             if (playerArr.length === 4) {
 
@@ -86,6 +86,12 @@ module.exports = {
                 });
     
                 await newPantheon.save();
+
+                const updatedCreator = await db.User.findOneAndUpdate({ 
+                    username : req.body.fighter1
+                }, {
+                    $push: { pantheon: newPantheon._id }
+                })
     
                 res.send("Pantheon created");
 

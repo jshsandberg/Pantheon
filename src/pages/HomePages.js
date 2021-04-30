@@ -33,7 +33,7 @@ export default function HomePage() {
                     <Header user={user} />
                     <Menu user={user} />
                     <div style={{display: "block"}}>
-                        <FriendsArena />
+                        <FriendsArena user={user} />
                         <CreatePantheon user={user}/>
                     </div>
                     <div>
