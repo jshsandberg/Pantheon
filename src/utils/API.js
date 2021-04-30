@@ -72,6 +72,9 @@ export const API = {
         pantheonId: pantheonId
       };
       return axios.post("api/pantheon/song/" + username, obj)
+    },
+    checkPantheonTimer: function(username) {
+      return axios.post("api/pantheon/timer/" + username);
     }
     // getActivePantheon: function(id) {
     //   return axios.post("api/pantheon/creator/" + id);

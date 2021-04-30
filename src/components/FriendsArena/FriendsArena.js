@@ -24,7 +24,7 @@ export default function FriendsArena({ user }) {
             {pantheon && pantheon.map((item, i) => {
                 return (
                     <div key={i} >
-                        <div className="highlight" style={{margin: "10px 30px", display: "flex", flexDirection: "row", justifyContent: "space-between"}}> 
+                        <div onClick={() => console.log(item, item.battle.battleOne)} className="highlight" style={{margin: "10px 30px", display: "flex", flexDirection: "row", justifyContent: "space-between"}}> 
                             <img style={{width: "20%", height: "20%"}} src={item.battle.battleOne.fighterOne.music.image} alt="album" />
                             <div style={{alignSelf: "center", display: "flex", flexDirection: "column"}}>
                                 <h2>{item.battle.battleOne.fighterOne.username}</h2>
@@ -37,7 +37,7 @@ export default function FriendsArena({ user }) {
                             </div>                   
                             <img style={{width: "20%", height: "20%"}} src={item.battle.battleOne.fighterTwo.music.image} alt="album" />
                         </div>
-                        <div className="highlight" style={{margin: "10px 30px", display: "flex", flexDirection: "row", justifyContent: "space-between"}}> 
+                        <div onClick={() => console.log(item, item.battle.battleTwo)}  className="highlight" style={{margin: "10px 30px", display: "flex", flexDirection: "row", justifyContent: "space-between"}}> 
                             <img style={{width: "20%", height: "20%"}} src={item.battle.battleTwo.fighterOne.music.image} alt="album" />
                             <div style={{alignSelf: "center", display: "flex", flexDirection: "column"}}>
                                 <h2>{item.battle.battleTwo.fighterOne.username}</h2>

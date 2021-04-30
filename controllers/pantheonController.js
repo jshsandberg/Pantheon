@@ -9,8 +9,6 @@ module.exports = {
 
             const playerArr = [req.body.fighter1, req.body.fighter2, req.body.fighter3, req.body.fighter4];
 
-       
-
             if (playerArr.length === 4) {
 
                 const getShuffledArr = arr => {
@@ -24,7 +22,8 @@ module.exports = {
 
                 const shuffledArr = getShuffledArr(playerArr);
 
-                console.log(shuffledArr)
+                const DateNow = Date.now(); 
+                new Date(DateNow).toString()
            
                 const newPantheon = new Pantheon ({
                     category: req.body.pantheon,
@@ -32,6 +31,7 @@ module.exports = {
                     creator: req.body.fighter1,
                     acceptedPlayers: [req.body.fighter1],
                     numOfPlayers: 4,
+                    votingTime: req.body.votingTimer * 60000,
                     battle: {
                         battleOne: {
                             fighterOne: {
@@ -44,7 +44,6 @@ module.exports = {
                             },
                             votesForFighterOne: [],
                             votesForFighterTwo: [],
-                            playersWhoVoted: [],
                             winner: null
                         },
                         battleTwo: {
@@ -58,9 +57,9 @@ module.exports = {
                             },
                             votesForFighterOne: [],
                             votesForFighterTwo: [],
-                            playersWhoVoted: [],
                             winner: null
-                        }
+                        },
+                        timer: null,
                     },
                     finalBattle: {                    
                         fighterOne: {
@@ -73,7 +72,6 @@ module.exports = {
                         },
                         votesForFighterOne: [],
                         votesForFighterTwo: [],
-                        playersWhoVoted: [],
                         winner: null
                     },
                     accepted: false,
@@ -181,7 +179,7 @@ module.exports = {
                                     await db.Pantheon.findOneAndUpdate({ 
                                         _id: foundPantheon._id
                                     }, {
-                                        $set: { "music" : true }
+                                        $set: { "music" : true, "battle.timer" : Date.now() }
                                     });
                                 }
                                 res.json("Fighter One updated.");
@@ -196,7 +194,7 @@ module.exports = {
                                     await db.Pantheon.findOneAndUpdate({ 
                                         _id: foundPantheon._id
                                     }, {
-                                        $set: { "music" : true }
+                                        $set: { "music" : true, "battle.timer" : Date.now() }
                                     });
                                 };
                                 res.json("Fighter Two updated.")
@@ -211,7 +209,7 @@ module.exports = {
                                     await db.Pantheon.findOneAndUpdate({ 
                                         _id: foundPantheon._id
                                     }, {
-                                        $set: { "music" : true }
+                                        $set: { "music" : true, "battle.timer" : Date.now() }
                                     });
                                 };
                                 res.json("Fighter One updated.")
@@ -226,13 +224,36 @@ module.exports = {
                                     await db.Pantheon.findOneAndUpdate({ 
                                         _id: foundPantheon._id
                                     }, {
-                                        $set: { "music" : true }
+                                        $set: { "music" : true, "battle.timer" : Date.now() }
                                     });
                                 };
                                 res.json("Fighter Two updated.")
                                 break;
                         }
 
+
+            } catch (err) {
+                console.log(err)
+            }
+        },
+
+        checkTimer: async (req, res) => {
+            try {
+
+                const allPantheons = await db.Pantheon.find();
+              
+
+                for (let i = 0; i < allPantheons.length; i++) {
+                    if (allPantheons[i].battle.timer + allPantheons[i].votingTime < Date.now()) {
+                        await db.Pantheon.findOneAndUpdate({
+                           _id: allPantheons[i]._id
+                        }, {
+                            $set : { "vote" : true }
+                        });
+                    } else {
+                        console.log("not yet")
+                    }
+                }
 
             } catch (err) {
                 console.log(err)

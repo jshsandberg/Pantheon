@@ -29,7 +29,7 @@ export default function Menu({ user, reset }) {
         const checkForUserPantheonInteractions = async () => {
             const checkUserPantheonInteractions = await UserPantheonInteractions(user.username);
             await setInteractions(checkUserPantheonInteractions)
-        }
+        };
         checkForFriendRequests();
         gettingFriends();
         checkForUserPantheonInteractions();

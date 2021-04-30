@@ -4,8 +4,6 @@ const Schema = mongoose.Schema;
 const pantheonSchema = new Schema({
   category: {
     type: String
-    //required:true,
-    //unique:true
   },
   players: {
     type: Array
@@ -19,7 +17,9 @@ const pantheonSchema = new Schema({
   numOfPlayers: {
     type: Number
   },
-
+  votingTime: {
+    type: Number
+  },
   battle: {
     type: Object
   },

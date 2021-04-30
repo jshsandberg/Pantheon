@@ -15,6 +15,7 @@ export default function CreatePantheon({ user }) {
     const [secondFighter, setSecondFighter] = useState(null);
     const [thirdFighter, setThirdFighter] = useState(null);
     const [fourthFighter, setFourthFighter] = useState(null);
+    const [timer, setTimer] = useState(0);
 
     useEffect(() => {
         const gettingFriends = async () => {
@@ -38,13 +39,18 @@ export default function CreatePantheon({ user }) {
         setPantheonTitleInput(e.target.value);
     };
 
+    const handleTimerChange = (e) => {
+        setTimer(e.target.value);
+    };
+
     const submitPantheon = async () => {
         const pantheon = {
             fighter1: user.username,
             fighter2: secondFighter,
             fighter3: thirdFighter,
             fighter4: fourthFighter,
-            pantheon: pantheonTitleInput
+            pantheon: pantheonTitleInput,
+            votingTimer: timer
         };
         await setPantheonObj(pantheon)
         await setShow(true);
@@ -80,9 +86,14 @@ export default function CreatePantheon({ user }) {
                                 <br />
                                 <input onChange={(e) => handlePantheonTitleChange(e)} type="text" id="fname" name="fname" value={pantheonTitleInput} />
                             </form>
-                        </div>
-                        <div style={{flex: "30%", justifyContent: "center", display: "flex"}}>
-                            <button onClick={() => {secondFighter && thirdFighter && fourthFighter && pantheonTitleInput ? submitPantheon() : setError("Need to fill out all inputs")}}>Submit</button>  
+                            <div style={{display: "flex", flexDirection: "column"}}>
+                                <form style={{marginTop: "10px", marginLeft: "20px"}}>
+                                    <label htmlFor="pantheonTitle">Time for Voting in Mins</label>
+                                    <br />
+                                    <input onChange={(e) => handleTimerChange(e)} type="number" id="fname" name="fname" value={timer} />
+                                </form>
+                                <button style={{width: "80px"}} onClick={() => {secondFighter && thirdFighter && fourthFighter && pantheonTitleInput ? submitPantheon() : setError("Need to fill out all inputs")}}>Submit</button>  
+                            </div>
                         </div>
                     </div>
                     <div style={{position: "relative"}}>

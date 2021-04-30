@@ -33,7 +33,11 @@ function App() {
         setUser(null)
       }
     };
-    checkIfLoggedIn()
+    const checkForPantheonTimer = async () => {
+      await API.checkPantheonTimer("test");
+    };
+    checkIfLoggedIn();
+    checkForPantheonTimer();
   }, []);
 
 
