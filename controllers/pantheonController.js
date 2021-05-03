@@ -241,10 +241,67 @@ module.exports = {
             try {
 
                 const allPantheons = await db.Pantheon.find();
-              
 
+                const randomNumber1 = Math.random();
+                const randomNumber2 = Math.random()
+            
                 for (let i = 0; i < allPantheons.length; i++) {
                     if (allPantheons[i].battle.timer + allPantheons[i].votingTime < Date.now()) {
+                        console.log(allPantheons[i])
+                        if (allPantheons[i].battle.battleOne.votesForFighterOne.length > allPantheons[i].battle.battleOne.votesForFighterTwo.length) {
+                            await db.Pantheon.findOneAndUpdate({ 
+                                _id: allPantheons[i]._id
+                            }, {
+                                $set: { "battle.battleOne.winner" : allPantheons[i].battle.battleOne.fighterOne.username}
+                            })
+                        } else if (allPantheons[i].battle.battleOne.votesForFighterOne.length < allPantheons[i].battle.battleOne.votesForFighterTwo.length) {
+                            await db.Pantheon.findOneAndUpdate({ 
+                                _id: allPantheons[i]._id
+                            }, {
+                                $set: { "battle.battleOne.winner" : allPantheons[i].battle.battleOne.fighterTwo.username}
+                            })
+                        } else {
+                            if (randomNumber1 < .5) {
+                                await db.Pantheon.findOneAndUpdate({ 
+                                    _id: allPantheons[i]._id
+                                }, {
+                                    $set: { "battle.battleOne.winner" : allPantheons[i].battle.battleOne.fighterOne.username}
+                                })
+                            } else {
+                                await db.Pantheon.findOneAndUpdate({ 
+                                    _id: allPantheons[i]._id
+                                }, {
+                                    $set: { "battle.battleOne.winner" : allPantheons[i].battle.battleOne.fighterTwo.username}
+                                })
+                            }
+                        };
+                        if (allPantheons[i].battle.battleTwo.votesForFighterOne.length > allPantheons[i].battle.battleTwo.votesForFighterTwo.length) {
+                            await db.Pantheon.findOneAndUpdate({ 
+                                _id: allPantheons[i]._id
+                            }, {
+                                $set: { "battle.battleTwo.winner" : allPantheons[i].battle.battleTwo.fighterOne.username}
+                            })
+                        } else if (allPantheons[i].battle.battleTwo.votesForFighterOne.length < allPantheons[i].battle.battleTwo.votesForFighterTwo.length) {
+                            await db.Pantheon.findOneAndUpdate({ 
+                                _id: allPantheons[i]._id
+                            }, {
+                                $set: { "battle.battleTwo.winner" : allPantheons[i].battle.battleTwo.fighterTwo.username}
+                            })
+                        } else {
+                            if (randomNumber2 < .5) {
+                                await db.Pantheon.findOneAndUpdate({ 
+                                    _id: allPantheons[i]._id
+                                }, {
+                                    $set: { "battle.battleTwo.winner" : allPantheons[i].battle.battleTwo.fighterOne.username}
+                                })
+                            } else {
+                                await db.Pantheon.findOneAndUpdate({ 
+                                    _id: allPantheons[i]._id
+                                }, {
+                                    $set: { "battle.battleTwo.winner" : allPantheons[i].battle.battleTwo.fighterTwo.username}
+                                })
+                            }
+                        };
                         await db.Pantheon.findOneAndUpdate({
                            _id: allPantheons[i]._id
                         }, {
@@ -254,6 +311,49 @@ module.exports = {
                         console.log("not yet")
                     }
                 }
+
+            } catch (err) {
+                console.log(err)
+            }
+        },
+
+        submitVote: async (req, res) => {
+            try {
+
+ 
+                if (req.body.fighter === "fighterOne" && req.body.number === 1) {
+                    const updatePantheon = await db.Pantheon.findOneAndUpdate({
+                        _id: req.params.pantheonId
+                    }, {
+                        $push: { "battle.battleOne.votesForFighterOne" : req.body.username}
+                    })
+                    return res.json("Saved Vote")
+                } else if (req.body.fighter === "fighterTwo" && req.body.number === 1) {
+                    const updatePantheon = await db.Pantheon.findOneAndUpdate({
+                        _id: req.params.pantheonId
+                    }, {
+                        $push: { "battle.battleOne.votesForFighterTwo" : req.body.username}
+                    })
+                    return res.json("Saved Vote")
+                }  else if (req.body.fighter === "fighterOne" && req.body.number === 2) {
+                    const updatePantheon = await db.Pantheon.findOneAndUpdate({
+                        _id: req.params.pantheonId
+                    }, {
+                        $push: { "battle.battleTwo.votesForFighterOne" : req.body.username}
+                    })
+                    return res.json("Saved Vote")
+                }  else if (req.body.fighter === "fighterTwo" && req.body.number === 2) {
+                    const updatePantheon = await db.Pantheon.findOneAndUpdate({
+                        _id: req.params.pantheonId
+                    }, {
+                        $push: { "battle.battleTwo.votesForFighterTwo" : req.body.username}
+                    })
+                    return res.json("Saved Vote")
+                } else {
+                    console.log("error")
+                }
+        
+                
 
             } catch (err) {
                 console.log(err)

@@ -75,6 +75,15 @@ export const API = {
     },
     checkPantheonTimer: function(username) {
       return axios.post("api/pantheon/timer/" + username);
+    },
+    submitVote: function(username, fighter, pantheonId, battle, number) {
+      const obj = {
+        username: username,
+        fighter: fighter,
+        battle: battle,
+        number: number
+      };
+      return axios.post("api/pantheon/vote/" + pantheonId, obj)
     }
     // getActivePantheon: function(id) {
     //   return axios.post("api/pantheon/creator/" + id);

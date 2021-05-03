@@ -50,4 +50,33 @@
 
 }
 
+.votingModal {
+    width: 900px;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    padding: 10px;
+    box-shadow: 0 0 0 100vmax rgba(0, 0, 0, 0.6);
+    border: 1px solid #ccc;
+    transform: scale(1);
+    position: fixed;
+    z-index: 2000;
+    top: 20%;
+    left: calc(50% - 450px);
+    /* bottom: 40px; */
+    opacity: 1;
+    background-color: white;
+    animation: fadeIn .25s;
+}
+
+.votingHighlight:hover {
+    animation: vote 2s;
+    animation-fill-mode: forwards; 
+}
+
+@keyframes vote {
+    0% {background-color: white;}
+    100% {background-color: #8FC8FF ;}   
+}
+
 

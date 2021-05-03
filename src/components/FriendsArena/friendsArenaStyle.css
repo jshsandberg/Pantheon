@@ -14,3 +14,11 @@
     overflow: auto
 }
 
+.voted {
+    position: absolute;
+    background-color: red;
+    width: 423px;
+    text-align: center;
+    right: 170px
+}
+
