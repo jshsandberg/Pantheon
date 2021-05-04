@@ -243,11 +243,10 @@ module.exports = {
                 const allPantheons = await db.Pantheon.find();
 
                 const randomNumber1 = Math.random();
-                const randomNumber2 = Math.random()
+                const randomNumber2 = Math.random();
             
                 for (let i = 0; i < allPantheons.length; i++) {
-                    if (allPantheons[i].battle.timer + allPantheons[i].votingTime < Date.now()) {
-                        console.log(allPantheons[i])
+                    if (allPantheons[i].battle.timer + allPantheons[i].votingTime < Date.now() && allPantheons[i].vote === false && allPantheons[i].music === true) {
                         if (allPantheons[i].battle.battleOne.votesForFighterOne.length > allPantheons[i].battle.battleOne.votesForFighterTwo.length) {
                             await db.Pantheon.findOneAndUpdate({ 
                                 _id: allPantheons[i]._id
@@ -308,7 +307,7 @@ module.exports = {
                             $set : { "vote" : true }
                         });
                     } else {
-                        console.log("not yet")
+                        console.log("Timer not up")
                     }
                 }
 
@@ -318,9 +317,8 @@ module.exports = {
         },
 
         submitVote: async (req, res) => {
+            
             try {
-
- 
                 if (req.body.fighter === "fighterOne" && req.body.number === 1) {
                     const updatePantheon = await db.Pantheon.findOneAndUpdate({
                         _id: req.params.pantheonId
@@ -352,9 +350,25 @@ module.exports = {
                 } else {
                     console.log("error")
                 }
-        
-                
+            } catch (err) {
+                console.log(err)
+            }
+        },
 
+        finalVote: async (req, res) => {
+            try {
+
+                const allPantheon = await db.Pantheon.find();
+
+                for(let i = 0; i < allPantheon.length; i++) {
+                    if (allPantheon[i].vote === true && allPantheon[i].final === false) {
+                        await db.Pantheon.findOneAndUpdate({
+                            _id: allPantheon[i]._id
+                        }, {
+                            $set : { "finalBattle.fighterOne" : allPantheon[i].battle.battleOne.winner, "finalBattle.fighterTwo" : allPantheon[i].battle.battleTwo.winner, "final" : true }
+                        })
+                    }
+                }
             } catch (err) {
                 console.log(err)
             }

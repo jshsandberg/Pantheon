@@ -84,6 +84,9 @@ export const API = {
         number: number
       };
       return axios.post("api/pantheon/vote/" + pantheonId, obj)
+    },
+    finalVote: function(username) {
+      return axios.post("api/pantheon/finalVote/" + username);
     }
     // getActivePantheon: function(id) {
     //   return axios.post("api/pantheon/creator/" + id);

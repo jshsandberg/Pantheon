@@ -8,6 +8,7 @@ router.route("/selectMusic/:username").post(pantheonController.chooseMusic);
 router.route("/song/:username").post(pantheonController.submitSong);
 router.route("/timer/:username").post(pantheonController.checkTimer);
 router.route("/vote/:pantheonId").post(pantheonController.submitVote);
+router.route("/finalVote/:username").post(pantheonController.finalVote);
 // router.route("/creator/:username").post(pantheonController.findCreator)
 // router.route("/music/:id").post(pantheonController.startMusic);
 // router.route("/find/:username").post(pantheonController.getMusic);
