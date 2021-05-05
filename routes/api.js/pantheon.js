@@ -9,6 +9,15 @@ router.route("/song/:username").post(pantheonController.submitSong);
 router.route("/timer/:username").post(pantheonController.checkTimer);
 router.route("/vote/:pantheonId").post(pantheonController.submitVote);
 router.route("/finalVote/:username").post(pantheonController.finalVote);
+router.route("/results/:username").post(pantheonController.findResults);
+router.route("/results/:username").post(pantheonController.findResults);
+router.route("/finalVoting/:pantheonId").post(pantheonController.finalVoting);
+router.route("/finalTimer/:username").post(pantheonController.checkFinalTimer);
+
+
+
+
+
 // router.route("/creator/:username").post(pantheonController.findCreator)
 // router.route("/music/:id").post(pantheonController.startMusic);
 // router.route("/find/:username").post(pantheonController.getMusic);

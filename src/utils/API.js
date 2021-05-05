@@ -87,6 +87,20 @@ export const API = {
     },
     finalVote: function(username) {
       return axios.post("api/pantheon/finalVote/" + username);
+    },
+    getResultsPantheon: function (username) {
+      return axios.post("api/pantheon/results/" + username);
+    },
+    submitFinalVote: function(username, fighter, pantheonId, battle) {
+      const obj = {
+        username: username,
+        fighter: fighter,
+        battle: battle,
+      };
+      return axios.post("api/pantheon/finalVoting/" + pantheonId, obj)
+    },
+    checkFinalTimer: function(username) {
+      return axios.post("api/pantheon/finalTimer/" + username);
     }
     // getActivePantheon: function(id) {
     //   return axios.post("api/pantheon/creator/" + id);

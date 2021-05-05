@@ -349,6 +349,7 @@ module.exports = {
 			const pantheonId = [];
 			const stringfy = [];
 			const pantheonList = [];
+			const finalPantheonList = [];
 			
 			for (let i = 0; i < req.body.friend.length; i++) {
 				friends.push(req.body.friend[i])
@@ -376,7 +377,19 @@ module.exports = {
 				}
 			};
 
-			return res.json(pantheonList)
+			for (let i = 0; i < unique.length; i++) {
+				const getPantheon = await db.Pantheon.findOne({ _id: unique[i] });
+				if (getPantheon.final === true && getPantheon.finalVote === false) {
+					finalPantheonList.push(getPantheon)
+				}
+			};
+
+			const obj = {
+				pantheonList: pantheonList,
+				finalPantheonList: finalPantheonList
+			};
+			
+			return res.json(obj)
 
 		} catch (err) {
 			console.log(err)

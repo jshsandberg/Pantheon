@@ -8,6 +8,7 @@ export default function BattlePantheon({user, data, rerenderPage}) {
 
     const history = useHistory();
 
+
     const checkIfUserAlreadySubmitted = async (item) => {
         if (item.battle.battleOne.fighterOne.username === user.username && item.battle.battleOne.fighterOne.music !== null) {
             console.log("Looks like fighter one has already submitted a song")
@@ -62,6 +63,7 @@ export default function BattlePantheon({user, data, rerenderPage}) {
                         <h2>There are no Pantheons ready for this step</h2>
                     </div>
                 }
+                         
             </div>
         
         </div>

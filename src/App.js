@@ -38,10 +38,14 @@ function App() {
     };
     const checkForFinalVote = async () => {
       await API.finalVote()
+    };
+    const checkForFinalTimer = async () => {
+      await API.checkFinalTimer("test")
     }
     checkIfLoggedIn();
     checkForPantheonTimer();
     checkForFinalVote();
+    checkForFinalTimer();
   }, []);
 
 

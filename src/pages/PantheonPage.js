@@ -4,9 +4,11 @@ import BattlePantheon from "../components/Pantheon/BattlePantheon";
 import { GetNonAcceptedPantheons } from "../components/Functions/GetNonAcceptedPantheons";
 import { UserContext } from "../context/userContext";
 import { GetPantheonBattle } from "../components/Functions/GetPantheonBattle";
+import { GetResultsForPantheon } from "../components/Functions/GetResultsForPantheon";
 import Header from "../components/Header/Header";
 import Menu from "../components/Menu/Menu";
 import AcceptPantheon from "../components/Pantheon/AcceptPantheon";
+import ResultsPantheon from "../components/Pantheon/ResultsPantheon";
 
 export default function PantheonPage() {
 
@@ -18,6 +20,7 @@ export default function PantheonPage() {
     const [nonAcceptedPantheons, setNonAcceptedPantheons] = useState(null)
     const [rerender, setRerender] = useState(0);
     const [pantheonBattle, setPantheonBattle] = useState(null);
+    const [results, setResults] = useState(null);
 
     useEffect(() => {
         const checkData = async () => {
@@ -32,8 +35,14 @@ export default function PantheonPage() {
                     const selectMusicForBattle = await GetPantheonBattle(user.username);
                     setPantheonBattle(selectMusicForBattle);
                 };
+                const getResultsForPantheon = async () => {
+                    const foundResultsForPantheon = await GetResultsForPantheon(user.username);
+                    console.log(foundResultsForPantheon)
+                    setResults(foundResultsForPantheon);
+                }
                 await getNonAcceptedPantheon();
                 await chooseMusicForBattle();
+                await getResultsForPantheon();
                 await setLoading(false)
             }
         };
@@ -55,12 +64,17 @@ export default function PantheonPage() {
                     <Header user={user} />
                     <Menu user={user} reset={rerender}/>
                 </div>
-                <div style={{display: "flex", flexDirection: "row", justifyContent: "space-around"}}>
-                    <div>
-                        <AcceptPantheon user={user} data={nonAcceptedPantheons} rerenderPage={rerenderPage} />
+                <div style={{display: "flex", flexDirection: "column"}}>
+                    <div style={{display: "flex", flexDirection: "row", justifyContent: "space-around"}}>
+                        <div>
+                            <AcceptPantheon user={user} data={nonAcceptedPantheons} rerenderPage={rerenderPage} />
+                        </div>
+                        <div>
+                            <BattlePantheon user={user} data={pantheonBattle} rerenderPage={rerenderPage} finalBattle={results} />
+                        </div>
                     </div>
-                    <div>
-                        <BattlePantheon user={user} data={pantheonBattle} rerenderPage={rerenderPage} />
+                    <div style={{display: "flex", justifyContent: "center"}}>
+                        <ResultsPantheon user={user} data={results} rerenderPage={rerenderPage} />
                     </div>
                 </div>
             </div>
