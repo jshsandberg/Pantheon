@@ -1,6 +1,7 @@
 const { response } = require("express");
 const db = require("../models");
 const { Pantheon } = require("../models");
+const { findOneAndUpdate } = require("../models/user");
 
 
 module.exports = {
@@ -32,6 +33,7 @@ module.exports = {
                     acceptedPlayers: [req.body.fighter1],
                     numOfPlayers: 4,
                     votingTime: req.body.votingTimer * 60000,
+                    winnerTime: 8.64e+7,
                     battle: {
                         battleOne: {
                             fighterOne: {
@@ -80,7 +82,8 @@ module.exports = {
                     vote: false,
                     final: false,
                     finalVote: false,
-                    completed: false
+                    completed: false,
+                    victoryLap: null,
                 });
     
                 await newPantheon.save();
@@ -481,6 +484,79 @@ module.exports = {
                     }
                 }
 
+            } catch (err) {
+                console.log(err)
+            }
+        },
+
+        getWinner: async (req, res) => {
+            try {
+
+                const friends = [];
+                const friendAccounts = [];
+                const pantheonId = [];
+                const stringfy = [];
+                const pantheonList = [];
+                const finalPantheonList = [];
+
+
+                const foundUser = await db.User.findOne({ username: req.params.username });
+                
+                for (let i = 0; i < foundUser.friend.length; i++) {
+                    friends.push(foundUser.friend[i])
+                }
+    
+                for (let i = 0; i < friends.length; i++) {
+                    const friendAccount = await db.User.findOne({ username: friends[i] });
+                    friendAccounts.push(friendAccount.pantheon)
+                };
+    
+                for (let i = 0; i < friendAccounts.length; i++) {
+                    pantheonId.push(...friendAccounts[i])
+                };
+    
+                for (let i = 0; i < pantheonId.length; i++) {
+                    stringfy.push(pantheonId[i].toString())
+                };
+    
+                const unique = [...new Set(stringfy)];
+    
+                for (let i = 0; i < unique.length; i++) {
+                    const getPantheon = await db.Pantheon.findOne({ _id: unique[i] });
+                    if (getPantheon.finalVote === true && getPantheon.completed === false) {
+                        pantheonList.push(getPantheon)
+                    }
+                };
+
+                for (let i = 0; i < pantheonList.length; i++) {
+                    await db.Pantheon.findOneAndUpdate({
+                        _id: pantheonList[i]._id
+                    }, {
+                        $set : { "victoryLap" : Date.now() }
+                    })
+                }
+
+                return res.json(pantheonList)
+
+            } catch (err) {
+                console.log(err)
+            }
+        },
+
+        complete: async (req, res) => {
+            try {
+
+                const allPantheon = await db.Pantheon.find();
+
+                for (let i = 0; i < allPantheon.length; i++) {
+                    if ((allPantheon[i].victoryLap + allPantheon[i].winnerTime) < Date.now()) {
+                        await db.Pantheon.findOneAndUpdate({
+                            _id: allPantheon[i]._id
+                        }, {
+                            $set : { "completed" : true }
+                        })
+                    }
+                }
             } catch (err) {
                 console.log(err)
             }

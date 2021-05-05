@@ -20,6 +20,9 @@ const pantheonSchema = new Schema({
   votingTime: {
     type: Number
   },
+  winnerTime: {
+    type: Number
+  },
   battle: {
     type: Object
   },
@@ -54,6 +57,9 @@ const pantheonSchema = new Schema({
 
   completed: {
     type: Boolean
+  },
+  victoryLap: {
+    type: Number
   }
 });
 

@@ -101,6 +101,12 @@ export const API = {
     },
     checkFinalTimer: function(username) {
       return axios.post("api/pantheon/finalTimer/" + username);
+    },
+    getWinner: function(username) {
+      return axios.post("api/pantheon/winner/" + username);
+    },
+    completePantheon: function(username) {
+      return axios.post("api/pantheon/complete/" + username)
     }
     // getActivePantheon: function(id) {
     //   return axios.post("api/pantheon/creator/" + id);

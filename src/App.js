@@ -41,11 +41,15 @@ function App() {
     };
     const checkForFinalTimer = async () => {
       await API.checkFinalTimer("test")
-    }
+    };
+    const finishPantheon = async () => {
+      await API.completePantheon("test");
+    };
     checkIfLoggedIn();
     checkForPantheonTimer();
     checkForFinalVote();
     checkForFinalTimer();
+    finishPantheon()
   }, []);
 
 

@@ -13,6 +13,10 @@ router.route("/results/:username").post(pantheonController.findResults);
 router.route("/results/:username").post(pantheonController.findResults);
 router.route("/finalVoting/:pantheonId").post(pantheonController.finalVoting);
 router.route("/finalTimer/:username").post(pantheonController.checkFinalTimer);
+router.route("/winner/:username").post(pantheonController.getWinner);
+router.route("/complete/:username").post(pantheonController.complete);
+
+
 
 
 

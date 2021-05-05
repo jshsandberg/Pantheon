@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { GetFriendsPantheon } from "../Functions/GetFriendsPantheon";
 import { CheckUserVotePantheon } from "../Functions/CheckUserVotePantheon";
 import { CheckUserVoteFinalPantheon } from "../Functions/CheckUserVoteFinalPantheon";
+import { GetWinner } from "../Functions/GetWinner";
 import VotingModal from "../Modal/VotingModal";
 import FinalVotingModal from "../Modal/FinalVotingModal";
 import "./friendsArenaStyle.css"
@@ -16,15 +17,19 @@ export default function FriendsArena({ user }) {
     const [rerender, setRerender] = useState(0);
     const [finalPantheon, setFinalPantheon] = useState(null);
     const [finalShow, setFinalShow] = useState(false);
+    const [winner, setWinner] = useState(null);
 
     useEffect(() => {
         const gettingFriendsPantheon = async () => {
             const gotFriendsPantheon = await GetFriendsPantheon(user);
             const checkIfUserVotedForPantheon = await CheckUserVotePantheon(gotFriendsPantheon.pantheonList, user.username);
-            const checkIfUserVotedInFinalPantheon = await CheckUserVoteFinalPantheon(gotFriendsPantheon.finalPantheonList, user.username)
+            const checkIfUserVotedInFinalPantheon = await CheckUserVoteFinalPantheon(gotFriendsPantheon.finalPantheonList, user.username);
+            const showOffWinner = await GetWinner(user.username);
+            await setWinner(showOffWinner);
             await setFinalPantheon(checkIfUserVotedInFinalPantheon)
             await setPantheon(checkIfUserVotedForPantheon)
         };
+        
         gettingFriendsPantheon();
     }, [user, rerender]);
 
@@ -44,6 +49,22 @@ export default function FriendsArena({ user }) {
                 <h2 style={{textAlign: "center", color: "white"}}>Active Pantheons</h2>
             </div>
             <div className="parentDiv">
+                {winner && winner.map((item, i) => {
+                    return (
+                        <div key={i} style={{margin: "10px 30px", display: "flex", flexDirection: "row", justifyContent: "space-between"}}> 
+                            {item.finalBattle.winner === item.finalBattle.fighterOne.username ? <img style={{width: "20%", height: "20%"}} src={item.finalBattle.fighterOne.music.image} alt="album" /> : <img style={{width: "20%", height: "20%"}} src={item.finalBattle.fighterTwo.music.image} alt="album" />}
+                            <div style={{alignSelf: "center", display: "flex", flexDirection: "column"}}>
+                                <h1>Winner</h1>
+                            </div>
+                            <div style={{alignSelf: "center", display: "flex", flexDirection: "column"}}>
+                                <h2 style={{textAlign: "center", margin: "0px", padding: "0px"}}>{item.category}:</h2>
+                            </div>
+                            <div style={{alignSelf: "center", display: "flex", flexDirection: "column"}}>
+                            {item.finalBattle.winner === item.finalBattle.fighterOne.username ?  <h1>{item.finalBattle.fighterOne.username}</h1> : <h1>{item.finalBattle.fighterTwo.username}</h1>}
+                            </div>                   
+                        </div>
+                    )
+                })}
                 {finalPantheon && finalPantheon.map((item, i) => {
                     return (
                         <div key={i}>
