@@ -18,6 +18,7 @@ export default function FriendsArena({ user }) {
     const [finalPantheon, setFinalPantheon] = useState(null);
     const [finalShow, setFinalShow] = useState(false);
     const [winner, setWinner] = useState(null);
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         const gettingFriendsPantheon = async () => {
@@ -26,8 +27,9 @@ export default function FriendsArena({ user }) {
             const checkIfUserVotedInFinalPantheon = await CheckUserVoteFinalPantheon(gotFriendsPantheon.finalPantheonList, user.username);
             const showOffWinner = await GetWinner(user.username);
             await setWinner(showOffWinner);
-            await setFinalPantheon(checkIfUserVotedInFinalPantheon)
-            await setPantheon(checkIfUserVotedForPantheon)
+            await setFinalPantheon(checkIfUserVotedInFinalPantheon);
+            await setPantheon(checkIfUserVotedForPantheon);
+            await setLoading(false);
         };
         
         gettingFriendsPantheon();
@@ -105,7 +107,6 @@ export default function FriendsArena({ user }) {
                         </div>
                     )
                 })}
-
             {pantheon && pantheon.map((item, i) => {
                 return (
                     <div key={i} >
@@ -176,6 +177,13 @@ export default function FriendsArena({ user }) {
                     </div>
                 )
             })}
+            {!loading && pantheon.length === 0 && finalPantheon.length === 0 && winner.length === 0 ?
+                <div>
+                    <h2 style={{textAlign: "center"}}>There are no active Pantheons</h2>
+                </div>
+                :
+                null
+            }
             </div>
             <div>
                 <VotingModal show={show} hide={onClose} item={battle} pantheon={item} user={user} number={number} rerenderPage={rerenderPage} />

@@ -37,7 +37,6 @@ export default function PantheonPage() {
                 };
                 const getResultsForPantheon = async () => {
                     const foundResultsForPantheon = await GetResultsForPantheon(user.username);
-                    console.log(foundResultsForPantheon)
                     setResults(foundResultsForPantheon);
                 }
                 await getNonAcceptedPantheon();
@@ -57,30 +56,28 @@ export default function PantheonPage() {
 
     return (
         <div>
-        {
-            !loading ?
             <div>
-                <div>
-                    <Header user={user} />
-                    <Menu user={user} reset={rerender}/>
-                </div>
-                <div style={{display: "flex", flexDirection: "column"}}>
-                    <div style={{display: "flex", flexDirection: "row", justifyContent: "space-around"}}>
-                        <div>
-                            <AcceptPantheon user={user} data={nonAcceptedPantheons} rerenderPage={rerenderPage} />
-                        </div>
-                        <div>
-                            <BattlePantheon user={user} data={pantheonBattle} rerenderPage={rerenderPage} finalBattle={results} />
-                        </div>
-                    </div>
-                    <div style={{display: "flex", justifyContent: "center"}}>
-                        <ResultsPantheon user={user} data={results} rerenderPage={rerenderPage} />
-                    </div>
-                </div>
+                <Header user={user} />
+                <Menu user={user} reset={rerender}/>
             </div>
-            :
-            null
-        }         
-    </div>
+            {
+                !loading ?
+                    <div style={{display: "flex", flexDirection: "column"}}>
+                        <div style={{display: "flex", flexDirection: "row", justifyContent: "space-around"}}>
+                            <div>
+                                <AcceptPantheon user={user} data={nonAcceptedPantheons} rerenderPage={rerenderPage} />
+                            </div>
+                            <div>
+                                <BattlePantheon user={user} data={pantheonBattle} rerenderPage={rerenderPage} finalBattle={results} />
+                            </div>
+                        </div>
+                        <div style={{display: "flex", justifyContent: "center"}}>
+                            <ResultsPantheon user={user} data={results} rerenderPage={rerenderPage} />
+                        </div>
+                    </div>
+                :
+                null
+            }         
+        </div>
     )
 }

@@ -311,8 +311,11 @@ module.exports = {
                         });
                     } else {
                         
+
                     }
                 }
+
+                return res.status(200)
 
             } catch (err) {
                 console.log(err)
@@ -352,7 +355,7 @@ module.exports = {
                     })
                     return res.json("Saved Vote")
                 } else {
-                    console.log("error")
+                    return res.status(200)
                 }
             } catch (err) {
                 console.log(err)
@@ -383,7 +386,10 @@ module.exports = {
                             $set : { "finalBattle.fighterOne.username" : allPantheon[i].battle.battleOne.winner, "finalBattle.fighterTwo.username" : allPantheon[i].battle.battleTwo.winner, "finalBattle.fighterOne.music" : winnerOneMusic.music, "finalBattle.fighterTwo.music" : winnerTwoMusic.music, "final" : true, "finalBattle.timer" : Date.now() }
                         })
                     }
-                }
+                };
+
+                return res.status(200)
+
             } catch (err) {
                 console.log(err)
             }
@@ -479,8 +485,14 @@ module.exports = {
                         }, {
                             $set : { "finalVote" : true }
                         });
+
+                        return res.status(200)
+
+
                     } else {
                         
+                        return res.status(200)
+
                     }
                 }
 
@@ -557,6 +569,9 @@ module.exports = {
                         })
                     }
                 }
+
+                return res.status(200)
+
             } catch (err) {
                 console.log(err)
             }

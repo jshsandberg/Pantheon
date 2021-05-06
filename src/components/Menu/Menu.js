@@ -77,10 +77,11 @@ export default function Menu({ user, reset }) {
                             {interactions !== null ? <h2 style={{color: "white"}}>+{interactions}</h2> : <h2 style={{color: "white"}}>+0</h2>}
                         </div>
                     </Link>
-                    <div className="menu" style={{display: "flex", flexDirection: "row", justifyContent: "space-evenly", marginTop: "0px"}}>
-                        <h2 style={{color: "white"}}>User Profile (creator of pantheons go here)</h2>
-                        {/* <h2>+6</h2> */}
-                    </div>
+                    <Link style={{textDecoration: "none"}} to="/user">
+                        <div className="menu" style={{display: "flex", flexDirection: "row", justifyContent: "space-evenly", marginTop: "0px"}}>
+                            <h2 style={{color: "white"}}>User Profile</h2>
+                        </div>
+                    </Link>
                     <div className="menu" style={{display: "flex", flexDirection: "row", justifyContent: "space-evenly", marginTop: "0px"}}>
                         <h2 style={{color: "white"}}>Friends</h2>
                         <h2>+6</h2>

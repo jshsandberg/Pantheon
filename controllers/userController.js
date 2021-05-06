@@ -406,8 +406,6 @@ module.exports = {
 			// FIND PANTHEON THAT USER HAS NOT ACCEPTED/DECLINED PANTHEON INVITE
 			const foundPantheon = await db.Pantheon.find({ players: req.params.username });
 
-			console.log(foundPantheon)
-
 			for (let i = 0; i < foundPantheon.length; i++) {
 				if (foundPantheon[i].acceptedPlayers.includes(req.params.username)) {
 				} else {
