@@ -14,6 +14,7 @@ app.use(express.json());
 app.use(cors());
 
 
+
 // Serve up static assets (usually on heroku)
 app.use(express.static(path.join(__dirname, 'build')));
 
