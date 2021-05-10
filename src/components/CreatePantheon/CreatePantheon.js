@@ -118,7 +118,7 @@ export default function CreatePantheon({ user }) {
                     </div>
                 </div>
                 <div style={{width: "45%"}}>
-                    <h2 style={{textAlign: "center"}}>Add a Competitor</h2>
+                    {friends === null || friends.length === 0 ? <h2 style={{textAlign: "center"}}>Add Friends to start a Pantheon</h2> : <h2 style={{textAlign: "center"}}>Add a Competitor</h2>}
                     <div style={{display: "flex", flexDirection: "column", overflow: "auto", height: "378px"}}>
                         {
                             friends && friends.map((item, i) => {

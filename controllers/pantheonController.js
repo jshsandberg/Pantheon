@@ -11,7 +11,6 @@ module.exports = {
             const playerArr = [req.body.fighter1, req.body.fighter2, req.body.fighter3, req.body.fighter4];
 
             if (playerArr.length === 4) {
-
                 const getShuffledArr = arr => {
                     const newArr = arr.slice()
                     for (let i = newArr.length - 1; i > 0; i--) {
@@ -323,9 +322,7 @@ module.exports = {
         },
 
         submitVote: async (req, res) => {
-            
             try {
-
                 if (req.body.fighter === "fighterOne" && req.body.number === 1) {
                     const updatePantheon = await db.Pantheon.findOneAndUpdate({
                         _id: req.params.pantheonId
@@ -411,9 +408,7 @@ module.exports = {
                         results.push(pantheons[i]);
                     };
                 };
-
                 return res.json(results)
-
             } catch (err) {
                 console.log(err)
             }
@@ -421,7 +416,6 @@ module.exports = {
 
         finalVoting: async (req, res) => {
             try {
-
                 if (req.body.fighter === "fighterOne") {
                     await db.Pantheon.findOneAndUpdate({
                         _id: req.params.pantheonId
@@ -437,7 +431,6 @@ module.exports = {
                     });
                     return res.json("Saved Vote")
                 }
-        
             } catch (err) {
                 console.log(err)
             }
@@ -449,10 +442,11 @@ module.exports = {
                 const allPantheons = await db.Pantheon.find();
 
                 const randomNumber = Math.random();
-               
+
+
             
                 for (let i = 0; i < allPantheons.length; i++) {
-                    if (allPantheons[i].finalBattle.timer + allPantheons[i].votingTime < Date.now() && allPantheons[i].final === true && allPantheons[i].finalVote === false) {
+                    if (((allPantheons[i].finalBattle.timer + allPantheons[i].votingTime) < Date.now()) && allPantheons[i].final === true && allPantheons[i].finalVote === false) {
                         if (allPantheons[i].finalBattle.votesForFighterOne.length > allPantheons[i].finalBattle.votesForFighterTwo.length) {
                             await db.Pantheon.findOneAndUpdate({ 
                                 _id: allPantheons[i]._id
@@ -486,15 +480,13 @@ module.exports = {
                             $set : { "finalVote" : true }
                         });
 
-                        return res.status(200)
-
-
                     } else {
                         
-                        return res.status(200)
-
                     }
                 }
+
+                                        return res.status(200)
+
 
             } catch (err) {
                 console.log(err)
@@ -561,7 +553,8 @@ module.exports = {
                 const allPantheon = await db.Pantheon.find();
 
                 for (let i = 0; i < allPantheon.length; i++) {
-                    if ((allPantheon[i].victoryLap + allPantheon[i].winnerTime) < Date.now()) {
+                    // console.log(allPantheon[i].victoryLap + allPantheon[i].winnerTime, Date.now())
+                    if (allPantheon[i].victoryLap !== null && ((allPantheon[i].victoryLap + allPantheon[i].winnerTime) < Date.now())) {
                         await db.Pantheon.findOneAndUpdate({
                             _id: allPantheon[i]._id
                         }, {

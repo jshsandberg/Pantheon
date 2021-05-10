@@ -20,7 +20,9 @@ app.use(express.static(path.join(__dirname, 'build')));
 
 // Connect to the Mongo DB
 mongoose
-	.connect(process.env.MONGODB_URI || "mongodb://localhost/pantheon", {
+	.connect(
+		process.env.MONGODB_URI || 
+		"mongodb://localhost/pantheon", {
 		useNewUrlParser: true,
 		useFindAndModify: false,
 		useUnifiedTopology: true,
