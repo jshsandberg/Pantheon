@@ -45,8 +45,7 @@ export default function PantheonPage() {
                 await setLoading(false)
             }
         };
-        checkData();
-      
+        checkData();      
     }, [user, history, rerender]);
 
     const rerenderPage = () => {

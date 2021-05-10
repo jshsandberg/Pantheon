@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { friendRequests } from "../Functions/CheckFriendRequest";
 import { UserPantheonInteractions } from "../Functions/UserPantheonInteractions";
 import { GetFriends } from "../Functions/GetFriends.js";
@@ -8,6 +8,9 @@ import FriendRequestModal from "../Modal/FriendRequestModal";
 import "./menuStyle.css"
 
 export default function Menu({ user, reset }) {
+
+    const history = useHistory();
+
 
     const [rerender, setRerender] = useState(0);
     const [fade, setFade] = useState(false);
@@ -18,21 +21,26 @@ export default function Menu({ user, reset }) {
 
 
     useEffect(() => {
-        const gettingFriends = async () => {
-            const gotFriends = await GetFriends(user.username);
-            await setFriends(gotFriends)
+
+        if (user === null) {
+            history.push({pathname: "/" })
+        } else {
+            const gettingFriends = async () => {
+                const gotFriends = await GetFriends(user.username);
+                await setFriends(gotFriends)
+            };
+            const checkForFriendRequests = async () => {
+                const checkedRequest = await friendRequests(user.username);
+                await setRequests(checkedRequest);
+            };
+            const checkForUserPantheonInteractions = async () => {
+                const checkUserPantheonInteractions = await UserPantheonInteractions(user.username);
+                await setInteractions(checkUserPantheonInteractions)
+            };
+            checkForFriendRequests();
+            gettingFriends();
+            checkForUserPantheonInteractions();
         };
-        const checkForFriendRequests = async () => {
-            const checkedRequest = await friendRequests(user.username);
-            await setRequests(checkedRequest);
-        };
-        const checkForUserPantheonInteractions = async () => {
-            const checkUserPantheonInteractions = await UserPantheonInteractions(user.username);
-            await setInteractions(checkUserPantheonInteractions)
-        };
-        checkForFriendRequests();
-        gettingFriends();
-        checkForUserPantheonInteractions();
     }, [user, rerender, reset]);
 
 

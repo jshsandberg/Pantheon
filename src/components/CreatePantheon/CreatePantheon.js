@@ -130,34 +130,6 @@ export default function CreatePantheon({ user }) {
                                 )
                             })
                         }
-                        {/* <div style={{display: "flex", flexDirection: "row", justifyContent: "space-around"}}>
-                            <h2>Josh</h2>
-                            <button onClick={() => submitChallenger()}>Add me</button>
-                        </div>
-                        <div style={{display: "flex", flexDirection: "row", justifyContent: "space-around"}}>
-                            <h2>Josh</h2>
-                            <button onClick={() => submitChallenger()}>Add me</button>
-                        </div>
-                        <div style={{display: "flex", flexDirection: "row", justifyContent: "space-around"}}>
-                            <h2>Josh</h2>
-                            <button onClick={() => submitChallenger()}>Add me</button>
-                        </div>
-                        <div style={{display: "flex", flexDirection: "row", justifyContent: "space-around"}}>
-                            <h2>Josh</h2>
-                            <button onClick={() => submitChallenger()}>Add me</button>
-                        </div>
-                        <div style={{display: "flex", flexDirection: "row", justifyContent: "space-around"}}>
-                            <h2>Josh</h2>
-                            <button onClick={() => submitChallenger()}>Add me</button>
-                        </div>
-                        <div style={{display: "flex", flexDirection: "row", justifyContent: "space-around"}}>
-                            <h2>Josh</h2>
-                            <button onClick={() => submitChallenger()}>Add me</button>
-                        </div>
-                        <div style={{display: "flex", flexDirection: "row", justifyContent: "space-around"}}>
-                            <h2>Josh</h2>
-                            <button onClick={() => submitChallenger()}>Add me</button>
-                        </div> */}
                     </div>
                 </div>
             </div>
