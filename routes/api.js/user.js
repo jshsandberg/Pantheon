@@ -13,6 +13,8 @@ router.route("/addFriend/:username").post(userController.addFriend);
 router.route("/pantheonInteractions/:username").post(userController.pantheonInteractions);
 router.route("/pantheon/:id").post(userController.acceptPantheon);
 router.route("/pantheonDeclined/:id").post(userController.declinePantheon);
+router.route("/allPantheon/:username").post(userController.getAllPantheons);
+
 
 
 // router.route("/review/:userId").post(userController.saveReview);

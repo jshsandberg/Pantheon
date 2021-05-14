@@ -576,6 +576,18 @@ module.exports = {
 			console.log("there is an error")
 			console.log(err)
 		}
+	},
+
+	getAllPantheons: async (req, res) => {
+		try {
+
+			const foundCreatorPantheon = await db.Pantheon.find({ creator: req.params.username });
+
+			return res.json(foundCreatorPantheon)
+
+		} catch (err) {
+			console.log(err)
+		}
 	}
 
 }

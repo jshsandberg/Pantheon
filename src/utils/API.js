@@ -20,6 +20,9 @@ export const API = {
     declineFriendRequest: function(username, friendUsername) {
       return axios.post("/api/user/declineFriendRequest/" + username, {friendUsername: friendUsername})
     },
+    getAllUsersPantheon: function(username) {
+      return axios.post("/api/user/allPantheon/" + username);
+    },
     // saveReview: function(user, review) {
     //   return axios.post("/api/user/review/" + user, review);
     // },
