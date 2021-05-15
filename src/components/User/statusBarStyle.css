@@ -1,0 +1,35 @@
+.data:hover .test {
+    transform: scale(1.5) translate(-20px,-20px)
+  }
+.test {
+    transition: all 1s;
+    transform-origin: 50% 50%;
+    }
+
+.accept {
+    position: absolute;
+    top: -35px; 
+    z-index: 1000; 
+    left: -35px;
+    border-radius: 25px;
+    padding: 0px;
+    opacity: 0
+}
+
+.data:hover .accept {
+    animation: fadeIn 3s;
+    animation-fill-mode: forwards;  
+
+}
+
+@keyframes fadeIn {
+    0% {opacity: 0;}
+    20%{opacity: 0;}
+    100% {opacity: 1;}
+}
+
+
+
+
+
+

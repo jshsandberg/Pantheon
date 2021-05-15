@@ -21,16 +21,22 @@ export const SeperatePantheons = async (data) => {
                 num: 3
             };
             info.push(obj)
-        } else if (data[i].final === false || data[i].finalVote === false) {
+        } else if (data[i].final === false) {
             const obj = {
                 data: data[i],
                 num: 4
             };
             info.push(obj)
-        } else {
+        } else if ( data[i].finalVote === false) {
             const obj = {
                 data: data[i],
                 num: 5
+            };
+            info.push(obj)
+        } else {
+            const obj = {
+                data: data[i],
+                num: 6
             };
             info.push(obj)
         }
