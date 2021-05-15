@@ -6,7 +6,7 @@
     transform-origin: 50% 50%;
     }
 
-.accept {
+.created {
     position: absolute;
     top: -35px; 
     z-index: 1000; 
@@ -16,17 +16,101 @@
     opacity: 0
 }
 
-.data:hover .accept {
-    animation: fadeIn 3s;
+.data:hover .created {
+    animation: fadeInCreated 3s;
     animation-fill-mode: forwards;  
-
 }
 
-@keyframes fadeIn {
+@keyframes fadeInCreated {
     0% {opacity: 0;}
     20%{opacity: 0;}
     100% {opacity: 1;}
 }
+
+.data:hover .accepted {
+    animation: fadeInAccepted 3s;
+    animation-fill-mode: forwards;  
+}
+
+.accepted {
+    position: absolute;
+    top: -35px; 
+    z-index: 1000; 
+    left: 35px;
+    border-radius: 25px;
+    padding: 0px;
+    opacity: 0
+}
+
+@keyframes fadeInAccepted {
+    0% {opacity: 0;}
+    20%{opacity: 0;}
+    100% {opacity: 1;}
+}
+
+.data:hover .music {
+    animation: fadeInMusic 3s;
+    animation-fill-mode: forwards;  
+}
+
+.music {
+    position: absolute;
+    top: -35px; 
+    z-index: 1000; 
+    left: 130px;
+    border-radius: 25px;
+    padding: 0px;
+    opacity: 0
+}
+
+@keyframes fadeInMusic {
+    0% {opacity: 0;}
+    20%{opacity: 0;}
+    100% {opacity: 1;}
+}
+
+.data:hover .vote {
+    animation: fadeInVote 3s;
+    animation-fill-mode: forwards;  
+}
+
+.vote {
+    position: absolute;
+    top: -35px; 
+    z-index: 1000; 
+    left: 250px;
+    border-radius: 25px;
+    padding: 0px;
+    opacity: 0
+}
+
+@keyframes fadeInVote {
+    0% {opacity: 0;}
+    20%{opacity: 0;}
+    100% {opacity: 1;}
+}
+
+.data:hover .final {
+    animation: fadeInFinal 3s;
+    animation-fill-mode: forwards;  
+}
+
+.final {
+    position: absolute;
+    top: -35px; 
+    z-index: 1000; 
+    left: 250px;
+    border-radius: 25px;
+    padding: 0px;
+    opacity: 0
+}
+
+@keyframes fadeInFinal {
+    0% {opacity: 0;}
+    20%{opacity: 0;}
+    100% {opacity: 1;}
+}
+
 
 
 

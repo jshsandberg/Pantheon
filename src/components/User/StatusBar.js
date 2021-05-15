@@ -163,15 +163,13 @@ export default function StatusBar({ num }) {
                 <img style={{position: "absolute", width: "54px", height: "auto", transform: "rotate(120deg)", top: "-7px", right: "250px" }} src={Line} />
                 <img style={{position: "absolute", width: "54px", height: "auto", transform: "rotate(120deg)", top: "-7px", right: "150px" }} src={Line} />
                 <img style={{position: "absolute", width: "54px", height: "auto", transform: "rotate(120deg)", top: "-7px", right: "50px" }} src={Line} />
-                    <div onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} className="data">
+                    <div className="data">
                         <svg className="test" onClick={() => console.log("hello")}  style={{position: "absolute", left: "-12", top: "0", width: "90px", height: "40px"}} viewBox="0 0 600 600">
                             <g fill="#61DAFB">
                             <path d="m 110 0 a 1 1 0 0 0 0 600 h 453 l 350 -600 z " />
                             </g>
                         </svg>      
-          
-                        <h2 onMouseEnter={() => console.log("hell")} className="accept" style={{fontSize: "15px", margin: "10px 10px 10px 10px"}}>Created</h2>
-
+                        <h2 className="created" style={{fontSize: "15px", margin: "10px 10px 10px 10px"}}>Created</h2>
                     </div>
 
 
@@ -179,31 +177,61 @@ export default function StatusBar({ num }) {
                  
              
 
-           
+                    <div className="data">
+
     
-                <svg className="test" style={{position: "absolute", left: "35", top: "0", width: "120px", height: "40px"}} viewBox="-5 0 600 600">
+                <svg className="test" style={{position: "absolute", left: "52", top: "0", width: "123px", height: "40px"}} viewBox="0 0 600 600">
                     <g fill="#61DAFB">
-                    <path d="m 10 0 l -350 600 h 453 l 350 -600 z " />
+                    <path d="m -260 0 l -350 600 h 1465 l 350 -600 z " />
                     </g>
                 </svg>
+                <h2 className="accepted" style={{fontSize: "15px", margin: "10px 10px 10px 10px"}}>Accepted</h2>
+
+                </div>
     
-                <svg className="test" style={{position: "absolute", left: "150", top: "0", width: "540px"}} viewBox="-5 0 600 600">
+                <div className="data">
+
+                <svg className="test" style={{position: "absolute", left: "150", top: "0", width: "126px", height: "40px"}} viewBox="0 0 600 600">
+                    <g fill="#61DAFB">
+                    <path d="m -255 0 L -600 600 h 1465 0 l 350 -600 z  " />
+                    </g>
+                </svg>
+                <h2 className="music" style={{fontSize: "15px", margin: "10px 10px 10px 10px"}}>Choose Song</h2>
+                </div>
+
+                <div className="data">
+
+                <svg className="test" style={{position: "absolute", left: "250", top: "0", width: "126px", height: "40px"}} viewBox="0 0 600 600">
+                    <g fill="#61DAFB">
+                    <path d="m -255 0 L -600 600 h 1465 0 l 350 -600 z  " />
+                    </g>
+                </svg>
+                <h2 className="vote" style={{fontSize: "15px", margin: "10px 10px 10px 10px"}}>Voted</h2>
+                </div>
+
+                <div className="data">
+
+                <svg className="test" style={{position: "absolute", left: "350", top: "0", width: "126px", height: "40px"}} viewBox="0 0 600 600">
+                    <g fill="#61DAFB">
+                    <path d="m -255 0 L -600 600 h 1465 0 l 350 -600 z  " />
+                    </g>
+                </svg>
+                <h2 className="final" style={{fontSize: "15px", margin: "10px 10px 10px 10px"}}>Final Vote</h2>
+                </div>
+
+                
+    
+                {/* <svg className="test" style={{position: "absolute", left: "250", top: "0", width: "540px"}} viewBox="-5 0 600 600">
                     <g fill="#61DAFB">
                     <path d="M -2 45 L 107 45 L 133 0 L 25 -1 z  " />
                     </g>
-                </svg>
+                </svg> */}
     
-                <svg className="test" style={{position: "absolute", left: "250", top: "0", width: "540px"}} viewBox="-5 0 600 600">
+                {/* <svg className="test" style={{position: "absolute", left: "350", top: "0", width: "540px"}} viewBox="-5 0 600 600">
                     <g fill="#61DAFB">
                     <path d="M -2 45 L 107 45 L 133 0 L 25 -1 z  " />
                     </g>
-                </svg>
-    
-                <svg className="test" style={{position: "absolute", left: "350", top: "0", width: "540px"}} viewBox="-5 0 600 600">
-                    <g fill="#61DAFB">
-                    <path d="M -2 45 L 107 45 L 133 0 L 25 -1 z  " />
-                    </g>
-                </svg>
+                </svg> */}
     
                 <svg className="test" style={{position: "absolute", left: "450", top: "0", width: "540px"}} viewBox="-5 0 600 600">
                     <g fill="#61DAFB">
