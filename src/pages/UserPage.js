@@ -27,7 +27,7 @@ export default function UserPage() {
             };
             getUsersPantheons();
         }
-    }, [user])
+    }, [user, history])
 
 
     return (

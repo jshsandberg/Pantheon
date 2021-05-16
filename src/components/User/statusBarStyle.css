@@ -17,7 +17,7 @@
 }
 
 .data:hover .created {
-    animation: fadeInCreated 3s;
+    animation: fadeInCreated 2.2s;
     animation-fill-mode: forwards;  
 }
 
@@ -28,7 +28,7 @@
 }
 
 .data:hover .accepted {
-    animation: fadeInAccepted 3s;
+    animation: fadeInAccepted 2.2s;
     animation-fill-mode: forwards;  
 }
 
@@ -49,7 +49,7 @@
 }
 
 .data:hover .music {
-    animation: fadeInMusic 3s;
+    animation: fadeInMusic 2.2s;
     animation-fill-mode: forwards;  
 }
 
@@ -70,7 +70,7 @@
 }
 
 .data:hover .vote {
-    animation: fadeInVote 3s;
+    animation: fadeInVote 2.2s;
     animation-fill-mode: forwards;  
 }
 
@@ -91,7 +91,7 @@
 }
 
 .data:hover .final {
-    animation: fadeInFinal 3s;
+    animation: fadeInFinal 2.2s;
     animation-fill-mode: forwards;  
 }
 
@@ -99,13 +99,34 @@
     position: absolute;
     top: -35px; 
     z-index: 1000; 
-    left: 250px;
+    left: 335px;
     border-radius: 25px;
     padding: 0px;
     opacity: 0
 }
 
 @keyframes fadeInFinal {
+    0% {opacity: 0;}
+    20%{opacity: 0;}
+    100% {opacity: 1;}
+}
+
+.data:hover .complete {
+    animation: fadeInComplete 2.2s;
+    animation-fill-mode: forwards;  
+}
+
+.complete {
+    position: absolute;
+    top: -35px; 
+    z-index: 1000; 
+    left: 418px;
+    border-radius: 25px;
+    padding: 0px;
+    opacity: 0
+}
+
+@keyframes fadeInComplete {
     0% {opacity: 0;}
     20%{opacity: 0;}
     100% {opacity: 1;}

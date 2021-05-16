@@ -41,7 +41,7 @@ export default function Menu({ user, reset }) {
             gettingFriends();
             checkForUserPantheonInteractions();
         };
-    }, [user, rerender, reset]);
+    }, [user, rerender, reset, history]);
 
 
 

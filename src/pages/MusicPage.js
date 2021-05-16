@@ -20,7 +20,9 @@ export default function MusicPage({ location: { state } }) {
 
     const {user} = useContext(UserContext);
 
-    const [rerender, setRerender] = useState(0);
+    const rerender = 0
+
+    // const [rerender, setRerender] = useState(0);
     const [value, setValue] = useState("");
     const [tracks, setTracks] = useState(null);    
     const [albums, setAlbums] = useState(null);
