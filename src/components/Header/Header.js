@@ -44,7 +44,7 @@ export default function Header({ user, pantheon }) {
                 !pantheon ?    
                 <form style={{position: "absolute", top: "11px", left: "345px"}}>
                     <input onChange={(e) => setValue(e.target.value)} type="text" />
-                    <button onClick={(e) => getSpotifyData(e)} style={{padding: "10px"}}>Search</button>
+                    <button className="button" onClick={(e) => getSpotifyData(e)} style={{padding: "10px"}}>Search</button>
                 </form>
                 :
                 null

@@ -1,6 +1,7 @@
 import React from "react";
 import { AcceptPantheonInvite } from "../Functions/AcceptPantheonInvite";
 import { DeclinePantheonInvite } from "../Functions/DeclinePantheonInvite";
+import Card from "./Card";
 
 
 export default function AcceptPantheon({ data, user, rerenderPage }) {
@@ -10,6 +11,9 @@ export default function AcceptPantheon({ data, user, rerenderPage }) {
              <div>
                  <h2>Pantheon Invites</h2>
              </div>
+             {/* <div>
+                 <Card />
+             </div> */}
              {
                  data.length > 0 ? 
                     data.map((item, i) => {

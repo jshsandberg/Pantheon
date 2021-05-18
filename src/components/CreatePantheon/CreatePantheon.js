@@ -92,7 +92,7 @@ export default function CreatePantheon({ user }) {
                                     <br />
                                     <input onChange={(e) => handleTimerChange(e)} type="number" id="fname" name="fname" value={timer} />
                                 </form>
-                                <button style={{width: "80px"}} onClick={() => {secondFighter && thirdFighter && fourthFighter && pantheonTitleInput ? submitPantheon() : setError("Need to fill out all inputs")}}>Submit</button>  
+                                <button className="button" style={{width: "80px"}} onClick={() => {secondFighter && thirdFighter && fourthFighter && pantheonTitleInput ? submitPantheon() : setError("Need to fill out all inputs")}}>Submit</button>  
                             </div>
                         </div>
                     </div>
@@ -104,7 +104,7 @@ export default function CreatePantheon({ user }) {
                                     <h2>{error}</h2>
                                 </div>
                                 <div style={{position: "absolute", top: "80px", left: "380px"}}>
-                                    <button onClick={() => setError(null)}>Close</button>
+                                    <button className="button" onClick={() => setError(null)}>Close</button>
                                 </div>
                             </div>
                             :
@@ -125,7 +125,7 @@ export default function CreatePantheon({ user }) {
                                 return (
                                     <div key={i} style={{display: "flex", flexDirection: "row", justifyContent: "space-around"}}>
                                         <h2>{item.username}</h2>
-                                        <button onClick={() => submitChallenger(item.username)}>Add me</button>
+                                        <button className="button" onClick={() => submitChallenger(item.username)}>Add me</button>
                                     </div> 
                                 )
                             })

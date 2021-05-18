@@ -72,7 +72,7 @@ export default function Menu({ user, reset }) {
     return (
       
         <div>
-            <button onClick={() => fade ? setFade(false) : setFade(true)} style={{position: "absolute", top: "3px", left: "200px"}}>{!fade ? <h4>Menu</h4> : <h4>Close</h4>}</button>
+            <button className="button" onClick={() => fade ? setFade(false) : setFade(true)} style={{position: "absolute", top: "3px", left: "200px"}}>{!fade ? <h4>Menu</h4> : <h4>Close</h4>}</button>
             <div style={{position: "relative"}}>
                 <div style={style}>
                         <div onClick={() => setShow(true)} className="menu" style={{display: "flex", flexDirection: "row", justifyContent: "space-evenly", marginTop: "0px"}}>

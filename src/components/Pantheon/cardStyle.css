@@ -1,0 +1,20 @@
+/* .cardBorder {
+    padding: 10px;
+    border: solid blue 1px
+} */
+
+
+.cardStatue {
+    min-height: 20vh;
+    background-image: url(../../utils/roman/statueOne.jpeg);
+    background-size: cover;
+    padding: 9rem 0 3rem;
+}
+
+.content {
+    padding: 0 10px;
+}
+
+.cardTitle {
+    padding: 0 10px
+}
