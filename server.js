@@ -13,6 +13,45 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
 
+// Twilio
+// const accountSid = process.env.TWILIO_ACCOUNT_SID;
+// const authToken = process.env.TWILIO_AUTH_TOKEN;
+// const client = require('twilio')(accountSid, authToken);
+
+
+// app.get('/text', (req, res) => {
+// 		client.messages
+// 		.create({
+// 		   body: 'This is the ship that made the Kessel Run in fourteen parsecs?',
+// 		   from: '+12174874133',
+// 		   to: '+19496333057'
+// 		 })
+// 		.then(message => console.log(message.sid));
+// })
+
+// MESSAGEBIRD
+
+
+var messagebird = require('messagebird')('Byp2PBke8lCGisAA26NLdWAUW');
+
+    var params = {
+      'originator': 'MessageBird',
+      'recipients': [
+        '19496333057'
+    ],
+      'body': 'This is a test message'
+    };
+
+	app.get('/text', (req, res) => {
+    messagebird.messages.create(params, function (err, response) {
+      if (err) {
+        return console.log(err);
+      }
+      console.log(response);
+    })
+	})
+
+
 
 
 // Serve up static assets (usually on heroku)
