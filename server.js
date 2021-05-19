@@ -32,24 +32,24 @@ app.use(cors());
 // MESSAGEBIRD
 
 
-var messagebird = require('messagebird')('Byp2PBke8lCGisAA26NLdWAUW');
+// var messagebird = require('messagebird')('Byp2PBke8lCGisAA26NLdWAUW');
 
-    var params = {
-      'originator': 'MessageBird',
-      'recipients': [
-        '19496333057'
-    ],
-      'body': 'This is a test message'
-    };
+//     var params = {
+//       'originator': 'MessageBird',
+//       'recipients': [
+//         '19496333057'
+//     ],
+//       'body': 'This is a test message'
+//     };
 
-	app.get('/text', (req, res) => {
-    messagebird.messages.create(params, function (err, response) {
-      if (err) {
-        return console.log(err);
-      }
-      console.log(response);
-    })
-	})
+// 	app.get('/text', (req, res) => {
+//     messagebird.messages.create(params, function (err, response) {
+//       if (err) {
+//         return console.log(err);
+//       }
+//       console.log(response);
+//     })
+// 	})
 
 
 
