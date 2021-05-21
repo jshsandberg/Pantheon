@@ -52,6 +52,12 @@ export default function AddFriend({ user }) {
                         <button onClick={() => setMessage("")} style={{position: "absolute", top: "0", right: "-140px"}}>Close Message</button>
                     </div>
                 :
+                message === "User does not exist" ?
+                <div style={{position: "relative"}}>
+                    <h2 style={{backgroundColor: "red", padding: "10px", color: "white"}}>{message}</h2>
+                    <button onClick={() => setMessage("")} style={{position: "absolute", top: "0", right: "-140px"}}>Close Message</button>
+                </div>
+            :
                 null
             }
         </div>
