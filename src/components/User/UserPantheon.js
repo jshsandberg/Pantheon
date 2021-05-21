@@ -1,23 +1,18 @@
 import React from "react";
 import StatusBar from "./StatusBar";
-import { useHistory } from "react-router-dom";
 
 
-
-export default function CreatedPantheons({ data }) {
-
-    const history = useHistory();
-
+export default function UserPantheon({ data }) {
 
     return (
         <div>
-            <div style={{display: "flex", justifyContent: "center"}}>
-                <h2>User's Created Pantheons</h2>
+            <div>
+                <h2 style={{textAlign: "center"}}>User Pantheons</h2>
             </div>
             <div>
-                {data && data.map((item, i) => {
+            {data && data.map((item, i) => {
                     return (
-                        <div onClick={() => history.push({pathname: "/pantheonInfo", state: item})} style={{display: "flex", flexDirection: "column",}}>
+                        <div style={{display: "flex", flexDirection: "column",}}>
                             <div key={i} style={{display: "flex", flexDirection: "row", justifyContent: "center",}}>
                                 <div style={{paddingRight: "10px"}}>
                                     <h2>{item.data.category}</h2>
@@ -38,9 +33,6 @@ export default function CreatedPantheons({ data }) {
                         </div>
                     )
                 })}
-            </div>
-            <div>
-   
             </div>
         </div>
     )

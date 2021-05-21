@@ -1,20 +1,91 @@
-/* .cardBorder {
-    padding: 10px;
-    border: solid blue 1px
-} */
 
+.body {
+    /* background: black; */
+    /* min-height: 100vh; */
+    min-width: 45vh;
+    margin: 1.25em
+}
 
-.cardStatue {
-    min-height: 20vh;
-    background-image: url(../../utils/roman/statueOne.jpeg);
+.cardOne {
+    color: white;
+    background-position: 50%;
     background-size: cover;
-    padding: 9rem 0 3rem;
+    padding: 8rem 0 0;
+    max-width: 35ch;
+    border-radius: .5rem;
+    overflow: hidden;
+    transition: transform 500ms ease                                        ;
 }
 
-.content {
-    padding: 0 10px;
+.cardOne:hover {
+    transform: scale(1.05)
 }
 
-.cardTitle {
-    padding: 0 10px
+.card-content > *:not(.card-title) {
+    opacity: 0;
+    transition: opacity 500ms linear
+}
+
+.cardOne:hover .card-content {
+    transform: translateY(0);
+    transition-delay: 500ms;
+}
+
+.cardOne:hover .card-content > * {
+    opacity: 1;
+    transition-delay: 1000ms;
+}
+
+.card-content {
+    --padding: 1.5rem;
+    padding: var(--padding);
+    background: linear-gradient(hsl(0 0% 0% / 0), hsl(0 0% 00% / .2) 10%, hsl(0 0% 0% / 1));
+    transform: translateY(60%);
+    transition: transform 500ms ease;
+}
+
+.card-title {
+    position: relative;
+    width: max-content;
+    max-width: 100%;
+}
+
+.card-title::after {
+    content: "";
+    position: absolute;
+    height: 4px;
+    left: calc(var(--padding) * -1);
+    bottom: -5px;
+    background: limegreen;
+    width: calc(100% + var(--padding));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 500ms ease                                        ;
+
+    
+
+}
+
+.cardOne:hover .card-title::after {
+    transform: scaleX(1);
+}
+
+.buttonOne {
+    cursor: pointer;
+    display: inline-block;
+    text-decoration: none;
+    color: black;
+    background-color: limegreen;        
+    padding: 0.5em 1.1em;
+    border-radius: .25em;
+    margin: auto;
+    border: none;
+
+
+}
+
+.buttonOne:hover,
+.button:focus {
+    background-color: white;
+    color: black
 }

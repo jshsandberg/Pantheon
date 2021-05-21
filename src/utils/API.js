@@ -23,6 +23,9 @@ export const API = {
     getAllUsersPantheon: function(username) {
       return axios.post("/api/user/allPantheon/" + username);
     },
+    allUserPantheons: function(username, user) {
+      return axios.post("/api/user/allUserPantheons/" + username, user)
+    },
     // saveReview: function(user, review) {
     //   return axios.post("/api/user/review/" + user, review);
     // },

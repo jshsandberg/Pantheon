@@ -588,6 +588,23 @@ module.exports = {
 		} catch (err) {
 			console.log(err)
 		}
+	},
+
+	getAllUserPantheons: async (req, res) => {
+		try {
+
+			const pantheonData = [];
+
+			for (let i = 0; i < req.body.pantheon.length; i++) {
+				const foundPantheon = await db.Pantheon.findOne({ _id: req.body.pantheon[i] })
+				pantheonData.push(foundPantheon);
+			}
+
+			return res.json(pantheonData)
+
+		} catch (err) {
+			console.log(err)
+		}
 	}
 
 }

@@ -6,6 +6,8 @@ import Header from "../components/Header/Header";
 import Menu from "../components/Menu/Menu";
 import CreatedPantheons from "../components/User/CreatedPantheons";
 import { SeperatePantheons } from "../components/Functions/SeperatePantheons";
+import UserPantheon from "../components/User/UserPantheon";
+import { AllUserPantheons } from "../components/Functions/AllUserPantheons";
 
 export default function UserPage() {
 
@@ -14,6 +16,7 @@ export default function UserPage() {
     const history = useHistory();
 
     const [creatorPantheons, setCreatorPantheons] = useState(null);
+    const [userPantheons, setUserPantheons] = useState(null);
 
 
     useEffect(() => {
@@ -22,8 +25,11 @@ export default function UserPage() {
         } else {
             const getUsersPantheons = async () => {
                 const foundUserPantheons = await GetAllUsersPantheons(user.username);
-                const seperatedPantheons = await SeperatePantheons(foundUserPantheons);
-                await setCreatorPantheons(seperatedPantheons);
+                const seperatedCreatorPantheons = await SeperatePantheons(foundUserPantheons);
+                await setCreatorPantheons(seperatedCreatorPantheons);
+                const foundAllUserPantheons = await AllUserPantheons(user);
+                const seperatedUserPantheons = await SeperatePantheons(foundAllUserPantheons);
+                await setUserPantheons(seperatedUserPantheons)
             };
             getUsersPantheons();
         }
@@ -36,8 +42,9 @@ export default function UserPage() {
                 <Header user={user} />
                 <Menu user={user} />
             </div>
-            <div style={{display: "flex", flexDirection: "row", justifyContent: "center"}}>
+            <div style={{display: "flex", flexDirection: "row", justifyContent: "space-around"}}>
                 <CreatedPantheons data={creatorPantheons} />
+                <UserPantheon data={userPantheons} />
             </div>
             <div>
                 

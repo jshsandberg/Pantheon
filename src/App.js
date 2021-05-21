@@ -13,6 +13,7 @@ import FriendsPage from "./pages/FriendsPage";
 import PantheonPage from "./pages/PantheonPage";
 import MusicPage from "./pages/MusicPage";
 import UserPage from "./pages/UserPage";
+import PantheonInfoPage from "./pages/PantheonInfoPage";
 
 function App() {
 
@@ -70,6 +71,8 @@ function App() {
           <Route exact path="/pantheon" component={PantheonPage} />
           <Route exact path="/music" component={MusicPage} />
           <Route exact path="/user" component={UserPage} />
+          <Route exact path="/pantheonInfo" component={PantheonInfoPage} />
+
 
           {/* <button onClick={() => console.log(user)}>Click ME</button> */}
         </UserContext.Provider>

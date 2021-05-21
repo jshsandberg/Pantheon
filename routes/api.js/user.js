@@ -14,6 +14,8 @@ router.route("/pantheonInteractions/:username").post(userController.pantheonInte
 router.route("/pantheon/:id").post(userController.acceptPantheon);
 router.route("/pantheonDeclined/:id").post(userController.declinePantheon);
 router.route("/allPantheon/:username").post(userController.getAllPantheons);
+router.route("/allUserPantheons/:username").post(userController.getAllUserPantheons);
+
 
 
 
