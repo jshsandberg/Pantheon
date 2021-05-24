@@ -1,0 +1,73 @@
+.circleColor {
+    position: relative;
+    margin: 5px;    
+    background-image: linear-gradient(
+        120deg,
+        #db3d44,
+        #db3d44,
+        #db3d44,
+        #db3d44,
+        #e04242,
+        #ab3cdf,
+        #563cc9,
+        #4d92d3,
+        dodgerblue,
+        dodgerblue,        
+        dodgerblue,
+        dodgerblue
+
+    );
+    height: 45vh;
+    width: 25vw;
+    border-radius: 50px;
+    background-size: 400%;
+    animation: 10s ease infinite colorChange alternate;
+}
+
+@keyframes colorChange {
+    0% {background-position: left;}
+    100% {background-position: right;}
+}
+
+.inputUsername {
+    width: 20vw;
+    height: 1.5em;
+    font-size: 1.5rem;
+    border-radius: 25px;
+    border: solid 2px;
+    text-align: center;;
+}
+
+.buttonSignUp {
+    padding: 1em 1.5em;
+    background-color: white;
+    border: black solid 2px;
+    border-radius: 25px;
+    color: rgb(107, 107, 107);
+    font-size: .7em;
+    margin: 5px 15px 0px 15px
+}
+
+.buttonSignUp:hover {
+    cursor: pointer;
+    color: black;
+    font-size: 1em;
+}
+
+.buttonConfirm {
+    width: 10rem;
+    height: auto;
+    padding: .5em;
+    background-color: white;
+    border: black solid 2px;
+    border-radius: 25px;
+    color: rgb(107, 107, 107);
+    font-size: 1.3em;
+}
+
+.buttonConfirm:hover {
+    cursor: pointer;
+    color: black;
+    width: 12rem;
+    font-size: 2em;
+}

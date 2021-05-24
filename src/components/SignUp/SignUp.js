@@ -1,12 +1,15 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useRef } from "react";
 import { UserContext } from "../../context/userContext";
 import { useHistory } from "react-router-dom";
-import { IoCloseCircleOutline } from "react-icons/io5";
+import { IoCloseCircleOutline, IoCloudUpload } from "react-icons/io5";
 import { API } from "../../utils/API";
+import "./signUpStyle.css"
 
 export default function SignUp() {
 
     const history = useHistory();
+
+    const hiddenFileInput = useRef(null);
 
     const {setUser} = useContext(UserContext);
     
@@ -32,7 +35,18 @@ export default function SignUp() {
         } catch (err) {
             console.log(err)
         }         
-    }
+    };
+
+    const upload = async (e) => {
+        e.preventDefault();
+        hiddenFileInput.current.click();
+    };
+
+    const handleFileChange = e => {
+        const fileUploaded = e.target.files[0];
+        console.log(fileUploaded)
+
+    };
 
 
     return (
@@ -48,26 +62,33 @@ export default function SignUp() {
                 :
                 null
             }
-            <div style={{display: "flex", justifyContent: "center"}}>
-                <div style={{width: "250px", boxShadow: "5px 5px", marginTop: "30px", backgroundColor: "#f5f5f5", border: "solid 1px"}}>
-                    <div>
-                        <h2 style={{textAlign: "center", borderBottom: "solid 1px", paddingBottom: "10px"}}>Sign Up</h2>
-                    </div>
-                    <div style={{margin: "20px"}}>
-                        <form>
-                            <label htmlFor="username">Username</label><br />
-                            <input onChange={handleInputChange} type="text" name="username" /><br />
-                            <label htmlFor="email">Email</label><br />
-                            <input onChange={handleInputChange} type="text" name="email" /><br />
-                            <label htmlFor="password">Password</label><br />
-                            <input onChange={handleInputChange} type="password" name="password" />
-                            <label htmlFor="confirmedPassword">Confirm Password</label><br />
-                            <input onChange={handleInputChange} type="password" name="confirmed" />
-                        </form>
-                        <button onClick={handleSubmit} name="submit">Submit</button>
-                    </div>
+        <div>
+            <h2 style={{textAlign: "center", borderBottom: "solid 1px", paddingBottom: "10px"}}>Sign Up</h2>
+        </div>
+        <div className="circleColor">
+          <div style={{display: "flex", justifyContent: "center"}}>                  
+                <div >
+                    <form style={{marginTop: "2em", display: "flex", flexDirection: "column", gap: "1em"}}>
+                        <input className="inputUsername" onChange={handleInputChange} type="text" name="username" placeholder="Username" />
+                        <input className="inputUsername" onChange={handleInputChange} type="text" name="email" placeholder="Email" />
+                        <input className="inputUsername" onChange={handleInputChange} type="text" name="password" placeholder="Password" />
+                        <input className="inputUsername" onChange={handleInputChange} type="text" name="confirmed" placeholder="Confirm Password" />
+                        <div style={{display: "flex", flexDirection: "row", justifyContent: "center"}}>
+                            <button onClick={(e) => upload(e)} type="file" className="buttonSignUp">Upload Image</button>
+                            <input type="file"
+                                ref={hiddenFileInput}
+                                style={{display:'none'}} 
+                                onChange={handleFileChange}
+                            /> 
+                            <button className="buttonSignUp">Choose Image</button>
+                        </div>
+                        <div style={{display: "flex", justifyContent: "center"}}>
+                            <button className="buttonConfirm" onClick={handleSubmit} name="submit">Submit</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
+    </div> 
     )
 }
