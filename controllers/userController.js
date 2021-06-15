@@ -1,6 +1,12 @@
 const db = require("../models");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const multer = require('multer');
+const express = require("express");
+const router = express.Router();
+const app = express();
+const uuidv4 = require('uuid/v4');
+const { Image } = require("../models");
 const { User } = require("../models");
 const { Pantheon } = require("../models");
 const { replaceOne } = require("../models/user");
@@ -11,17 +17,17 @@ module.exports = {
     register: async (req, res) => {
 		try {
 
-			let {email, username} = req.body;
+			let {email, username} = req.body.user;
 
-			if (!req.body.email || !req.body.username || !req.body.password || !req.body.confirmed) {
+			if (!req.body.user.email || !req.body.user.username || !req.body.user.password || !req.body.user.confirmed) {
 				return res.json({ msg: 'Need to fill out all the inputs.'});
 			};
 
-			if (req.body.password.length < 5) {
+			if (req.body.user.password.length < 5) {
 				return res.json({ msg: "The password needs to be at least 5 characters long." });
 			}
 
-			if (req.body.password !== req.body.confirmed) {
+			if (req.body.user.password !== req.body.user.confirmed) {
 				return res.json({ msg: "The passwords do not match up." });
 			}
 
@@ -36,13 +42,21 @@ module.exports = {
 			}
 
 			const salt = await bcrypt.genSalt();
-			const passwordHash = await bcrypt.hash(req.body.password, salt);
+			const passwordHash = await bcrypt.hash(req.body.user.password, salt);
+
+
+
 			
 			const newUser = new db.User({
-				username: req.body.username,
+				username: req.body.user.username,
 				password: passwordHash,
-				email: req.body.email
+				email: req.body.user.email,
+		
 			});
+
+		
+
+
 			const savedUser = await newUser.save();
 
 			const token = jwt.sign(
@@ -53,30 +67,7 @@ module.exports = {
 				"secret"
 			);
 
-			// const token = jwt.sign(
-			// 	{
-			// 		exp: Math.floor(Date.now() / 1000) + 60 * 60,
-			// 		id: user._id,
-			// 	},
-			// 	"secret"
-			// );
-			// res.json({
-			// 	token,
-			// 	user: {
-			// 		id: user._id,
-			// 		username: user.username,
-			// 		email: user.email,
-			// 		reviews: [
-			// 			{
-			// 				spotifyId: null,
-			// 				review: null,
-			// 				rating: null
-			// 			}
-			// 		],
-			// 		friend: [null],
-			// 		pantheon: [null]
-			// 		}
-			// 	});
+	
 			res.json({token, savedUser});
 		} catch (err) {
 			console.log(err)
@@ -605,6 +596,55 @@ module.exports = {
 		} catch (err) {
 			console.log(err)
 		}
+	},
+
+	image: async (req, res) => {
+
+        console.log(req.body)
+		// const DIR = './public/uploads';
+		// const storage = multer.diskStorage({
+		// 	destination: (req, file, cb) => {
+		// 		cb(null, DIR);
+		// 	},
+		// 	filename: (req, file, cb) => {
+		// 		const fileName = file.originalname.toLowerCase().split(' ').join('-');
+		// 		cb(null, uuidv4() + '-' + fileName)
+		// 	}
+		// });
+		// const upload = multer({
+		// 	storage: storage,
+		// 	fileFilter: (req, file, cb) => {
+		// 		if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
+		// 			cb(null, true);
+		// 		} else {
+		// 			cb(null, false);
+		// 			return cb(new Error('Only .png, .jpg and .jpeg format allowed!'));
+		// 		}
+		// 	}
+		// });
+
+		// // console.log(upload)
+
+
+
+		// upload.single('profileImg'), (req, res, next) => {
+		// 	console.log("here")
+		// 	const url = req.protocol + '://' + req.get('host')
+		// 	const imageTest = new Image({
+		// 		_id: new mongoose.Types.ObjectId(),
+		// 		profileImg: url + '/public/' + req.file.filename
+		// 	});
+		// 	imageTest.save().then(result => {
+		// 		res.status(201).json({
+		// 			message: "User registered successfully!",
+		// 			userCreated: {
+		// 				_id: result._id,
+		// 				profileImg: result.profileImg
+		// 			}
+		// 		})
+		// 	})
+	
+		// }
 	}
 
 }

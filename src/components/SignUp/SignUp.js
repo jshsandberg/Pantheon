@@ -1,9 +1,11 @@
 import React, { useState, useContext, useRef } from "react";
 import { UserContext } from "../../context/userContext";
 import { useHistory } from "react-router-dom";
-import { IoCloseCircleOutline, IoCloudUpload } from "react-icons/io5";
+import { IoCloseCircleOutline } from "react-icons/io5";
 import { API } from "../../utils/API";
 import "./signUpStyle.css"
+
+
 
 export default function SignUp() {
 
@@ -14,8 +16,9 @@ export default function SignUp() {
     const {setUser} = useContext(UserContext);
     
     const [input, setInput] = useState({});
-    const [status, setStatus] = useState("")
-
+    const [status, setStatus] = useState("");
+    const [userImage, setUserImage] = useState(null);
+    
     const handleInputChange = ({ target: { value, name }}) => {
         setInput({ ...input, [name]: value })
     };
@@ -23,7 +26,20 @@ export default function SignUp() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const newUser = await API.saveNewUser(input);
+
+
+            // let imageFormObj = new FormData();
+
+            // // await imageFormObj.append('imageName', 'multer-image-' + Date.now());
+            // await imageFormObj.append('imageData', userImage);
+
+
+            // axios.post("http://localhost:3000/api/user", formData, {
+            // }).then(res => {
+            //     console.log(res)
+            // })
+
+            const newUser = await API.saveNewUser(input, userImage);
             if (newUser.data.msg === undefined) {
                 await localStorage.setItem("auth-token", newUser.data.token);
                 console.log(newUser.data)
@@ -42,9 +58,24 @@ export default function SignUp() {
         hiddenFileInput.current.click();
     };
 
-    const handleFileChange = e => {
+    const handleFileChange = async e => {
         const fileUploaded = e.target.files[0];
-        console.log(fileUploaded)
+        // console.log(fileUploaded);
+        setUserImage(fileUploaded);
+
+        // test code
+
+        // console.log("here")
+
+        // const imageFormObj = new FormData();
+
+        // imageFormObj.append('imageName', 'multer-image-' + Date.now());
+        // imageFormObj.append('imageData', e.target.files[0]);
+
+        // console.log(imageFormObj)
+
+        // const newUser = await API.saveNewUser(input, imageFormObj);
+
 
     };
 
@@ -67,26 +98,27 @@ export default function SignUp() {
         </div>
         <div className="circleColor">
           <div style={{display: "flex", justifyContent: "center"}}>                  
-                <div >
-                    <form style={{marginTop: "2em", display: "flex", flexDirection: "column", gap: "1em"}}>
-                        <input className="inputUsername" onChange={handleInputChange} type="text" name="username" placeholder="Username" />
-                        <input className="inputUsername" onChange={handleInputChange} type="text" name="email" placeholder="Email" />
-                        <input className="inputUsername" onChange={handleInputChange} type="text" name="password" placeholder="Password" />
-                        <input className="inputUsername" onChange={handleInputChange} type="text" name="confirmed" placeholder="Confirm Password" />
-                        <div style={{display: "flex", flexDirection: "row", justifyContent: "center"}}>
-                            <button onClick={(e) => upload(e)} type="file" className="buttonSignUp">Upload Image</button>
-                            <input type="file"
-                                ref={hiddenFileInput}
-                                style={{display:'none'}} 
-                                onChange={handleFileChange}
-                            /> 
-                            <button className="buttonSignUp">Choose Image</button>
-                        </div>
-                        <div style={{display: "flex", justifyContent: "center"}}>
-                            <button className="buttonConfirm" onClick={handleSubmit} name="submit">Submit</button>
-                        </div>
-                    </form>
-                </div>
+                <form style={{marginTop: "2em", display: "flex", flexDirection: "column", justifyContent: "center",  gap: "1em"}}>
+                    <input className="inputUsername" onChange={handleInputChange} type="text" name="username" placeholder="Username" />
+                    <input className="inputUsername" onChange={handleInputChange} type="text" name="email" placeholder="Email" />
+                    <input className="inputUsername" onChange={handleInputChange} type="password" name="password" placeholder="Password" />
+                    <input className="inputUsername" onChange={handleInputChange} type="password" name="confirmed" placeholder="Confirm Password" />
+                    <div className="buttonHolder">
+                        <span style={{position: "relative"}} />
+                        <button onClick={(e) => upload(e)} type="file" className="buttonSignUp1">Upload Image</button>
+                        <input type="file"
+                            ref={hiddenFileInput}
+                            style={{display:'none'}} 
+                            onChange={handleFileChange}
+                            accept="image/*"
+                        /> 
+                        <button className="buttonSignUp2">Choose Image</button>
+                        <span className="divider" />
+                    </div>
+                    <div style={{display: "flex", justifyContent: "center"}}>
+                        <button className="buttonConfirm" onClick={handleSubmit} name="submit">Submit</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div> 

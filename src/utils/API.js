@@ -2,8 +2,12 @@ import axios from "axios";
 
 export const API = {
   
-    saveNewUser: function(user) {
-      return axios.post("/api/user/register", user);
+    saveNewUser: function(user, image) {
+      const obj = {
+        user: user,
+        image: image
+      }
+      return axios.post("/api/user/register", obj);
     },
     loginUser: function(loginData) {
       return axios.post("/api/user/login", loginData);

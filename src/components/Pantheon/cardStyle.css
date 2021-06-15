@@ -2,7 +2,7 @@
 .body {
     /* background: black; */
     /* min-height: 100vh; */
-    min-width: 45vh;
+    min-width: 10vw;
     margin: 1.25em
 }
 
@@ -10,7 +10,7 @@
     color: white;
     background-position: 50%;
     background-size: cover;
-    padding: 8rem 0 0;
+    padding: 0rem 0 0;
     max-width: 35ch;
     border-radius: .5rem;
     overflow: hidden;
