@@ -6,6 +6,16 @@
     margin: 1.25em
 }
 
+.imageCard {
+    color: white;
+    background-position: 50%;
+    background-size: cover;
+    padding: 0rem 0 0;
+    max-width: 35ch;
+    border-radius: .5rem;
+    overflow: hidden;
+    transition: transform 500ms ease     }
+
 .cardOne {
     color: white;
     background-position: 50%;

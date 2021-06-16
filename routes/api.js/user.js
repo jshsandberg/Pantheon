@@ -1,8 +1,7 @@
 const router = require("express").Router();
 const userController = require("../../controllers/userController");
 
-router.route("/test-image").post(userController.image)
-
+router.route("/userImage").post(userController.image)
 router.route("/register").post(userController.register);
 router.route("/login").post(userController.login);
 router.route("/:id").post(userController.findById);
@@ -17,6 +16,7 @@ router.route("/pantheon/:id").post(userController.acceptPantheon);
 router.route("/pantheonDeclined/:id").post(userController.declinePantheon);
 router.route("/allPantheon/:username").post(userController.getAllPantheons);
 router.route("/allUserPantheons/:username").post(userController.getAllUserPantheons);
+
 
 // Test
 

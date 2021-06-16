@@ -17,7 +17,7 @@ export default function CreatedPantheons({ data }) {
             <div>
                 {data && data.map((item, i) => {
                     return (
-                        <div onClick={() => history.push({pathname: "/pantheonInfo", state: item})} style={{display: "flex", flexDirection: "column",}}>
+                        <div key={i} onClick={() => history.push({pathname: "/pantheonInfo", state: item})} style={{display: "flex", flexDirection: "column",}}>
                             <div key={i} style={{display: "flex", flexDirection: "row", justifyContent: "center",}}>
                                 <div style={{paddingRight: "10px"}}>
                                     <h2>{item.data.category}</h2>

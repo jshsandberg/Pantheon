@@ -7,6 +7,27 @@ const { Pantheon } = require("../models");
 
 
 module.exports = {
+	image: async (req, res) => {
+
+		try {
+			
+			const imageUrl = req.body.image;
+
+			await db.User.findOneAndUpdate({
+				username: req.body.user.username
+			}, {
+				$set: {
+					imageUrl: imageUrl
+				}
+			});
+
+			res.sendStatus(200)
+	
+
+		} catch (error) {
+			console.log(error)
+		}
+	 },
     register: async (req, res) => {
 		try {
 
@@ -589,53 +610,6 @@ module.exports = {
 		}
 	},
 
-	image: async (req, res) => {
 
-        console.log(req.body)
-		// const DIR = './public/uploads';
-		// const storage = multer.diskStorage({
-		// 	destination: (req, file, cb) => {
-		// 		cb(null, DIR);
-		// 	},
-		// 	filename: (req, file, cb) => {
-		// 		const fileName = file.originalname.toLowerCase().split(' ').join('-');
-		// 		cb(null, uuidv4() + '-' + fileName)
-		// 	}
-		// });
-		// const upload = multer({
-		// 	storage: storage,
-		// 	fileFilter: (req, file, cb) => {
-		// 		if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
-		// 			cb(null, true);
-		// 		} else {
-		// 			cb(null, false);
-		// 			return cb(new Error('Only .png, .jpg and .jpeg format allowed!'));
-		// 		}
-		// 	}
-		// });
-
-		// // console.log(upload)
-
-
-
-		// upload.single('profileImg'), (req, res, next) => {
-		// 	console.log("here")
-		// 	const url = req.protocol + '://' + req.get('host')
-		// 	const imageTest = new Image({
-		// 		_id: new mongoose.Types.ObjectId(),
-		// 		profileImg: url + '/public/' + req.file.filename
-		// 	});
-		// 	imageTest.save().then(result => {
-		// 		res.status(201).json({
-		// 			message: "User registered successfully!",
-		// 			userCreated: {
-		// 				_id: result._id,
-		// 				profileImg: result.profileImg
-		// 			}
-		// 		})
-		// 	})
-	
-		// }
-	}
 
 }

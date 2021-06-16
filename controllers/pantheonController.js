@@ -112,6 +112,8 @@ module.exports = {
 
             const response = [];
 
+            const returnedData = [];
+
             foundPantheon.forEach(item => {
                 if (item.acceptedPlayers.includes(req.params.username)){
                     
@@ -119,8 +121,19 @@ module.exports = {
                     response.push(item)
                 }
             });
+
+            for (let i = 0; i < response.length; i++) {
+                const foundUser = await db.User.findOne({ username: response[i].creator });
+                const obj = {
+                    pantheon: response[i],
+                    creator: foundUser
+                };
+                returnedData.push(obj)
+
+            }
+
             
-            res.json(response);
+            res.json(returnedData);
 
         } catch (err) {
             console.log(err)
@@ -439,12 +452,12 @@ module.exports = {
         checkFinalTimer: async (req, res) => {
             try {
 
+                console.log("here")
+
                 const allPantheons = await db.Pantheon.find();
 
                 const randomNumber = Math.random();
 
-
-            
                 for (let i = 0; i < allPantheons.length; i++) {
                     if (((allPantheons[i].finalBattle.timer + allPantheons[i].votingTime) < Date.now()) && allPantheons[i].final === true && allPantheons[i].finalVote === false) {
                         if (allPantheons[i].finalBattle.votesForFighterOne.length > allPantheons[i].finalBattle.votesForFighterTwo.length) {
@@ -481,11 +494,12 @@ module.exports = {
                         });
 
                     } else {
-                        
+                        // ADDED HERE
+                        return res.status(200)
                     }
                 }
 
-                                        return res.status(200)
+                return res.status(200)
 
 
             } catch (err) {

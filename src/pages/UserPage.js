@@ -8,6 +8,7 @@ import CreatedPantheons from "../components/User/CreatedPantheons";
 import { SeperatePantheons } from "../components/Functions/SeperatePantheons";
 import UserPantheon from "../components/User/UserPantheon";
 import { AllUserPantheons } from "../components/Functions/AllUserPantheons";
+import UserProfile from "../components/User/UserProfile";
 
 export default function UserPage() {
 
@@ -33,7 +34,7 @@ export default function UserPage() {
             };
             getUsersPantheons();
         }
-    }, [user, history])
+    }, [user, history]);
 
 
     return (
@@ -43,13 +44,15 @@ export default function UserPage() {
                 <Menu user={user} />
             </div>
             <div style={{display: "flex", flexDirection: "row", justifyContent: "space-around"}}>
-                <CreatedPantheons data={creatorPantheons} />
-                <UserPantheon data={userPantheons} />
+                <div style={{display: "flex", flexDirection: "column"}}>
+                    <CreatedPantheons data={creatorPantheons} />
+                    <UserPantheon data={userPantheons} />
+                </div>
+                <div>
+                    <UserProfile user={user} />
+                </div>
             </div>
-            <div>
-                
       
-            </div>
         </div>
     )
 }

@@ -12,7 +12,7 @@ export default function UserPantheon({ data }) {
             <div>
             {data && data.map((item, i) => {
                     return (
-                        <div style={{display: "flex", flexDirection: "column",}}>
+                        <div key={i} style={{display: "flex", flexDirection: "column",}}>
                             <div key={i} style={{display: "flex", flexDirection: "row", justifyContent: "center",}}>
                                 <div style={{paddingRight: "10px"}}>
                                     <h2>{item.data.category}</h2>
