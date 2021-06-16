@@ -17,16 +17,10 @@ const userSchema = new Schema({
   email: {
     type: String
   },
-  // imageName: {
-  //   type: String,
-  //   defualt: "none",
-  //   required: true
-  // },
-  // imageData: {
-  //     type: String,
-  //     required: true
-  // },
-  // Added to this
+  imageUrl: {
+    type: String,
+  },
+
   reviews: [],
 
   friend: [],

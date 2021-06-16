@@ -10,28 +10,17 @@ export default function Test() {
 
    const onSubmit = async (e) => {
         e.preventDefault()
-        // const data = new FormData()
-        // data.append('profileImg', image, image.name )
+        const file = new FormData()
+        file.append('file', image)
 
-        // //     await axios({
-        // //     method: "post",
-        // //     url: "/api/user/test-image",
-        // //     data: data, 
-        // //     headers: data.getHeaders()
-        // // }).then(res => {
-        // //     console.log(res)
-        // // })
-        // await axios.post('/api/user/test-image', data, { headers: {'Content-Type': 'multipart/form-data' }})
-
-        const data = new FormData();
-
-
-        data.append('action', 'ADD');
-        data.append('param', 0);
-        data.append('secondParam', 0);
-        data.append('file', new Blob(['test payload'], { type: 'text/csv' }));
-
-        axios.post('/api/user/test-image', data);
+            await axios({
+            method: "post",
+            url: "/file/upload",
+            data: file, 
+            headers: { "Content-Type": "multipart/form-data" }
+        }).then(res => {
+            console.log(res)
+        })
 
     }
 

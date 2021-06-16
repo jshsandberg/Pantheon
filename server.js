@@ -61,16 +61,7 @@ app.use(cors());
 
 
 
-// Serve up static assets (usually on heroku)
-// app.use(express.static(path.join(__dirname, 'build')));
 
-// app.get('/*', function(req, res) {
-// 	res.sendFile(path.join(__dirname, '/build/index.html'), function(err) {
-// 	  if (err) {
-// 		res.status(500).send(err)
-// 	  }
-// 	})
-//   })
 
 // Connect to the Mongo DB
 mongoose
@@ -97,9 +88,7 @@ conn.once("open", function() {
 
 
 app.get('/file/:filename', async (req, res) => {
-	// console.log("hello")
 	try {
-		console.log("here")
 		const file = await gfs.files.findOne({filename: req.params.filename});
 		const readStream = gfs.createReadStream(file.filename);
 		readStream.pipe(res)
@@ -120,6 +109,17 @@ app.delete("/file/:filename", async (req, res) => {
 
 app.use(routes);
 app.use("/file", upload);
+
+// Serve up static assets (usually on heroku)
+app.use(express.static(path.join(__dirname, 'build')));
+
+app.get('/*', function(req, res) {
+	res.sendFile(path.join(__dirname, '/build/index.html'), function(err) {
+	  if (err) {
+		res.status(500).send(err)
+	  }
+	})
+  })
 
 
 // Start the API server

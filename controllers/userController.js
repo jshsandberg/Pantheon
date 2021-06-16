@@ -1,15 +1,8 @@
 const db = require("../models");
 const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const multer = require('multer');
-const express = require("express");
-const router = express.Router();
-const app = express();
-const uuidv4 = require('uuid/v4');
-const { Image } = require("../models");
+const jwt = require("jsonwebtoken");;
 const { User } = require("../models");
 const { Pantheon } = require("../models");
-const { replaceOne } = require("../models/user");
 
 
 
@@ -51,10 +44,8 @@ module.exports = {
 				username: req.body.user.username,
 				password: passwordHash,
 				email: req.body.user.email,
-		
+				imageUrl: req.body.image
 			});
-
-		
 
 
 			const savedUser = await newUser.save();
