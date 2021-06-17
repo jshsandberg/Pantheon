@@ -1,10 +1,37 @@
 const db = require("../models");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");;
+const nodemailer = require('nodemailer');
 const { User } = require("../models");
 const { Pantheon } = require("../models");
+require("dotenv").config();
 
 
+
+
+// const transporter = nodemailer.createTransport({
+// 	host: 'smtp.gmail.com',
+// 	auth: {
+// 		user: 'pantheonmusic2021@gmail.com',
+// 		pass: 'process.env.EMAIL_PASSWORD'
+
+// 	}
+// });
+
+// const mailOptions = {
+// 	from: 'pantheonmusic2021@gmail.com',
+// 	to: 'jshsandberg@gmail.com',
+// 	subject: 'Sending Email using Node.js',
+// 	text: 'That was easy!'
+//   };
+
+//   transporter.sendMail(mailOptions, function(error, info){
+// 	if (error) {
+// 	  console.log(error);
+// 	} else {
+// 	  console.log('Email sent: ' + info.response);
+// 	}
+//   });
 
 module.exports = {
 	image: async (req, res) => {
@@ -57,18 +84,15 @@ module.exports = {
 
 			const salt = await bcrypt.genSalt();
 			const passwordHash = await bcrypt.hash(req.body.user.password, salt);
-
-
-
 			
 			const newUser = new db.User({
 				username: req.body.user.username,
 				password: passwordHash,
 				email: req.body.user.email,
-				imageUrl: req.body.image
+				imageUrl: req.body.image,
+				notification: req.body.notify
 			});
-
-
+	
 			const savedUser = await newUser.save();
 
 			const token = jwt.sign(

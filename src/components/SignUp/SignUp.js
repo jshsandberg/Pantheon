@@ -17,6 +17,7 @@ export default function SignUp() {
     const {setUser} = useContext(UserContext);
     
     const [input, setInput] = useState({});
+    const [notify, setNotify] = useState(false);
     const [status, setStatus] = useState("");
     const [userImage, setUserImage] = useState(null);
     const [userPreImage, setUserPreImage] = useState(null);
@@ -30,7 +31,6 @@ export default function SignUp() {
         e.preventDefault();
         try {
             
-            console.log(userImage);
             if (userImage !== null && userPreImage === null) {
                 const file = new FormData()
                 file.append('file', userImage);
@@ -46,7 +46,9 @@ export default function SignUp() {
                     imgUrl['data'] = res.data
                 });
 
-                const newUser = await API.saveNewUser(input, imgUrl.data);
+                console.log(notify)
+
+                const newUser = await API.saveNewUser(input, notify, imgUrl.data);
                 if (newUser.data.msg === undefined) {
                     await localStorage.setItem("auth-token", newUser.data.token);
                     console.log(newUser.data)
@@ -57,7 +59,7 @@ export default function SignUp() {
                 }
 
             } else if (userImage === null && userPreImage !== null) {
-                const newUser = await API.saveNewUser(input, userPreImage);
+                const newUser = await API.saveNewUser(input, notify, userPreImage);
                 if (newUser.data.msg === undefined) {
                     await localStorage.setItem("auth-token", newUser.data.token);
                     console.log(newUser.data)
@@ -88,6 +90,10 @@ export default function SignUp() {
         await setUserImage(fileUploaded);
     };
 
+    const handleChecked = async e => {
+        setNotify(e.target.checked)
+    }
+
 
     return (
         <div style={{display: "flex", flexDirection: "column"}}>
@@ -107,7 +113,7 @@ export default function SignUp() {
         </div>
         <div className="circleColor">
           <div style={{display: "flex", justifyContent: "center"}}>                  
-                <form style={{marginTop: "2em", display: "flex", flexDirection: "column", justifyContent: "center",  gap: "1em"}}>
+                <form style={{marginTop: "1.5em", display: "flex", flexDirection: "column", justifyContent: "center",  gap: "1em"}}>
                     <input className="inputUsername" onChange={handleInputChange} type="text" name="username" placeholder="Username" />
                     <input className="inputUsername" onChange={handleInputChange} type="text" name="email" placeholder="Email" />
                     <input className="inputUsername" onChange={handleInputChange} type="password" name="password" placeholder="Password" />
@@ -136,15 +142,19 @@ export default function SignUp() {
                             </>
                         }
                         {userImage === null && userPreImage !== null ?
-                            <button style={{backgroundColor: "gray", color: "white"}} onClick={(e) => {e.preventDefault(); setUserImage(null); setUserPreImage("test")}} className="buttonSignUp2">Choose Image</button>
+                            <button style={{backgroundColor: "gray", color: "white"}} onClick={(e) => {e.preventDefault(); setUserImage(null); setUserPreImage("testimage")}} className="buttonSignUp2">Choose Image</button>
                             :
-                            <button onClick={(e) => {e.preventDefault(); setUserImage(null); setUserPreImage("test")}} className="buttonSignUp2">Choose Image</button>
+                            <button onClick={(e) => {e.preventDefault(); setUserImage(null); setUserPreImage("testimage")}} className="buttonSignUp2">Choose Image</button>
                         }
               
                         <span className="divider" />
                     </div>
+                    <div style={{display: "flex", flexDirection: "row", alignItems: "flex-end", justifyContent: "center"}}>
+                        <h4 style={{margin: "0px 0px 0px 0px", color: "white"}}>Recieve updates via email</h4>
+                        <input onClick={(e) => handleChecked(e)} style={{marginLeft: "2em"}} type="checkbox" id="notification" name="notification" />
+                    </div>
                     <div style={{display: "flex", justifyContent: "center"}}>
-                        <button className="buttonConfirm" onClick={handleSubmit} name="submit">Submit</button>
+                        <button style={{marginTop: ".5em"}} className="buttonConfirm" onClick={handleSubmit} name="submit">Submit</button>
                     </div>
                 </form>
             </div>

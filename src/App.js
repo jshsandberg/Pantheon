@@ -36,7 +36,7 @@ function App() {
       }
     };
     const checkForPantheonTimer = async () => {
-      await API.checkPantheonTimer("test");
+      await API.checkPantheonTimer("timer");
     };
     const checkForFinalVote = async () => {
       await API.finalVote()

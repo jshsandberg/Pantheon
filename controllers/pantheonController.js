@@ -323,11 +323,10 @@ module.exports = {
                         });
                     } else {
                         
-
                     }
                 }
 
-                return res.status(200)
+                res.status(201).end()
 
             } catch (err) {
                 console.log(err)
@@ -374,6 +373,7 @@ module.exports = {
 
         finalVote: async (req, res) => {
             try {
+
                 const allPantheon = await db.Pantheon.find();
 
                 for(let i = 0; i < allPantheon.length; i++) {
@@ -398,7 +398,7 @@ module.exports = {
                     }
                 };
 
-                return res.status(200)
+                res.status(200).end()
 
             } catch (err) {
                 console.log(err)
@@ -452,7 +452,6 @@ module.exports = {
         checkFinalTimer: async (req, res) => {
             try {
 
-                console.log("here")
 
                 const allPantheons = await db.Pantheon.find();
 
@@ -494,12 +493,12 @@ module.exports = {
                         });
 
                     } else {
-                        // ADDED HERE
-                        return res.status(200)
+                       
                     }
+                 
                 }
 
-                return res.status(200)
+             res.status(200).end()
 
 
             } catch (err) {
@@ -577,7 +576,7 @@ module.exports = {
                     }
                 }
 
-                return res.status(200)
+                res.status(200).end()
 
             } catch (err) {
                 console.log(err)

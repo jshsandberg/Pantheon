@@ -2,9 +2,10 @@ import axios from "axios";
 
 export const API = {
   
-    saveNewUser: function(user, image) {
+    saveNewUser: function(user, notify, image) {
       const obj = {
         user: user,
+        notify: notify,
         image: image
       }
       return axios.post("/api/user/register", obj);
