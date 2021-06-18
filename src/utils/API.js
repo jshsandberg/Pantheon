@@ -42,6 +42,7 @@ export const API = {
     // },
     addFriend: function(username, selector, input) {
       const obj = {
+        username: username,
         selector: selector,
         input: input
       };

@@ -6,32 +6,14 @@ const { User } = require("../models");
 const { Pantheon } = require("../models");
 require("dotenv").config();
 
+const transporter = nodemailer.createTransport({
+	host: 'smtp.gmail.com',
+	auth: {
+		user: 'pantheonmusic2021@gmail.com',
+		pass: process.env.EMAIL_PASSWORD
 
-
-
-// const transporter = nodemailer.createTransport({
-// 	host: 'smtp.gmail.com',
-// 	auth: {
-// 		user: 'pantheonmusic2021@gmail.com',
-// 		pass: 'process.env.EMAIL_PASSWORD'
-
-// 	}
-// });
-
-// const mailOptions = {
-// 	from: 'pantheonmusic2021@gmail.com',
-// 	to: 'jshsandberg@gmail.com',
-// 	subject: 'Sending Email using Node.js',
-// 	text: 'That was easy!'
-//   };
-
-//   transporter.sendMail(mailOptions, function(error, info){
-// 	if (error) {
-// 	  console.log(error);
-// 	} else {
-// 	  console.log('Email sent: ' + info.response);
-// 	}
-//   });
+	}
+});
 
 module.exports = {
 	image: async (req, res) => {
@@ -94,6 +76,22 @@ module.exports = {
 			});
 	
 			const savedUser = await newUser.save();
+
+			const mailOptions = {
+				from: 'pantheonmusic2021@gmail.com',
+				to: req.body.user.email,
+				subject: 'Pantheon Music',
+				text: 'Thanks for joining Pantheon! You have signed up for email notifications. What this means is that whenever an action is required from you (friend request was sent to you, pantheon update, ect), you will be alerted with an email on the action required. If you ever want to stop the email, go to the user page on Pantheon and click the button "Stop Notification". Goodluck!'
+			  };
+
+			  
+			transporter.sendMail(mailOptions, function(error, info){
+				if (error) {
+				console.log(error);
+				} else {
+				console.log('Email sent: ' + info.response);
+				}
+			});
 
 			const token = jwt.sign(
 				{
@@ -210,6 +208,23 @@ module.exports = {
 									friendRequest: req.params.username
 								}
 							});
+
+						const mailOptions = {
+							from: 'pantheonmusic2021@gmail.com',
+							to: foundFriend.email,
+							subject: 'Pantheon Music',
+							text: 'You have a new friend request!'
+						  };
+			
+						  
+						transporter.sendMail(mailOptions, function(error, info){
+							if (error) {
+							console.log(error);
+							} else {
+							console.log('Email sent: ' + info.response);
+							}
+						});
+
 							return res.send("Friend request sent")
 					}
 				}
@@ -221,13 +236,13 @@ module.exports = {
 			} else if (foundUser.friend.includes(foundEmail.username)) {
 					return res.send("User has already been added");
 				} else {
-					await User.findOneAndUpdate({
-							username: foundEmail.username
-						}, {
-							$push: {
-								friendRequest: req.params.username
-							}
-						});
+					// await User.findOneAndUpdate({
+					// 		username: foundEmail.username
+					// 	}, {
+					// 		$push: {
+					// 			friendRequest: req.params.username
+					// 		}
+					// 	});
 						return res.send("Friend request sent")
 				}
 			}
