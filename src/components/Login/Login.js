@@ -3,6 +3,7 @@ import { UserContext } from "../../context/userContext";
 import { useHistory } from "react-router-dom";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import { API } from "../../utils/API";
+import "./Login.css"
 
 export default function Login() {
 
@@ -47,22 +48,20 @@ export default function Login() {
                 :
                 null
             }
-            <div style={{display: "flex", justifyContent: "center"}}>
-                <div style={{width: "250px", boxShadow: "5px 5px", marginTop: "30px", backgroundColor: "#f5f5f5", border: "solid 1px"}}>
-                    <div>
-                        <h2 style={{textAlign: "center", borderBottom: "solid 1px", paddingBottom: "10px"}}>Login</h2>
-                    </div>
-                    <div style={{margin: "20px"}}>
-                        <form>
-                            <label htmlFor="fname">Username</label><br />
-                            <input onChange={handleInputChange}  type="text" id="username" name="username" /><br />
-                            <label htmlFor="lname">Password</label><br />
-                            <input onChange={handleInputChange} type="password" id="password" name="password" />
-                            <button onClick={handleSubmit} name="submit">Submit</button>
-                        </form>
-                    </div>
-                </div>
+        <div>
+            <h2 style={{textAlign: "center", borderBottom: "solid 1px", paddingBottom: "10px"}}>Login</h2>
+        </div>
+        <div className="circleColorLogin">
+          <div style={{display: "flex", justifyContent: "center"}}>                  
+                <form style={{marginTop: "1.5em", display: "flex", flexDirection: "column", justifyContent: "center",  gap: "1em"}}>
+                    <input className="inputUsername" onChange={handleInputChange} type="text" name="username" placeholder="Username" />
+                    <input className="inputUsername" onChange={handleInputChange} type="password" name="password" placeholder="Password" />
+                    <div className="buttonHolder">
+                        <button style={{marginTop: ".5em"}} className="buttonConfirmLogin" onClick={handleSubmit} name="submit">Login</button>
+                      </div>
+                </form>
             </div>
         </div>
+    </div> 
     )
 }

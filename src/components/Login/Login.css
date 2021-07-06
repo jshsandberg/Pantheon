@@ -1,0 +1,48 @@
+.circleColorLogin {
+    position: relative;
+    margin: 5px;    
+    background-image: linear-gradient(
+        120deg,
+        #db3d44,
+        #db3d44,
+        #db3d44,
+        #db3d44,
+        #e04242,
+        #ab3cdf,
+        #563cc9,
+        #4d92d3,
+        dodgerblue,
+        dodgerblue,        
+        dodgerblue,
+        dodgerblue
+
+    );
+    height: 250px;
+    width: 400px;
+    border-radius: 50px;
+    background-size: 400%;
+    animation: 10s ease infinite colorChange alternate;
+}
+
+@keyframes colorChange {
+    0% {background-position: left;}
+    100% {background-position: right;}
+}
+
+.buttonConfirmLogin {
+    width: 10rem;
+    height: auto;
+    padding: .5em;
+    background-color: white;
+    border: black solid 2px;
+    border-radius: 25px;
+    color: rgb(107, 107, 107);
+    font-size: 1.3em;
+    transition: transform 500ms ease;
+}
+
+.buttonConfirmLogin:hover {
+    cursor: pointer;
+    color: black;
+    transform: scale(1.2)
+}

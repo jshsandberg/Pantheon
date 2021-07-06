@@ -42,27 +42,27 @@ module.exports = {
 
 			let {email, username} = req.body.user;
 
-			if (!req.body.user.email || !req.body.user.username || !req.body.user.password || !req.body.user.confirmed) {
-				return res.json({ msg: 'Need to fill out all the inputs.'});
-			};
+			// if (!req.body.user.email || !req.body.user.username || !req.body.user.password || !req.body.user.confirmed) {
+			// 	return res.json({ msg: 'Need to fill out all the inputs.'});
+			// };
 
-			if (req.body.user.password.length < 5) {
-				return res.json({ msg: "The password needs to be at least 5 characters long." });
-			}
+			// if (req.body.user.password.length < 5) {
+			// 	return res.json({ msg: "The password needs to be at least 5 characters long." });
+			// }
 
-			if (req.body.user.password !== req.body.user.confirmed) {
-				return res.json({ msg: "The passwords do not match up." });
-			}
+			// if (req.body.user.password !== req.body.user.confirmed) {
+			// 	return res.json({ msg: "The passwords do not match up." });
+			// }
 
-			const existingUser = await db.User.findOne({ username });
-			if (existingUser) {
-				return res.json({ msg: "An account with this username has already been created."});
-			}
+			// const existingUser = await db.User.findOne({ username });
+			// if (existingUser) {
+			// 	return res.json({ msg: "An account with this username has already been created."});
+			// }
 
-			const existingEmail = await db.User.findOne({ email });
-			if (existingEmail) {
-				return res.json({ msg: "An account with this email has already been created." });
-			}
+			// const existingEmail = await db.User.findOne({ email });
+			// if (existingEmail) {
+			// 	return res.json({ msg: "An account with this email has already been created." });
+			// }
 
 			const salt = await bcrypt.genSalt();
 			const passwordHash = await bcrypt.hash(req.body.user.password, salt);
@@ -85,7 +85,7 @@ module.exports = {
 			  };
 
 			  
-			transporter.sendMail(mailOptions, function(error, info){
+			newUser.notification && transporter.sendMail(mailOptions, function(error, info){
 				if (error) {
 				console.log(error);
 				} else {
@@ -192,7 +192,7 @@ module.exports = {
 		try {
 			if (req.body.selector === "username") {
 				const foundUser = await db.User.findOne({ username: req.params.username });
-				if (foundUser.friend.includes(req.body.input)) {
+				if (!foundUser.friend.includes(req.body.input)) {
 						return res.send("User is already friends with this user")
 				} else { 
 					const foundFriend = await db.User.findOne({
@@ -209,6 +209,7 @@ module.exports = {
 								}
 							});
 
+		
 						const mailOptions = {
 							from: 'pantheonmusic2021@gmail.com',
 							to: foundFriend.email,
@@ -217,7 +218,7 @@ module.exports = {
 						  };
 			
 						  
-						transporter.sendMail(mailOptions, function(error, info){
+						foundFriend.notification && transporter.sendMail(mailOptions, function(error, info){
 							if (error) {
 							console.log(error);
 							} else {
@@ -236,13 +237,29 @@ module.exports = {
 			} else if (foundUser.friend.includes(foundEmail.username)) {
 					return res.send("User has already been added");
 				} else {
-					// await User.findOneAndUpdate({
-					// 		username: foundEmail.username
-					// 	}, {
-					// 		$push: {
-					// 			friendRequest: req.params.username
-					// 		}
-					// 	});
+					await User.findOneAndUpdate({
+							username: foundEmail.username
+						}, {
+							$push: {
+								friendRequest: req.params.username
+							}
+						});
+
+					const mailOptions = {
+						from: 'pantheonmusic2021@gmail.com',
+						to: foundFriend.email,
+						subject: 'Pantheon Music',
+						text: 'You have a new friend request!'
+					  };
+		
+					  
+					foundEmail.notification && transporter.sendMail(mailOptions, function(error, info){
+						if (error) {
+						console.log(error);
+						} else {
+						console.log('Email sent: ' + info.response);
+						}
+					});
 						return res.send("Friend request sent")
 				}
 			}
